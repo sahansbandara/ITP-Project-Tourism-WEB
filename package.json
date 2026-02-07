@@ -1,0 +1,28 @@
+{
+  "name": "tourism-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/joy": "^5.0.0-beta.48",
+    "@mui/material": "^5.16.7",
+    "@mui/x-charts": "^7.14.0",
+    "@mui/x-data-grid": "^7.18.0",
+    "@mui/x-date-pickers": "^5.0.20",
+    "next": "16.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1"
+  }
+}
