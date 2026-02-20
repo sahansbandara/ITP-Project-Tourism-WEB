@@ -89,7 +89,7 @@ export default async function HomePage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <SectionHeading
-                                title="Why Choose Ceylon Escapes?"
+                                title="Why Choose Yatara Ceylon?"
                                 subtitle="The Ceylon Difference"
                                 align="left"
                                 className="mb-8"

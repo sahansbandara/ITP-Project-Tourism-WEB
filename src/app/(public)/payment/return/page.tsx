@@ -70,7 +70,7 @@ function PaymentReturnContent() {
                 <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-6" />
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Payment Successful!</h2>
                 <p className="text-gray-600 mb-8">
-                    Your booking (Order Ref: {orderId}) is confirmed. Thank you for choosing Ceylon Escapes!
+                    Your booking (Order Ref: {orderId}) is confirmed. Thank you for choosing Yatara Ceylon!
                 </p>
                 <Link href="/">
                     <Button className="bg-ocean-600 hover:bg-ocean-700">Return to Home</Button>

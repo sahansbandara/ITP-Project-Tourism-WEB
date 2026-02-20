@@ -8,7 +8,7 @@ import Package from '@/models/Package';
 import { FilterX } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Tour Packages | Ceylon Escapes',
+    title: 'Tour Packages | Yatara Ceylon',
     description: 'Explore our curated collection of Sri Lanka tour packages. From beach holidays to cultural expeditions.',
 };
 

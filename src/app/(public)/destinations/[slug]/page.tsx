@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const dest: any = await Destination.findOne({ slug, isPublished: true, isDeleted: false }).lean();
     if (!dest) return { title: 'Destination Not Found' };
     return {
-        title: `${dest.title} | Ceylon Escapes`,
+        title: `${dest.title} | Yatara Ceylon`,
         description: dest.description,
     };
 }

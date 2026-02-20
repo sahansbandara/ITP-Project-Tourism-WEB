@@ -6,7 +6,7 @@ import District from '@/models/District';
 import DistrictPlace from '@/models/DistrictPlace';
 
 export const metadata: Metadata = {
-    title: 'Build Your Custom Tour | Ceylon Escapes',
+    title: 'Build Your Custom Tour | Yatara Ceylon',
     description: 'Create your perfect Sri Lanka itinerary. Customize your destinations, duration, and experiences.',
 };
 

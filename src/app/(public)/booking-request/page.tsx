@@ -6,7 +6,7 @@ import Vehicle from '@/models/Vehicle';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Booking Request | Ceylon Escapes',
+    title: 'Booking Request | Yatara Ceylon',
     description: 'Submit your booking request or pay securely online.',
 };
 

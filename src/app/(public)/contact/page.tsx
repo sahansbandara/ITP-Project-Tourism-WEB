@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter } from 'lucide
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Contact Us | Ceylon Escapes',
+    title: 'Contact Us | Yatara Ceylon',
     description: 'Get in touch with our team for inquiries, bookings, and support.',
 };
 

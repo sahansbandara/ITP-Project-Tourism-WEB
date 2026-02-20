@@ -160,7 +160,7 @@ async function seed() {
     if (testCount === 0) {
         await Testimonial.insertMany([
             { name: 'Sarah Johnson', rating: 5, comment: 'An absolutely magical experience! The Cultural Triangle tour exceeded all expectations. Our guide was knowledgeable and the accommodations were superb.', isPublished: true },
-            { name: 'Marco Rossi', rating: 5, comment: 'The personalized service was exceptional. Every detail of our Coastal Paradise trip was perfectly arranged. Will definitely use Ceylon Escapes again!', isPublished: true },
+            { name: 'Marco Rossi', rating: 5, comment: 'The personalized service was exceptional. Every detail of our Coastal Paradise trip was perfectly arranged. Will definitely use Yatara Ceylon again!', isPublished: true },
             { name: 'Emma Williams', rating: 4, comment: 'The Hill Country Tea Trail was breathtaking. The scenic train ride alone was worth the entire trip. Highly recommended for nature lovers.', isPublished: true },
             { name: 'David Chen', rating: 5, comment: 'Our safari adventure was unforgettable! We spotted a leopard on our very first drive. The safari lodge was comfortable and the food was amazing.', isPublished: true },
         ]);

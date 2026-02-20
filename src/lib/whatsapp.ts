@@ -12,7 +12,7 @@ export function generateWhatsAppLink(
 ): string {
     const businessPhone =
         phone || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '';
-    const lines: string[] = ['Hi Ceylon Escapes! I\'d like to inquire about:'];
+    const lines: string[] = ['Hi Yatara Ceylon! I\'d like to inquire about:'];
 
     if (data.packageName) lines.push(`📦 Package: ${data.packageName}`);
     if (data.vehicleType) lines.push(`🚗 Vehicle: ${data.vehicleType}`);

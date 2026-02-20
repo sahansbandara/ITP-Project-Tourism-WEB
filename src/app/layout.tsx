@@ -3,11 +3,11 @@ import './globals.css';
 
 export const metadata: Metadata = {
     title: {
-        default: 'Ceylon Escapes | Discover Sri Lanka',
-        template: '%s | Ceylon Escapes',
+        default: 'Yatara Ceylon | Discover Sri Lanka',
+        template: '%s | Yatara Ceylon',
     },
     description:
-        'Experience the magic of Sri Lanka with Ceylon Escapes. From ancient temples to pristine beaches, lush tea plantations to thrilling wildlife safaris. Book your dream vacation today.',
+        'Experience the magic of Sri Lanka with Yatara Ceylon. From ancient temples to pristine beaches, lush tea plantations to thrilling wildlife safaris. Book your dream vacation today.',
     keywords: [
         'Sri Lanka tours',
         'Ceylon travel',
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
         'wildlife safari',
         'tea plantations',
         'custom tour builder',
-        'Ceylon Escapes',
+        'Yatara Ceylon',
     ],
     openGraph: {
-        title: 'Ceylon Escapes | Discover Sri Lanka',
-        description: 'Experience the magic of Sri Lanka with Ceylon Escapes.',
+        title: 'Yatara Ceylon | Discover Sri Lanka',
+        description: 'Experience the magic of Sri Lanka with Yatara Ceylon.',
         type: 'website',
         locale: 'en_US',
-        siteName: 'Ceylon Escapes',
+        siteName: 'Yatara Ceylon',
     },
 };
 
@@ -44,7 +44,7 @@ export default function RootLayout({
                     crossOrigin="anonymous"
                 />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+                    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
                     rel="stylesheet"
                 />
             </head>

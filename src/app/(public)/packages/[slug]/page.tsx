@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const pkg = await getPackage(slug);
     if (!pkg) return { title: 'Package Not Found' };
     return {
-        title: `${pkg.title} | Ceylon Escapes`,
+        title: `${pkg.title} | Yatara Ceylon`,
         description: pkg.summary,
     };
 }

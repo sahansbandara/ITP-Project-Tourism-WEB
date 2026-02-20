@@ -10,12 +10,10 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/packages', label: 'Packages' },
-    { href: '/destinations', label: 'Destinations' },
-    { href: '/vehicles', label: 'Transfers' },
-    { href: '/build-tour', label: 'Build Tour' },
-    { href: '/offers', label: 'Offers' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/packages', label: 'Curated Journeys' },
+    { href: '/destinations', label: 'The Destinations' },
+    { href: '/vehicles', label: 'Private Transfers' },
+    { href: '/contact', label: 'Bespoke Planning' },
 ];
 
 export function Navbar() {
@@ -23,27 +21,27 @@ export function Navbar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="section-container flex h-16 items-center justify-between">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-off-white/95 backdrop-blur supports-[backdrop-filter]:bg-off-white/80">
+            <div className="section-container flex h-20 items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <Palmtree className="h-7 w-7 text-ocean-600 group-hover:text-ocean-500 transition-colors" />
-                    <span className="font-display text-xl font-bold gradient-text">
-                        Ceylon Escapes
+                <Link href="/" className="flex items-center gap-3 group">
+                    <Palmtree className="h-8 w-8 text-antique-gold group-hover:scale-105 transition-transform duration-500" />
+                    <span className="font-serif text-2xl font-semibold tracking-[0.15em] uppercase text-deep-emerald">
+                        Yatara Ceylon
                     </span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-1">
+                <nav className="hidden lg:flex items-center gap-2">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             className={cn(
-                                'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                                'px-4 py-2 text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 border-b-2',
                                 pathname === link.href
-                                    ? 'text-ocean-700 bg-ocean-50'
-                                    : 'text-muted-foreground hover:text-ocean-700 hover:bg-ocean-50/50'
+                                    ? 'text-deep-emerald border-antique-gold'
+                                    : 'text-gray-500 border-transparent hover:text-deep-emerald hover:border-antique-gold/50'
                             )}
                         >
                             {link.label}
@@ -52,56 +50,43 @@ export function Navbar() {
                 </nav>
 
                 {/* Desktop CTA */}
-                <div className="hidden md:flex items-center gap-3">
+                <div className="hidden lg:flex items-center gap-3">
                     <Link href="/contact">
-                        <Button className="btn-primary text-sm h-9">
-                            Book Now
+                        <Button className="h-11 px-8 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 uppercase tracking-[0.2em] text-[10px] rounded-none border border-deep-emerald transition-all duration-500">
+                            Plan Your Journey
                         </Button>
-                    </Link>
-                    <Link
-                        href="/dashboard"
-                        className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        Dashboard
                     </Link>
                 </div>
 
                 {/* Mobile Menu */}
                 <Sheet open={open} onOpenChange={setOpen}>
-                    <SheetTrigger asChild className="md:hidden">
-                        <Button variant="ghost" size="icon">
-                            <Menu className="h-5 w-5" />
+                    <SheetTrigger asChild className="lg:hidden">
+                        <Button variant="ghost" size="icon" className="hover:bg-gray-100">
+                            <Menu className="h-6 w-6 text-deep-emerald" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-72">
-                        <div className="flex flex-col gap-4 mt-8">
+                    <SheetContent side="right" className="w-80 bg-off-white border-l border-gray-100">
+                        <div className="flex flex-col gap-6 mt-12">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setOpen(false)}
                                     className={cn(
-                                        'px-4 py-2.5 rounded-lg text-base font-medium transition-all',
+                                        'px-4 py-3 text-sm font-serif tracking-[0.2em] uppercase transition-all duration-300 border-l-2',
                                         pathname === link.href
-                                            ? 'text-ocean-700 bg-ocean-50'
-                                            : 'text-muted-foreground hover:text-ocean-700 hover:bg-ocean-50/50'
+                                            ? 'text-deep-emerald border-antique-gold bg-antique-gold/5'
+                                            : 'text-gray-600 border-transparent hover:text-deep-emerald hover:bg-gray-50 hover:border-antique-gold/30'
                                     )}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
-                            <div className="border-t pt-4 mt-2">
+                            <div className="border-t border-gray-200 pt-8 mt-4 px-4">
                                 <Link href="/contact" onClick={() => setOpen(false)}>
-                                    <Button className="btn-primary w-full">
-                                        Book Now
+                                    <Button className="w-full h-12 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 uppercase tracking-[0.2em] text-[11px] rounded-none border border-deep-emerald transition-all duration-500">
+                                        Plan Your Journey
                                     </Button>
-                                </Link>
-                                <Link
-                                    href="/dashboard"
-                                    onClick={() => setOpen(false)}
-                                    className="block text-center mt-3 text-sm font-medium text-muted-foreground hover:text-foreground"
-                                >
-                                    Dashboard →
                                 </Link>
                             </div>
                         </div>

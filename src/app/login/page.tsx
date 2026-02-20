@@ -51,7 +51,7 @@ export default function LoginPage() {
                         <Palmtree className="h-7 w-7 text-ocean-600" />
                     </div>
                     <CardTitle className="text-2xl font-display gradient-text">
-                        Ceylon Escapes
+                        Yatara Ceylon
                     </CardTitle>
                     <CardDescription>
                         Sign in to the Tour Management Dashboard

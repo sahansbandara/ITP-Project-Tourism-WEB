@@ -8,6 +8,9 @@ const config: Config = {
     theme: {
     	extend: {
     		colors: {
+    			'deep-emerald': '#043927',
+    			'antique-gold': '#D4AF37',
+    			'off-white': '#FAFAFA',
     			ocean: {
     				'50': '#F0F9FF',
     				'100': '#E0F2FE',
@@ -79,14 +82,17 @@ const config: Config = {
     		},
     		fontFamily: {
     			sans: [
-    				'Inter',
+    				'Montserrat',
     				'system-ui',
     				'sans-serif'
     			],
+    			serif: [
+    				'"Cormorant Garamond"',
+    				'serif'
+    			],
     			display: [
-    				'Inter',
-    				'system-ui',
-    				'sans-serif'
+    				'"Cormorant Garamond"',
+    				'serif'
     			]
     		},
     		animation: {

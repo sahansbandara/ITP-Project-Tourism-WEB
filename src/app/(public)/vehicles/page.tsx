@@ -9,7 +9,7 @@ import { FilterX } from 'lucide-react';
 import { VehicleStatus } from '@/lib/constants';
 
 export const metadata: Metadata = {
-    title: 'Transfers & Vehicles | Ceylon Escapes',
+    title: 'Transfers & Vehicles | Yatara Ceylon',
     description: 'Safe and comfortable transfers across Sri Lanka. Airport pickups, drops, and city tours.',
 };
 

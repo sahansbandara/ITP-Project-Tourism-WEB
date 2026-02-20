@@ -21,7 +21,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ payment
         // Header
         doc.setFontSize(22);
         doc.setTextColor(2, 132, 199); // ocean-600
-        doc.text('Ceylon Escapes', 20, 25);
+        doc.text('Yatara Ceylon', 20, 25);
         doc.setFontSize(10);
         doc.setTextColor(100);
         doc.text('Tour Operator Management System', 20, 32);
@@ -67,7 +67,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ payment
         doc.setTextColor(130);
         doc.text('This is a computer-generated receipt. No signature required.', 20, y);
         doc.text(`Generated on ${new Date().toLocaleDateString()}`, 20, y + 6);
-        doc.text('Ceylon Escapes | info@ceylonescapes.lk | +94 77 123 4567', 20, y + 12);
+        doc.text('Yatara Ceylon | info@ceylonescapes.lk | +94 77 123 4567', 20, y + 12);
 
         const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
         return new NextResponse(pdfBuffer, {

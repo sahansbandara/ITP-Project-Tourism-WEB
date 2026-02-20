@@ -19,7 +19,7 @@ export function Footer() {
                         <div className="flex items-center gap-2 mb-4">
                             <Palmtree className="h-6 w-6 text-ocean-400" />
                             <span className="font-display text-xl font-bold text-white">
-                                Ceylon Escapes
+                                Yatara Ceylon
                             </span>
                         </div>
                         <p className="text-ocean-300 text-sm leading-relaxed">
@@ -71,7 +71,7 @@ export function Footer() {
             <div className="border-t border-ocean-800">
                 <div className="section-container py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
                     <p className="text-xs text-ocean-400">
-                        © {new Date().getFullYear()} Ceylon Escapes. All rights reserved.
+                        © {new Date().getFullYear()} Yatara Ceylon. All rights reserved.
                     </p>
                     <p className="text-xs text-ocean-500">
                         SLIIT ITP Project | Tour Operator Management System

@@ -6,7 +6,7 @@ import Destination from '@/models/Destination';
 import DestinationCard from '@/components/public/DestinationCard';
 
 export const metadata: Metadata = {
-    title: 'Special Offers | Ceylon Escapes',
+    title: 'Special Offers | Yatara Ceylon',
     description: 'Exclusive travel deals and promotional offers for your Sri Lanka vacation.',
 };
 

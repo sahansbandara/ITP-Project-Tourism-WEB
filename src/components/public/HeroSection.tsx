@@ -24,7 +24,7 @@ export default function HeroSection() {
     }, []);
 
     return (
-        <div className="relative h-[85vh] w-full overflow-hidden">
+        <div className="relative h-[85vh] w-full overflow-hidden bg-deep-emerald font-sans">
             {/* Background Video/Image */}
             <div className="absolute inset-0 w-full h-full">
                 <video
@@ -33,44 +33,50 @@ export default function HeroSection() {
                     loop
                     muted
                     playsInline
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full opacity-60 mix-blend-overlay"
                     poster="https://images.unsplash.com/photo-1588258387711-540e53db3838?q=80&w=1920&auto=format&fit=crop"
                 >
                     <source src="/Hero-Section.mp4" type="video/mp4" />
-                    <div className="absolute inset-0 bg-ocean-900" />
                 </video>
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+                <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-deep-emerald/80 via-transparent to-deep-emerald/90" />
             </div>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center items-center text-white px-4 md:px-8 max-w-7xl mx-auto pt-20">
+            <div className="relative z-10 h-full flex flex-col justify-center items-center text-off-white px-4 md:px-8 max-w-7xl mx-auto pt-20">
                 <div className="text-center space-y-6 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                    <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium tracking-wide">
-                        Explore Sri Lanka with Us
+                    <span className="inline-block py-1 px-4 text-xs tracking-[0.2em] uppercase font-medium text-antique-gold border border-antique-gold/30 rounded-none bg-deep-emerald/40 backdrop-blur-md">
+                        High-End Boutique Travel
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
-                        Discover the Pearl of the <br />
-                        <span className="text-ocean-300">Indian Ocean</span>
+                    <h1 className="text-5xl md:text-7xl font-serif tracking-normal leading-tight">
+                        <span className="italic font-light">The Soul of Your</span> <br />
+                        Island Journey.
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light">
-                        Experience breathtaking landscapes, pristine beaches, and rich culture.
-                        Your perfect island getaway starts here.
+                    <p className="text-lg md:text-xl text-off-white/80 max-w-2xl mx-auto font-light leading-relaxed">
+                        Experience a synchronized odyssey through the heart of Ceylon.
+                        Bespoke itineraries, private transitions, and heritage unlocked.
                     </p>
+
+                    {/* Minimalist CTA */}
+                    <div className="mt-8">
+                        <Button className="h-12 px-8 bg-transparent border border-antique-gold text-antique-gold hover:bg-antique-gold hover:text-deep-emerald font-medium uppercase tracking-widest text-sm transition-all duration-300 rounded-none">
+                            Begin Your Journey
+                        </Button>
+                    </div>
                 </div>
 
-                {/* Search Box */}
-                <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 md:p-2 shadow-2xl animate-in fade-in zoom-in duration-1000 delay-300">
+                {/* Search Box - Luxury Redesign */}
+                <div className="w-full max-w-4xl bg-deep-emerald/40 backdrop-blur-xl border border-antique-gold/20 rounded-none p-4 md:p-2 shadow-2xl animate-in fade-in zoom-in duration-1000 delay-300">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         {/* Location Input */}
                         <div className="relative group">
-                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-ocean-400 transition-colors">
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-antique-gold/50 group-focus-within:text-antique-gold transition-colors">
                                 <MapPin className="h-5 w-5" />
                             </div>
                             <input
                                 type="text"
                                 placeholder="Where to?"
-                                className="w-full h-12 pl-10 pr-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:bg-white/10 text-white placeholder:text-gray-400 transition-all font-medium"
+                                className="w-full h-12 pl-10 pr-4 bg-deep-emerald/50 border border-antique-gold/20 rounded-none focus:outline-none focus:ring-1 focus:ring-antique-gold focus:bg-deep-emerald/80 text-off-white placeholder:text-off-white/50 transition-all font-light tracking-wide"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                             />
@@ -83,20 +89,21 @@ export default function HeroSection() {
                                     <Button
                                         variant="outline"
                                         className={cn(
-                                            "w-full h-12 justify-start text-left font-normal bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white border-white/10 focus:ring-2 focus:ring-ocean-400",
-                                            !date && "text-gray-400"
+                                            "w-full h-12 justify-start text-left font-light tracking-wide bg-deep-emerald/50 border-antique-gold/20 text-off-white hover:bg-deep-emerald/80 hover:text-off-white focus:ring-1 focus:ring-antique-gold rounded-none",
+                                            !date && "text-off-white/50"
                                         )}
                                     >
-                                        <Calendar className="mr-2 h-4 w-4" />
+                                        <Calendar className="mr-2 h-4 w-4 text-antique-gold/50" />
                                         {date ? format(date, "PPP") : <span>Pick a date</span>}
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0" align="start">
+                                <PopoverContent className="w-auto p-0 border-antique-gold/20 bg-deep-emerald text-off-white rounded-none" align="start">
                                     <CalendarComponent
                                         mode="single"
                                         selected={date}
                                         onSelect={setDate}
                                         initialFocus
+                                        className="bg-deep-emerald text-off-white font-sans"
                                     />
                                 </PopoverContent>
                             </Popover>
@@ -105,21 +112,21 @@ export default function HeroSection() {
                         {/* Package Type */}
                         <div className="relative">
                             <Select>
-                                <SelectTrigger className="w-full h-12 bg-white/5 border-white/10 text-white hover:bg-white/10 focus:ring-2 focus:ring-ocean-400">
+                                <SelectTrigger className="w-full h-12 bg-deep-emerald/50 border-antique-gold/20 text-off-white hover:bg-deep-emerald/80 focus:ring-1 focus:ring-antique-gold rounded-none font-light tracking-wide">
                                     <SelectValue placeholder="Tour Type" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="beach">Beach Relax</SelectItem>
-                                    <SelectItem value="adventure">Adventure</SelectItem>
-                                    <SelectItem value="cultural">Cultural</SelectItem>
-                                    <SelectItem value="wildlife">Wildlife</SelectItem>
+                                <SelectContent className="bg-deep-emerald border-antique-gold/20 text-off-white rounded-none">
+                                    <SelectItem value="beach" className="focus:bg-antique-gold/20 focus:text-antique-gold">Beach Relax</SelectItem>
+                                    <SelectItem value="adventure" className="focus:bg-antique-gold/20 focus:text-antique-gold">Adventure</SelectItem>
+                                    <SelectItem value="cultural" className="focus:bg-antique-gold/20 focus:text-antique-gold">Cultural</SelectItem>
+                                    <SelectItem value="wildlife" className="focus:bg-antique-gold/20 focus:text-antique-gold">Wildlife</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
 
                         {/* Search Button */}
-                        <Button className="h-12 w-full bg-ocean-600 hover:bg-ocean-700 text-white font-bold rounded-xl shadow-lg hover:shadow-ocean-500/30 transition-all flex items-center justify-center gap-2">
-                            <Search className="h-5 w-5" />
+                        <Button className="h-12 w-full bg-antique-gold hover:bg-antique-gold/80 text-deep-emerald font-semibold uppercase tracking-widest rounded-none transition-all flex items-center justify-center gap-2">
+                            <Search className="h-4 w-4" />
                             Search
                         </Button>
                     </div>
@@ -127,7 +134,7 @@ export default function HeroSection() {
 
                 {/* Scrolldown indicator */}
                 <div className="absolute bottom-8 animate-bounce hidden md:block">
-                    <span className="text-white/60 text-sm tracking-widest uppercase">Scroll to explore</span>
+                    <span className="text-antique-gold/60 text-xs tracking-[0.3em] uppercase">Scroll to explore</span>
                 </div>
             </div>
         </div>

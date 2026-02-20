@@ -6,7 +6,7 @@ import Destination from '@/models/Destination';
 import { FilterX } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Destinations | Ceylon Escapes',
+    title: 'Destinations | Yatara Ceylon',
     description: 'Explore the most beautiful destinations in Sri Lanka. From the beaches of Mirissa to the heights of Ella.',
 };
 

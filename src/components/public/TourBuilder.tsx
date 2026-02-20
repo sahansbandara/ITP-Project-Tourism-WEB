@@ -284,9 +284,9 @@ export default function TourBuilder({ districts, places }: TourBuilderProps) {
                                 <Select value={formData.budget} onValueChange={(val) => setFormData({ ...formData, budget: val })}>
                                     <SelectTrigger><SelectValue placeholder="Select budget" /></SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="standard">$50 - $100 / day</SelectItem>
-                                        <SelectItem value="premium">$100 - $200 / day</SelectItem>
-                                        <SelectItem value="luxury">$200+ / day</SelectItem>
+                                        <SelectItem value="standard">LKR 50 - LKR 100 / day</SelectItem>
+                                        <SelectItem value="premium">LKR 100 - LKR 200 / day</SelectItem>
+                                        <SelectItem value="luxury">LKR 200+ / day</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
