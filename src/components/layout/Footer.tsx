@@ -12,7 +12,7 @@ export function Footer() {
                     <div className="col-span-1 lg:col-span-1">
                         <div className="mb-6">
                             <Image
-                                src="/images/yatara-ceylon-logo.svg"
+                                src="/images/logo.svg"
                                 alt="Yatara Ceylon Logo"
                                 width={180}
                                 height={36}

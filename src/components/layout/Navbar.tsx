@@ -29,7 +29,7 @@ export function Navbar() {
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
                     <Image
-                        src="/images/yatara-ceylon-logo.svg"
+                        src="/images/logo.svg"
                         alt="Yatara Ceylon Logo"
                         width={200}
                         height={40}

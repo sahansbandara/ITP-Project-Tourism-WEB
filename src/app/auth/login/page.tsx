@@ -43,7 +43,7 @@ export default function EliteLoginPage() {
                 {/* Logo */}
                 <div className="flex justify-center mb-8">
                     <Image
-                        src="/images/yatara-ceylon-logo.svg"
+                        src="/images/logo.svg"
                         alt="Yatara Ceylon Logo"
                         width={200}
                         height={60}
