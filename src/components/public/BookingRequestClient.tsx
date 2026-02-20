@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Script from 'next/script';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,6 +66,9 @@ export default function BookingRequestClient({ vehicle }: { vehicle?: any }) {
 
             // Only attempt to pay if amount > 0
             if (amountVal > 0) {
+                // Calculate 20% Advance natively in LKR
+                const advanceAmount = amountVal * 0.20;
+
                 // 2. Init PayHere
                 const payRes = await fetch('/api/payhere/create', {
                     method: 'POST',
@@ -80,21 +84,43 @@ export default function BookingRequestClient({ vehicle }: { vehicle?: any }) {
                             city: form.city,
                             country: form.country,
                         },
-                        items: vehicle ? `${vehicle.model} Transfer` : `Booking ${bookingData.bookingNo}`,
-                        amount: amountVal
+                        items: vehicle ? `20% Advance - ${vehicle.model} Transfer` : `20% Advance - Booking ${bookingData.bookingNo}`,
+                        amount: advanceAmount
                     })
                 });
 
                 if (!payRes.ok) throw new Error('Payment initialization failed');
                 const payData = await payRes.json();
 
-                // 3. Render HTML form and submit
-                setCheckoutData({ url: payData.checkoutUrl, fields: payData.fields });
+                // 3. Trigger PayHere SDK Popup
+                // @ts-ignore
+                if (typeof window !== 'undefined' && window.payhere) {
+                    // @ts-ignore
+                    window.payhere.onCompleted = function onCompleted(orderId) {
+                        setStatus({ success: true, message: 'Payment completed successfully. Validating...' });
+                        window.location.href = `/payment/return?order_id=${orderId}`;
+                    };
 
-                // Wait for form to render then submit
-                setTimeout(() => {
-                    if (formRef.current) formRef.current.submit();
-                }, 500);
+                    // @ts-ignore
+                    window.payhere.onDismissed = function onDismissed() {
+                        setStatus({ success: false, message: 'Payment popup was dismissed.' });
+                        setLoading(false);
+                    };
+
+                    // @ts-ignore
+                    window.payhere.onError = function onError(error) {
+                        console.error('PayHere error', error);
+                        setStatus({ success: false, message: 'An error occurred triggering the gateway.' });
+                        setLoading(false);
+                    };
+
+                    // @ts-ignore
+                    window.payhere.startPayment(payData.fields);
+                } else {
+                    console.error("PayHere SDK not loaded");
+                    setStatus({ success: false, message: 'Payment gateway SDK not loaded.' });
+                    setLoading(false);
+                }
 
             } else {
                 setStatus({ success: true, message: 'Booking request sent successfully. We will contact you soon.' });
@@ -171,20 +197,13 @@ export default function BookingRequestClient({ vehicle }: { vehicle?: any }) {
                     <Input id="pickupLocation" required value={form.pickupLocation} onChange={e => setForm({ ...form, pickupLocation: e.target.value })} placeholder="e.g. Airport, Hotel" />
                 </div>
 
-                <Button type="submit" disabled={loading} className="w-full bg-ocean-600 hover:bg-ocean-700 text-white rounded-xl h-12 text-lg font-semibold shadow-md inline-flex items-center justify-center">
-                    {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-                    {vehicle ? 'Confirm & Pay Now' : 'Submit Request'}
+                <Button type="submit" disabled={loading} className="w-full bg-deep-emerald hover:bg-deep-emerald/90 text-antique-gold font-serif tracking-widest uppercase rounded-none h-14 text-sm font-semibold shadow-[0_0_15px_rgba(212,175,55,0.2)] border border-transparent hover:border-antique-gold inline-flex items-center justify-center transition-all duration-300">
+                    {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin text-antique-gold" />}
+                    {vehicle ? 'Confirm & Advance Pay (20%)' : 'Submit Fleet Request'}
                 </Button>
             </form>
 
-            {/* Hidden PayHere Form */}
-            {checkoutData && (
-                <form ref={formRef} action={checkoutData.url} method="POST" className="hidden">
-                    {Object.entries(checkoutData.fields).map(([key, val]) => (
-                        <input key={key} type="hidden" name={key} value={val as string} />
-                    ))}
-                </form>
-            )}
+            <Script src="https://www.payhere.lk/lib/payhere.js" strategy="lazyOnload" />
         </>
     );
 }

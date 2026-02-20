@@ -1,6 +1,9 @@
 export const UserRoles = {
     ADMIN: 'ADMIN',
     STAFF: 'STAFF',
+    USER: 'USER',
+    VEHICLE_OWNER: 'VEHICLE_OWNER',
+    HOTEL_OWNER: 'HOTEL_OWNER',
 } as const;
 
 export const UserStatus = {

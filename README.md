@@ -1,124 +1,110 @@
-# Ceylon Escapes - Tourism Management System
+# Yatara Ceylon - Sovereign Tourism Management System (TOMS)
 
-A comprehensive, responsive tourism website and management dashboard built for Sri Lanka's travel industry. This application facilitates tour package browsing, custom itinerary building, and a full back-office management suite for administrators.
+An exclusive, highly-curated luxury travel platform designed for high-net-worth foreign travelers seeking profound heritage experiences in Sri Lanka. This ecosystem includes an elite public interface, a dynamic map-based bespoke tour builder, and a robust administrative backend for Concierge, Fleet, and Finance management.
 
 ---
 
-## 🚀 Live Demo
+## 🏛️ Live Sovereign Access
 
-**Public URL**: https://yatara-ceylon.vercel.app
+**Public Gateway**: [https://yatara-ceylon.vercel.app](https://yatara-ceylon.vercel.app)
 
-**Admin Portal Access**:
-To access the management dashboard, use the following credentials:
-- **Login URL**: `/login`
-- **Username**: `admin@ceylonescapes.lk`
+**Elite Concierge Portal (Admin)**:
+Access the internal management dashboard using the official credentials:
+- **Login Portal**: `/login` *(Glassmorphic Access)*
+- **Username**: `admin@yataraceylon.com`
 - **Password**: `Admin@123`
 
-*> Note: If the database is empty, run `npm run seed` locally to populate initial data.*
+*(Note: The database natively seeds core 'Yatara Gems' via `npm run seed` if initializing a sandbox)*
 
 ---
 
-## 📖 Project Overview
+## 💎 Elite Features & Architecture
 
-Ceylon Escapes allows travelers to explore Sri Lanka's rich culture and landscapes through curated packages or custom-built tours. For operators, it provides a centralized dashboard to manage bookings, content, finance, and user support.
+**The Public Journey:**
+- **Signature Experiences**: A curated collection of Sri Lanka's finest pre-built itineraries (e.g., The Hill Country Tea Trail).
+- **Interactive GeoJSON Explorer**: A custom map enabling guests to visually select districts, view curated 'Yatara Gems', and pull live data from the Headless CMS.
+- **Bespoke Tour Builder**: A multi-day draft generator allowing granular customization of places, interests, and Sovereign Investment Scales (LKR Focus).
+- **Dual Currency Engine**: Seamlessly converts internal LKR base pricing to USD aesthetics dynamically.
+- **Concierge API Integration**: Direct floating Tawk.to chat bridge styled natively to the brand.
 
-### Key Features
-
-**Public Interface:**
-- **Dynamic Tour Packages**: Browse and filter curated travel itineraries.
-- **Destination Guide**: Explore key locations with rich media.
-- **Tour Builder**: Interactive map-based custom tour planner.
-- **Booking Engine**: Streamlined enquiry and booking process.
-- **Responsive Design**: Optimized for mobile, tablet, and desktop.
-
-**Admin Dashboard:**
-- **Content Management**: CRUD operations for Packages, Destinations, and Vehicles.
-- **Booking Management**: Track and update booking statuses.
-- **Finance Module**: Generate invoices, track payments, and view reports.
-- **User Management**: Role-Based Access Control (RBAC) for staff and admins.
-- **Support System**: Integrated ticketing system for customer inquiries.
+**The Management Engine (TOMS):**
+- **Multi-Role Protocol (RBAC)**: Secure routing systems granting distinct access to 5 tiers: `Admin`, `Staff`, `User`, `Vehicle Owner`, and `Hotel Owner`.
+- **Financial Module & Receipt Generator**: Native Server-side generation of branded PDF 'Luxury Receipts' outlining Order IDs, Advances, Remaining Balances, and the official HQ Address (142 Sir James Peiris Mawatha, Colombo 02).
+- **Automated Fleet Calendar**: Mongoose pre/post save hooks instantly block `VehicleBlock` databases when a booking confirms, eliminating double-booking flaws natively.
+- **Supplier Rate Cards**: Instantly align Guide, Driver, or Hotel service providers with active client bookings.
+- **PayHere Advance Gateway**: Dynamic 20% Advance calculation natively triggering the Sandbox PayHere SDK Popup.
 
 ---
 
-## 🏗️ Architecture
+## 🛠️ The Tech Stack
 
-The application is built on the **Next.js 16 App Router** architecture, leveraging Server Components for performance and Client Components for interactivity.
-
-### Component Structure
-
-- **Public Routes**: Home Page, Tours Listing, Tour Details, Destinations, Contact.
-- **Protected Routes**: Overview, Bookings Management, Content Management, User Management, Finance.
-
-### User Flow
-
-1. **Visitor**: Browse Public Website -> Inquire/Book -> Booking Request
-2. **Admin**: Login -> Admin Dashboard -> Manage Content/Bookings -> Database
+| Module | Technology | Purpose |
+|-------------|--------------|----------------|
+| **Framework** | Next.js 16.1 | App Router, Server Actions, API Routes |
+| **Aesthetics** | Tailwind CSS & shadcn/ui | Custom Deep Emerald (`#043927`) & Gold (`#D4AF37`) themes |
+| **Logic** | TypeScript | Strict type safety across financial and map domains |
+| **Database** | MongoDB & Mongoose 8.9 | High-performance document clustering |
+| **Maps** | Leaflet.js | GeoJSON plotting and CircleMarker rendering |
+| **Financials**| jsPDF & autoTable | Dynamic Server-Side PDF rendering |
 
 ---
 
-## 🛠️ Technology Stack
-
-| Component | Technology | Version | Purpose |
-|-----------|------------|---------|---------|
-| **Framework** | Next.js | 16.1 | App Router, Server Actions, API Routes |
-| **UI Library** | React | 18.3 | User Interface Components |
-| **Styling** | Tailwind CSS | 3.4 | Utility-first styling |
-| **Components** | shadcn/ui | Latest | Accessible, reusable UI components |
-| **Database** | MongoDB | Atlas | Document-oriented database |
-| **ORM** | Mongoose | 8.9 | Object Data Modeling |
-| **Validation** | Zod | 3.24 | Schema validation |
-| **Maps** | Leaflet | 1.9 | Interactive maps |
-
----
-
-## 🚀 Getting Started
+## ⚙️ Initializing the System
 
 ### Prerequisites
 - Node.js 18.x or higher
-- MongoDB Connection String
+- MongoDB Atlas Connection String
+- PayHere Sandbox Merchant Account
 
-### Installation
+### 1. Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/sahansbandara/ITP-Project-Tourism-WEB.git
-   cd ITP-Project-Tourism-WEB
-   ```
+```bash
+git clone https://github.com/sahansbandara/ITP-Project-Tourism-WEB.git
+cd ITP-Project-Tourism-WEB
+npm install
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### 2. Environment Configuration
 
-3. **Configure Environment**
-   Create a `.env.local` file:
-   ```env
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   NEXT_PUBLIC_APP_URL=http://localhost:3000
-   ```
+Create a `.env.local` file in the root structure matching this blueprint:
 
-4. **Seed Database** (Optional)
-   Populate the database with sample data:
-   ```bash
-   npm run seed
-   ```
+```env
+# Database
+MONGODB_URI=your_mongodb_cluster_string
 
-5. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
-   Access the app at `http://localhost:3000`.
+# Authentication & Security
+JWT_SECRET=your_secure_jwt_secret
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# PayHere Integration (Vercel Build Requirements)
+PAYHERE_MODE=sandbox
+PAYHERE_MERCHANT_ID=your_merchant_id
+PAYHERE_MERCHANT_SECRET=your_merchant_secret
+PAYHERE_CURRENCY=LKR
+```
+
+### 3. Native Seeding & Compilation
+
+Populate the database with sample Sovereign Data, compile the TS framework, and start the local environment:
+
+```bash
+npm run seed
+npm run build
+npm run dev
+```
+Execute the build globally at `http://localhost:3000`.
 
 ---
 
-## 📄 License
+## 📜 Official Office & Contact
 
-This project is licensed under the **MIT License**.
+**Yatara Ceylon Headquarters**
+142 Sir James Peiris Mawatha,
+Colombo 02, Sri Lanka
+
+**Concierge Contact**: concierge@yataraceylon.com
 
 ---
 
-## 👥 Team
-
-**SLIIT ITP Project Team**
-*Developing sustainable tourism solutions.*
+## 🛡️ License
+Distributed under the MIT License. See `LICENSE` for more information.

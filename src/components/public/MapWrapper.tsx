@@ -2,71 +2,79 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Loader2 } from 'lucide-react';
 
 const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
-// const useMap = dynamic(() => import('react-leaflet').then(mod => mod.useMap), { ssr: false });
+const GeoJSON = dynamic(() => import('react-leaflet').then(mod => mod.GeoJSON), { ssr: false });
 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-
-// Fix Leaflet icon issue
-const icon = L.icon({
-    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-});
 
 interface MapWrapperProps {
     places: any[];
     selectedPlaces: string[];
     onSelectPlace: (placeId: string) => void;
+    selectedDistricts: string[];
+    onSelectDistrict: (districtName: string) => void;
 }
 
-export default function MapWrapper({ places, selectedPlaces, onSelectPlace }: MapWrapperProps) {
-    // Center of Sri Lanka
+export default function MapWrapper({ places, selectedPlaces, onSelectPlace, selectedDistricts, onSelectDistrict }: MapWrapperProps) {
     const center: [number, number] = [7.8731, 80.7718];
+    const [geoData, setGeoData] = useState<any>(null);
+
+    useEffect(() => {
+        // Fetch Sri Lanka District GeoJSON securely from public folder
+        fetch('/srilanka-districts.geojson')
+            .then(res => res.json())
+            .then(data => setGeoData(data))
+            .catch(err => console.error("Could not load GeoJSON", err));
+    }, []);
+
+    if (!geoData) {
+        return (
+            <div className="h-[400px] w-full rounded-none flex items-center justify-center bg-off-white/50 border border-antique-gold/20">
+                <Loader2 className="w-8 h-8 text-deep-emerald animate-spin" />
+            </div>
+        );
+    }
+
+    const onEachFeature = (feature: any, layer: any) => {
+        const districtName = feature.properties.name || feature.properties.NAME_2 || feature.properties.district_name;
+
+        layer.on({
+            click: () => {
+                if (districtName) onSelectDistrict(districtName);
+            }
+        });
+    };
+
+    const geoJsonStyle = (feature: any) => {
+        const districtName = feature.properties.name || feature.properties.NAME_2 || feature.properties.district_name;
+        const isSelected = selectedDistricts.some(d => d.toLowerCase() === districtName?.toLowerCase());
+
+        return {
+            fillColor: isSelected ? '#043927' : '#D4AF37',
+            weight: 1,
+            opacity: 1,
+            color: '#ffffff',
+            fillOpacity: isSelected ? 0.8 : 0.2
+        };
+    };
 
     return (
-        <div className="h-[400px] w-full rounded-xl overflow-hidden shadow-inner border border-gray-200 relative z-0">
-            {/* Note: MapContainer needs explicit height */}
+        <div className="h-[500px] w-full border border-gray-200 relative z-0">
             {typeof window !== 'undefined' && (
-                <MapContainer center={center} zoom={7} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+                <MapContainer center={center} zoom={7.2} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
                     <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
                     />
-                    {places.map(place => (
-                        place.coords && place.coords.lat && place.coords.lng && (
-                            <Marker
-                                key={place._id}
-                                position={[place.coords.lat, place.coords.lng]}
-                                icon={icon}
-                                eventHandlers={{
-                                    click: () => onSelectPlace(place._id),
-                                }}
-                            >
-                                <Popup>
-                                    <div className="text-center">
-                                        <h3 className="font-bold">{place.name}</h3>
-                                        <p className="text-xs">{place.category}</p>
-                                        <button
-                                            onClick={() => onSelectPlace(place._id)}
-                                            className={`mt-2 px-3 py-1 rounded text-xs font-bold ${selectedPlaces.includes(place._id) ? 'bg-red-500 text-white' : 'bg-ocean-600 text-white'}`}
-                                        >
-                                            {selectedPlaces.includes(place._id) ? 'Remove' : 'Add to Plan'}
-                                        </button>
-                                    </div>
-                                </Popup>
-                            </Marker>
-                        )
-                    ))}
+                    <GeoJSON
+                        data={geoData}
+                        style={geoJsonStyle}
+                        onEachFeature={onEachFeature}
+                    />
                 </MapContainer>
             )}
         </div>
