@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 const navLinks = [
-    { href: '/tours', label: 'SIGNATURE JOURNEYS' },
-    { href: '/map-builder', label: 'SOVEREIGN CANVAS' },
+    { href: '/packages', label: 'SIGNATURE JOURNEYS' },
+    { href: '/build-tour', label: 'SOVEREIGN CANVAS' },
     { href: '/destinations', label: 'DESTINATIONS' },
 ];
 
@@ -21,9 +21,9 @@ export function Navbar() {
 
     return (
         <header className="sticky top-0 z-50 w-full bg-emerald-950/20 backdrop-blur-lg border-b border-white/10">
-            <div className="section-container flex h-20 items-center justify-between relative px-4 lg:px-8">
+            <div className="section-container flex h-20 items-center justify-between px-4 lg:px-8">
                 {/* Logo */}
-                <Link href="/" className="flex items-center">
+                <Link href="/" className="flex items-center shrink-0">
                     <Image
                         src="/images/yatara-brand-block.svg"
                         alt="Yatara Ceylon Logo"
@@ -34,25 +34,25 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Nav Center */}
-                <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-                    <Link href="/tours" className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors">
+                <nav className="hidden lg:flex flex-1 justify-center items-center gap-6 xl:gap-10">
+                    <Link href="/packages" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         SIGNATURE JOURNEYS
                     </Link>
-                    <Link href="/map-builder" className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors border-b border-[#D4AF37] pb-1">
+                    <Link href="/build-tour" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors border-b border-[#D4AF37] pb-1 whitespace-nowrap">
                         SOVEREIGN CANVAS
                     </Link>
-                    <Link href="/destinations" className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors">
+                    <Link href="/destinations" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         DESTINATIONS
                     </Link>
                 </nav>
 
                 {/* Desktop Right Actions */}
-                <div className="hidden lg:flex items-center gap-6">
-                    <Link href="/profile/bookings" className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors">
+                <div className="hidden lg:flex items-center gap-6 shrink-0">
+                    <Link href="/dashboard/my-journeys" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         MY LEDGER
                     </Link>
                     <Link href="/auth/login">
-                        <Button className="h-10 px-6 bg-transparent text-white hover:bg-[#D4AF37] hover:text-emerald-950 tracking-widest text-[14px] rounded-none border border-[#D4AF37] transition-all duration-300 font-sans">
+                        <Button className="h-10 px-6 bg-transparent text-white hover:bg-[#D4AF37] hover:text-emerald-950 tracking-widest text-[13px] xl:text-[14px] rounded-none border border-[#D4AF37] transition-all duration-300 font-sans whitespace-nowrap">
                             CONCIERGE ACCESS
                         </Button>
                     </Link>
@@ -73,13 +73,13 @@ export function Navbar() {
                                     href={link.href}
                                     onClick={() => setOpen(false)}
                                     className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors"
-                                    style={link.href === '/map-builder' ? { borderBottom: '1px solid #D4AF37', paddingBottom: '4px', width: 'fit-content' } : {}}
+                                    style={link.href === '/build-tour' ? { borderBottom: '1px solid #D4AF37', paddingBottom: '4px', width: 'fit-content' } : {}}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
                             <div className="border-t border-[#D4AF37]/20 pt-8 mt-4 flex flex-col gap-6">
-                                <Link href="/profile/bookings" onClick={() => setOpen(false)} className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors">
+                                <Link href="/dashboard/my-journeys" onClick={() => setOpen(false)} className="text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors">
                                     MY LEDGER
                                 </Link>
                                 <Link href="/auth/login" onClick={() => setOpen(false)}>

@@ -1,9 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" fill="none">
+  <!-- Journey / Elite Icon: A stylized compass star representing curated journeys -->
   <g transform="translate(10, 10)">
-    <path d="M40 80C40 80 40 40 40 30M40 30C55 20 70 25 75 35M40 30C25 20 10 25 5 35" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M40 30C45 15 55 10 65 15M40 30C35 15 25 10 15 15" stroke="#043927" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="40" cy="80" r="3" fill="#D4AF37"/>
+    <!-- Outer dashed elite ring -->
+    <circle cx="35" cy="42" r="30" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4 6" opacity="0.8"/>
+    <!-- Inner solid subtle ring -->
+    <circle cx="35" cy="42" r="24" stroke="#F8F8F8" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Compass points (Gold backing) -->
+    <path d="M35 7 L40 37 L70 42 L40 47 L35 77 L30 47 L0 42 L30 37 Z" fill="#D4AF37"/>
+    <!-- Compass bevel highlights (Off-white) -->
+    <path d="M35 7 L40 37 L35 42 Z" fill="#F8F8F8" opacity="0.9"/>
+    <path d="M70 42 L40 47 L35 42 Z" fill="#F8F8F8" opacity="0.9"/>
+    <path d="M35 77 L30 47 L35 42 Z" fill="#F8F8F8" opacity="0.9"/>
+    <path d="M0 42 L30 37 L35 42 Z" fill="#F8F8F8" opacity="0.9"/>
+    
+    <!-- High-contrast center pip -->
+    <circle cx="35" cy="42" r="4" fill="#043927"/>
   </g>
-  <text x="100" y="55" font-family="serif" font-size="42" font-weight="600" fill="#043927" letter-spacing="0.02em">Yatara</text>
-  <text x="100" y="85" font-family="sans-serif" font-size="20" letter-spacing="0.3em" font-weight="300" fill="#D4AF37">CEYLON</text>
+  
+  <!-- Sleek, prominent text designed for dark/glass backgrounds -->
+  <text x="95" y="55" font-family="serif" font-size="46" font-weight="600" fill="#F8F8F8" letter-spacing="0.06em">YATARA</text>
+  <text x="100" y="82" font-family="sans-serif" font-size="16" letter-spacing="0.4em" font-weight="400" fill="#D4AF37">CEYLON</text>
 </svg>
