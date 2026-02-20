@@ -39,7 +39,7 @@ export default function HeroSection() {
                     <source src="/Hero-Section.mp4" type="video/mp4" />
                 </video>
                 {/* Overlay - Subtler luxury tint */}
-                <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/30 via-transparent to-emerald-950/40" />
+                <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/40 to-transparent" />
             </div>
 
             {/* Content */}

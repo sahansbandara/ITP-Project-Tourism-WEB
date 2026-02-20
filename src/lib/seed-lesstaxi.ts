@@ -243,7 +243,7 @@ async function seed() {
                     highlights: ["Air Conditioned", "English Speaking Driver", "Private Vehicle"],
                     inclusions: ["Fuel", "Driver", "Parking"],
                     exclusions: ["Meals", "Entrance Fees"],
-                    tags: ["Airport", "Transfer", "Taxi"],
+                    tags: ["Airport", "Transfer", "Elite"],
                     isPublished: true,
                     isDeleted: false
                 },
