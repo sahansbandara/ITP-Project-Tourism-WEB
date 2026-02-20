@@ -23,7 +23,7 @@ export function Navbar() {
     const { currency, setCurrency } = useCurrency();
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-emerald-950/20 backdrop-blur-lg border-b border-white/10">
+        <header className="sticky top-0 z-50 w-full bg-[#f8f8f8]/85 backdrop-blur-lg border-b border-[#043927]/10">
             <div className="section-container flex h-20 items-center justify-between px-4 lg:px-8">
                 {/* Logo */}
                 <Link href="/" className="flex items-center shrink-0">
@@ -38,14 +38,17 @@ export function Navbar() {
 
                 {/* Desktop Nav Center */}
                 <nav className="hidden lg:flex flex-1 justify-center items-center gap-6 xl:gap-10">
-                    <Link href="/packages" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
+                    <Link href="/packages" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         SIGNATURE JOURNEYS
                     </Link>
-                    <Link href="/build-tour" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors border-b border-[#D4AF37] pb-1 whitespace-nowrap">
+                    <Link href="/build-tour" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors border-b border-[#D4AF37] pb-1 whitespace-nowrap">
                         BESPOKE BUILDER
                     </Link>
-                    <Link href="/destinations" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
+                    <Link href="/destinations" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         DESTINATIONS
+                    </Link>
+                    <Link href="/vehicles" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors whitespace-nowrap">
+                        PRIVATE FLEET
                     </Link>
                 </nav>
 
@@ -53,15 +56,15 @@ export function Navbar() {
                 <div className="hidden lg:flex items-center gap-6 shrink-0">
                     <button
                         onClick={() => setCurrency(currency === 'LKR' ? 'USD' : 'LKR')}
-                        className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap"
+                        className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors whitespace-nowrap"
                     >
                         {currency}
                     </button>
-                    <Link href="/dashboard/my-journeys" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-white hover:text-[#D4AF37] transition-colors whitespace-nowrap">
+                    <Link href="/dashboard/my-journeys" className="text-[13px] xl:text-[14px] font-sans tracking-widest text-[#043927] hover:text-[#D4AF37] transition-colors whitespace-nowrap">
                         MY JOURNEYS
                     </Link>
                     <Link href="/auth/login">
-                        <Button className="h-10 px-6 bg-transparent text-white hover:bg-[#D4AF37] hover:text-emerald-950 tracking-widest text-[13px] xl:text-[14px] rounded-none border border-[#D4AF37] transition-all duration-300 font-sans whitespace-nowrap">
+                        <Button className="h-10 px-6 bg-transparent text-[#043927] border-[#043927]/30 hover:bg-[#D4AF37] hover:border-[#D4AF37] hover:text-white tracking-widest text-[13px] xl:text-[14px] rounded-none border transition-all duration-300 font-sans whitespace-nowrap">
                             CONCIERGE ACCESS
                         </Button>
                     </Link>
