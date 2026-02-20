@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Search } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -12,9 +13,23 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 export default function HeroSection() {
+    const router = useRouter();
     const [date, setDate] = useState<Date>();
     const [location, setLocation] = useState('');
+    const [tourType, setTourType] = useState('');
     const videoRef = useRef<HTMLVideoElement>(null);
+
+    const handleSearch = () => {
+        if (!location && !date && !tourType) {
+            alert('Please fill in at least one field to search.');
+            return;
+        }
+        const params = new URLSearchParams();
+        if (location) params.set('location', location);
+        if (date) params.set('date', format(date, 'yyyy-MM-dd'));
+        if (tourType) params.set('type', tourType);
+        router.push(`/packages?${params.toString()}`);
+    };
 
     // Attempted autoplay fix
     useEffect(() => {
@@ -59,9 +74,11 @@ export default function HeroSection() {
 
                     {/* Minimalist CTA */}
                     <div className="mt-8">
-                        <Button className="h-12 px-8 bg-transparent border border-antique-gold text-antique-gold hover:bg-antique-gold hover:text-deep-emerald font-medium uppercase tracking-widest text-sm transition-all duration-300 rounded-none">
-                            Begin Your Journey
-                        </Button>
+                        <Link href="/packages">
+                            <Button className="h-12 px-8 bg-transparent border border-antique-gold text-antique-gold hover:bg-antique-gold hover:text-deep-emerald font-medium uppercase tracking-widest text-sm transition-all duration-300 rounded-none">
+                                Begin Your Journey
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 
@@ -111,7 +128,7 @@ export default function HeroSection() {
 
                         {/* Package Type */}
                         <div className="relative">
-                            <Select>
+                            <Select value={tourType} onValueChange={setTourType}>
                                 <SelectTrigger className="w-full h-12 bg-black/20 border-off-white/10 text-off-white hover:bg-black/40 focus:ring-1 focus:ring-antique-gold rounded-none font-light tracking-wide">
                                     <SelectValue placeholder="Tour Type" />
                                 </SelectTrigger>
@@ -125,7 +142,10 @@ export default function HeroSection() {
                         </div>
 
                         {/* Search Button */}
-                        <Button className="h-12 w-full bg-antique-gold hover:bg-antique-gold/80 hover:scale-[1.02] text-deep-emerald font-semibold uppercase tracking-widest rounded-none transition-all duration-300 flex items-center justify-center gap-2">
+                        <Button
+                            onClick={handleSearch}
+                            className="h-12 w-full bg-antique-gold hover:bg-antique-gold/80 hover:scale-[1.02] text-deep-emerald font-semibold uppercase tracking-widest rounded-none transition-all duration-300 flex items-center justify-center gap-2"
+                        >
                             <Search className="h-4 w-4" />
                             Search
                         </Button>

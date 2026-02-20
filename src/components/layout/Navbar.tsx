@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { useCurrency } from '@/lib/CurrencyContext';
 
 const navLinks = [
-    { href: '/', label: 'HOME' },
     { href: '/packages', label: 'SIGNATURE JOURNEYS' },
     { href: '/destinations', label: 'THE DESTINATIONS' },
     { href: '/vehicles', label: 'PRIVATE TRANSFERS' },
@@ -73,7 +72,7 @@ export function Navbar() {
 
                     {/* Concierge Access - Highlighted CTA */}
                     <Link href="/auth/login">
-                        <Button className="h-10 px-7 bg-gradient-to-r from-[#D4AF37] to-[#C5A028] text-[#043927] hover:from-[#C5A028] hover:to-[#B8932A] tracking-[0.15em] text-[12px] rounded-sm border border-[#D4AF37]/60 transition-all duration-300 font-semibold shadow-[0_0_20px_rgba(212,175,55,0.25)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] whitespace-nowrap">
+                        <Button className="h-10 px-7 bg-deep-emerald text-white hover:bg-deep-emerald/85 tracking-[0.15em] text-[12px] rounded-full border border-deep-emerald transition-all duration-300 font-semibold shadow-md hover:shadow-lg whitespace-nowrap">
                             CONCIERGE ACCESS
                         </Button>
                     </Link>
@@ -113,7 +112,7 @@ export function Navbar() {
                                     </span>
                                 </button>
                                 <Link href="/auth/login" onClick={() => setOpen(false)}>
-                                    <Button className="w-full h-12 bg-gradient-to-r from-[#D4AF37] to-[#C5A028] text-[#043927] hover:from-[#C5A028] hover:to-[#B8932A] tracking-[0.15em] text-[13px] rounded-sm font-semibold shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-[#D4AF37]/60">
+                                    <Button className="w-full h-12 bg-deep-emerald text-white hover:bg-deep-emerald/85 tracking-[0.15em] text-[13px] rounded-full font-semibold shadow-md border border-deep-emerald">
                                         CONCIERGE ACCESS
                                     </Button>
                                 </Link>
