@@ -49,7 +49,7 @@ export default function ContactForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 md:p-12 shadow-2xl border border-off-white/20 rounded-none relative overflow-hidden">
+        <form id="booking-form" onSubmit={handleSubmit} className="space-y-6 bg-white p-8 md:p-12 shadow-2xl border border-off-white/20 rounded-none relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-deep-emerald/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
             <h3 className="text-3xl font-serif text-deep-emerald mb-8">Craft Your Journey</h3>
 

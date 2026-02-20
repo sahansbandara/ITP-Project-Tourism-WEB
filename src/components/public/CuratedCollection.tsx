@@ -41,27 +41,27 @@ export default function CuratedCollection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {curatedJourneys.map((journey) => (
-                        <div key={journey.id} className="group relative overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full rounded-none">
+                        <div key={journey.id} className="group relative overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-700 border border-gray-200/50 hover:border-antique-gold/50 flex flex-col h-full rounded-none">
                             <div className="relative h-[28rem] w-full overflow-hidden">
                                 <Image
                                     src={journey.image}
                                     alt={journey.title}
                                     fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/80 via-deep-emerald/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/90 via-deep-emerald/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
                             </div>
 
-                            <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                <h3 className="text-2xl font-serif text-off-white mb-3">
+                            <div className="absolute bottom-0 left-0 right-0 p-10 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                                <h3 className="text-3xl font-serif tracking-wide text-off-white mb-4 group-hover:text-antique-gold transition-colors duration-500">
                                     {journey.title}
                                 </h3>
-                                <p className="text-off-white/80 font-light text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 leading-relaxed">
+                                <p className="text-off-white/90 font-light text-sm mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 leading-relaxed max-w-[95%]">
                                     {journey.description}
                                 </p>
                                 <Link
                                     href={`/packages`}
-                                    className="inline-flex items-center text-xs tracking-[0.2em] text-antique-gold hover:text-off-white uppercase font-medium transition-colors duration-300"
+                                    className="inline-flex items-center text-xs tracking-[0.2em] text-antique-gold hover:text-white uppercase font-semibold transition-colors duration-300 border-b border-transparent hover:border-white pb-1"
                                 >
                                     View Journey <ArrowRight className="ml-2 h-4 w-4" />
                                 </Link>
