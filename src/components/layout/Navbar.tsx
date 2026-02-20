@@ -63,7 +63,7 @@ export function Navbar() {
                     >
                         {currency}
                     </button>
-                    <Link href="/contact#booking-form">
+                    <Link href="/build-tour">
                         <Button className="h-11 px-8 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 uppercase tracking-[0.2em] text-[10px] rounded-none border border-deep-emerald transition-all duration-500">
                             Plan Your Journey
                         </Button>
@@ -103,7 +103,7 @@ export function Navbar() {
                                         Currency: {currency}
                                     </button>
                                 </div>
-                                <Link href="/contact#booking-form" onClick={() => setOpen(false)}>
+                                <Link href="/build-tour" onClick={() => setOpen(false)}>
                                     <Button className="w-full h-12 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 uppercase tracking-[0.2em] text-[11px] rounded-none border border-deep-emerald transition-all duration-500">
                                         Plan Your Journey
                                     </Button>
