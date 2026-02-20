@@ -49,8 +49,9 @@ export default function ContactForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 md:p-12 shadow-2xl border border-off-white/20 rounded-none relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-deep-emerald/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
+            <h3 className="text-3xl font-serif text-deep-emerald mb-8">Craft Your Journey</h3>
 
             <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Full Name</label>
@@ -58,7 +59,8 @@ export default function ContactForm() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="John Doe"
+                    placeholder="Your Name"
+                    className="h-12 rounded-none border-gray-200 focus:border-antique-gold focus:ring-antique-gold font-light"
                 />
             </div>
 
@@ -69,7 +71,8 @@ export default function ContactForm() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="john@example.com"
+                    placeholder="name@example.com"
+                    className="h-12 rounded-none border-gray-200 focus:border-antique-gold focus:ring-antique-gold font-light"
                 />
             </div>
 
@@ -79,7 +82,8 @@ export default function ContactForm() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="Inquiry about..."
+                    placeholder="e.g. Bespoke Honeymoon Planning"
+                    className="h-12 rounded-none border-gray-200 focus:border-antique-gold focus:ring-antique-gold font-light"
                 />
             </div>
 
@@ -89,14 +93,14 @@ export default function ContactForm() {
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="How can we help you?"
-                    className="min-h-[150px]"
+                    placeholder="Share the details of your dream getaway..."
+                    className="min-h-[150px] rounded-none border-gray-200 focus:border-antique-gold focus:ring-antique-gold font-light resize-none"
                 />
             </div>
 
-            <Button type="submit" disabled={loading} className="w-full h-12 text-lg font-bold bg-ocean-600 hover:bg-ocean-700">
+            <Button type="submit" disabled={loading} className="w-full h-14 bg-deep-emerald hover:bg-antique-gold text-antique-gold hover:text-deep-emerald rounded-none uppercase font-semibold tracking-widest text-[11px] transition-all duration-500 mt-4">
                 {loading ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : null}
-                Send Message
+                Submit Request
             </Button>
         </form>
     );

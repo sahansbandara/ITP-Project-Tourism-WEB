@@ -22,7 +22,7 @@ export function Navbar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 z-50 w-full border-b border-off-white/10 bg-black/20 backdrop-blur-md supports-[backdrop-filter]:bg-black/20">
+        <header className="sticky top-0 z-50 w-full border-b border-off-white/10 bg-emerald-950/10 backdrop-blur-md supports-[backdrop-filter]:bg-emerald-950/10">
             <div className="section-container flex h-20 items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">

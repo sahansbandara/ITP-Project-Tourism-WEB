@@ -1,79 +1,65 @@
-import { Suspense } from 'react';
 import { Metadata } from 'next';
-import SectionHeading from '@/components/public/SectionHeading';
 import VehicleCard from '@/components/public/VehicleCard';
-import VehicleFilters from '@/components/public/VehicleFilters';
-import connectDB from '@/lib/mongodb';
-import Vehicle from '@/models/Vehicle';
-import { FilterX } from 'lucide-react';
-import { VehicleStatus } from '@/lib/constants';
 
 export const metadata: Metadata = {
-    title: 'Transfers & Vehicles | Yatara Ceylon',
-    description: 'Safe and comfortable transfers across Sri Lanka. Airport pickups, drops, and city tours.',
+    title: 'Private Transfers | Yatara Ceylon',
+    description: 'Safe, luxurious, and comfortable transfers across Sri Lanka. Airport pickups, drops, and elite chauffeur services.',
 };
 
-async function getAvailableVehicles(searchParams: { [key: string]: string | string[] | undefined }) {
-    await connectDB();
-
-    const filter: any = { isDeleted: false, status: VehicleStatus.AVAILABLE };
-
-    // Server-side filtering by transfer type
-    const transferType = searchParams.transferType as string;
-    if (transferType && transferType !== 'all') {
-        filter.transferTypes = transferType;
+const TRANSFERS = [
+    {
+        _id: 't1',
+        model: 'Luxury SUV (Toyota Land Cruiser)',
+        type: 'Premium SUV',
+        seats: 4,
+        luggage: 4,
+        dailyRate: 25000,
+        images: ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&auto=format&fit=crop'],
+        transferTypes: ['Airport Pickup', 'City Transfer'],
+    },
+    {
+        _id: 't2',
+        model: 'Executive Sedan (Mercedes-Benz E-Class)',
+        type: 'Premium Sedan',
+        seats: 3,
+        luggage: 2,
+        dailyRate: 30000,
+        images: ['https://images.unsplash.com/photo-1541899481282-d53bffe3c3ea?w=800&auto=format&fit=crop'],
+        transferTypes: ['Airport Drop', 'VIP Transfer'],
+    },
+    {
+        _id: 't3',
+        model: 'Premium Van (Toyota Alphard)',
+        type: 'Luxury Van',
+        seats: 6,
+        luggage: 6,
+        dailyRate: 28000,
+        images: ['https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=800&auto=format&fit=crop'],
+        transferTypes: ['Airport Pickup', 'Group Transfer'],
     }
+];
 
-    const vehicles = await Vehicle.find(filter).sort({ createdAt: -1 }).lean();
-    return JSON.parse(JSON.stringify(vehicles));
-}
-
-export default async function VehiclesPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-    const params = await searchParams;
-    const vehicles = await getAvailableVehicles(params);
-
+export default function VehiclesPage() {
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-20">
+        <div className="min-h-screen bg-off-white pt-32 pb-20">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
                 {/* Header */}
-                <div className="mb-12">
-                    <SectionHeading
-                        title="Transfers & Fleet"
-                        description="Professional drivers and comfortable vehicles for your travel needs."
-                    />
+                <div className="mb-16 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    <span className="inline-block py-1 px-4 text-xs tracking-[0.2em] uppercase font-medium text-antique-gold border border-antique-gold/30 mb-6 bg-deep-emerald/5">
+                        Seamless Journeys
+                    </span>
+                    <h1 className="text-4xl md:text-5xl font-serif text-deep-emerald mb-4">
+                        Private Transfers
+                    </h1>
+                    <p className="text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+                        Arrive in elegance. Explore our premium fleet of chauffeur-driven vehicles for airport pickups, drops, and bespoke city transfers.
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    {/* Filters Sidebar */}
-                    <div className="hidden lg:block lg:col-span-1">
-                        <Suspense fallback={<div>Loading filters...</div>}>
-                            <VehicleFilters />
-                        </Suspense>
-                    </div>
-
-                    {/* Packages Grid */}
-                    <div className="lg:col-span-3">
-                        {vehicles.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {vehicles.map((vehicle: any) => (
-                                    <VehicleCard
-                                        key={vehicle._id}
-                                        vehicle={vehicle}
-                                    />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="flex flex-col items-center justify-center bg-white rounded-xl p-12 text-center border dashed border-gray-200">
-                                <div className="bg-gray-50 p-4 rounded-full mb-4">
-                                    <FilterX className="h-8 w-8 text-gray-400" />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">No vehicles found</h3>
-                                <p className="text-gray-500 max-w-sm">
-                                    Try adjusting your filters to see more results.
-                                </p>
-                            </div>
-                        )}
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    {TRANSFERS.map((vehicle: any) => (
+                        <VehicleCard key={vehicle._id} vehicle={vehicle} />
+                    ))}
                 </div>
             </div>
         </div>

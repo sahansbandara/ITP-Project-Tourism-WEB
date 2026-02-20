@@ -18,7 +18,7 @@ interface PackageCardProps {
 
 export default function PackageCard({ pkg }: PackageCardProps) {
     return (
-        <div className="group rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
+        <div className="group rounded-none overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 border border-off-white/20 flex flex-col h-full">
             {/* Image */}
             <div className="relative h-64 overflow-hidden">
                 <Image
@@ -28,42 +28,40 @@ export default function PackageCard({ pkg }: PackageCardProps) {
                     className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-4 right-4">
-                    <Badge className="bg-white/90 text-ocean-700 hover:bg-white backdrop-blur-sm font-semibold shadow-sm">
+                    <Badge className="bg-white/90 text-deep-emerald hover:bg-white backdrop-blur-sm font-serif shadow-sm rounded-none tracking-widest text-[10px] uppercase">
                         {pkg.durationDays} Days
                     </Badge>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
             </div>
 
             {/* Content */}
             <div className="p-6 flex flex-col flex-grow">
                 <div className="mb-4">
-                    <div className="flex items-center gap-2 text-ocean-600 text-xs font-semibold uppercase tracking-wider mb-2">
-                        <span className={pkg.difficulty === 'EASY' ? 'text-green-600' : pkg.difficulty === 'MEDIUM' ? 'text-orange-500' : 'text-red-500'}>
-                            {pkg.difficulty}
-                        </span>
+                    <div className="flex items-center gap-2 text-antique-gold text-xs font-semibold uppercase tracking-widest mb-3 font-serif">
+                        <span>{pkg.difficulty}</span>
                         <span>•</span>
-                        <span>Tour Package</span>
+                        <span>Curated Journey</span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-ocean-600 transition-colors mb-2 line-clamp-2">
+                    <h3 className="text-2xl font-serif text-deep-emerald group-hover:text-antique-gold transition-colors duration-500 mb-3 line-clamp-2">
                         {pkg.title}
                     </h3>
-                    <p className="text-gray-500 text-sm line-clamp-2">
+                    <p className="text-gray-500 font-light text-sm line-clamp-3 leading-relaxed">
                         {pkg.description}
                     </p>
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
                     <div>
-                        <p className="text-xs text-gray-400 font-medium uppercase">Starting from</p>
-                        <p className="text-2xl font-bold text-ocean-700">
-                            ${pkg.priceMin.toLocaleString()}
+                        <p className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase mb-1">Starting from</p>
+                        <p className="text-2xl font-serif text-deep-emerald">
+                            LKR {pkg.priceMin.toLocaleString()}
                         </p>
                     </div>
                     <Link href={`/packages/${pkg.slug}`}>
                         <Button
                             size="icon"
-                            className="bg-ocean-100 text-ocean-700 hover:bg-ocean-600 hover:text-white rounded-full transition-colors h-10 w-10"
+                            className="bg-deep-emerald/5 border border-deep-emerald/10 text-deep-emerald hover:bg-antique-gold hover:text-white rounded-none transition-all duration-300 h-12 w-12 group-hover:scale-110"
                         >
                             <ArrowRight className="h-5 w-5" />
                         </Button>
