@@ -10,10 +10,10 @@ import Image from 'next/image';
 import { useCurrency } from '@/lib/CurrencyContext';
 
 const navLinks = [
-    { href: '/packages', label: 'SIGNATURE JOURNEYS' },
-    { href: '/destinations', label: 'THE DESTINATIONS' },
-    { href: '/vehicles', label: 'PRIVATE TRANSFERS' },
-    { href: '/build-tour', label: 'BESPOKE PLANNING' },
+    { href: '/packages', label: 'JOURNEYS' },
+    { href: '/destinations', label: 'DESTINATIONS' },
+    { href: '/vehicles', label: 'TRANSFERS' },
+    { href: '/build-tour', label: 'BUILD A TOUR' },
     { href: '/guide', label: 'GUIDE' },
 ];
 
@@ -74,7 +74,7 @@ export function Navbar() {
                     {/* Request A Proposal - Primary CTA */}
                     <Link href="/inquire">
                         <Button className="h-10 px-7 bg-deep-emerald text-white hover:bg-deep-emerald/85 tracking-[0.15em] text-[12px] rounded-full border border-deep-emerald transition-all duration-300 font-semibold shadow-md hover:shadow-lg whitespace-nowrap">
-                            REQUEST A PROPOSAL
+                            INQUIRE
                         </Button>
                     </Link>
                 </div>
@@ -114,7 +114,7 @@ export function Navbar() {
                                 </button>
                                 <Link href="/inquire" onClick={() => setOpen(false)}>
                                     <Button className="w-full h-12 bg-deep-emerald text-white hover:bg-deep-emerald/85 tracking-[0.15em] text-[13px] rounded-full font-semibold shadow-md border border-deep-emerald">
-                                        REQUEST A PROPOSAL
+                                        INQUIRE
                                     </Button>
                                 </Link>
                             </div>

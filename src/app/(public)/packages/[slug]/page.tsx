@@ -12,10 +12,69 @@ import Package from '@/models/Package';
 // Force dynamic rendering for detail page
 export const dynamic = 'force-dynamic';
 
+const MOCK_PACKAGES = [
+    {
+        _id: 'p1',
+        title: 'The Ramayana Heritage Trail',
+        slug: 'ramayana-heritage-trail',
+        summary: 'A spiritual and cultural odyssey tracing the ancient Ramayana saga across sacred temples, mystical caves, and legendary landmarks — perfect for families and pilgrims seeking profound heritage.',
+        fullDescription: 'Trace the legendary footsteps of the Ramayana across Sri Lanka\'s most sacred and breathtaking sites. From the ancient temples of Nuwara Eliya to the coastal shrines of Trincomalee, this journey weaves mythology with natural wonder in an experience found nowhere else on earth.',
+        priceMin: 128000,
+        duration: '10 Days',
+        images: ['/images/home/signature-heritage.png', '/images/home/pkg_ramayana_1772119639135.png'],
+        tags: ['Families', 'Pilgrims', 'Culture'],
+        itinerary: [
+            { day: 1, title: 'Arrival & Colombo', description: 'Begin your journey with a welcome at the airport and a transfer to Colombo.', activity: 'Galle Face Green Walk' },
+            { day: 2, title: 'Sacred Temples', description: 'Visit the revered temples central to the Ramayana epic.', activity: 'Temple Visit' }
+        ],
+        inclusions: ['Luxury accommodation', 'Private chauffeur-guide', 'Daily breakfast', 'Entrance fees to Ramayana sites'],
+        exclusions: ['International flights', 'Lunch & dinner', 'Personal expenses']
+    },
+    {
+        _id: 'p2',
+        title: 'Ceylon Highlights Express',
+        slug: 'ceylon-highlights-express',
+        summary: 'The essential Sri Lanka in seven unforgettable days — tea country, wildlife, and golden coastline.',
+        fullDescription: 'An essential 7-day immersion through Sri Lanka\'s crown jewels — from Sigiriya\'s lion fortress to Galle\'s colonial charm. Ideal for first-time visitors, couples, and families.',
+        priceMin: 155000,
+        duration: '7 Days',
+        images: ['/images/home/signature-ceylon.png', '/images/home/pkg_ceylon_express_1772119662402.png'],
+        tags: ['First-Time Visitors', 'Couples', 'Families'],
+        itinerary: [
+            { day: 1, title: 'Arrival & Negombo', description: 'Rest after your flight in the coastal town of Negombo.', activity: 'Beach Sunset' },
+            { day: 2, title: 'Cultural Triangle', description: 'Journey to the ancient kingdoms.', activity: 'Sigiriya Rock Climb' }
+        ],
+        inclusions: ['4-star boutique stays', 'Private AC vehicle', 'Breakfast & dinner', 'Safari jeep'],
+        exclusions: ['Flights', 'Visas', 'Travel insurance']
+    },
+    {
+        _id: 'p3',
+        title: 'Heritage & Wildlife Adventure',
+        slug: 'heritage-wildlife-adventure',
+        summary: 'Ancient kingdoms by morning, leopard safaris by dusk — the ultimate Sri Lanka dual experience.',
+        fullDescription: 'The ultimate Sri Lanka experience — from UNESCO heritage sites to thrilling safari encounters at Yala National Park. Designed for wildlife lovers and history buffs alike.',
+        priceMin: 195000,
+        duration: '12 Days',
+        images: ['/images/home/signature-wildlife.png', '/images/home/pkg_heritage_wildlife_1772119687299.png'],
+        tags: ['Wildlife Lovers', 'History Buffs'],
+        itinerary: [
+            { day: 1, title: 'Arrival', description: 'Welcome to Sri Lanka.', activity: 'Transfer to Hotel' },
+            { day: 5, title: 'Yala National Park', description: 'Experience the thrill of the wild.', activity: 'Leopard Safari' }
+        ],
+        inclusions: ['Luxury resort stays', 'Private naturalist guide', 'All park fees', 'Half-board meals'],
+        exclusions: ['Camera permits', 'Gratuities', 'Extra safaris']
+    },
+];
+
 async function getPackage(slug: string) {
     await connectDB();
     const pkg = await Package.findOne({ slug, isPublished: true, isDeleted: false }).lean();
-    return pkg ? JSON.parse(JSON.stringify(pkg)) : null;
+    if (pkg) {
+        return JSON.parse(JSON.stringify(pkg));
+    }
+    // Fallback to mock data if package is not in the database
+    const mockPkg = MOCK_PACKAGES.find(p => p.slug === slug);
+    return mockPkg || null;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

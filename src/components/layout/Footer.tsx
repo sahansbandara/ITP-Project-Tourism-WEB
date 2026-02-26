@@ -111,8 +111,9 @@ export function Footer() {
                         &copy; {new Date().getFullYear()} Yatara Ceylon. All rights reserved.
                     </p>
                     <div className="flex gap-6 text-xs font-light tracking-wider">
-                        <Link href="#" className="hover:text-antique-gold transition-colors">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-antique-gold transition-colors">Terms of Service</Link>
+                        <Link href="/privacy" className="hover:text-antique-gold transition-colors">Privacy Policy</Link>
+                        <span className="text-off-white/30">|</span>
+                        <Link href="/terms" className="hover:text-antique-gold transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>

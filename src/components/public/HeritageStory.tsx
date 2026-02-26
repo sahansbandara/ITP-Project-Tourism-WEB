@@ -43,9 +43,6 @@ export default function HeritageStory() {
                         </div>
 
                         <div className="mt-12 flex items-center gap-6">
-                            <div className="h-12 w-12 rounded-full border border-antique-gold flex items-center justify-center">
-                                <span className="font-serif text-antique-gold text-xl italic">Y</span>
-                            </div>
                             <div>
                                 <p className="text-xs tracking-[0.2em] uppercase text-deep-emerald font-semibold">The Founders</p>
                                 <p className="text-sm font-light text-gray-500">Curators of Fine Travel</p>
