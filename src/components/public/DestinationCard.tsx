@@ -17,7 +17,7 @@ export default function DestinationCard({ destination, variant = 'default' }: De
         <Link href={`/destinations/${destination.slug}`} className="group block relative overflow-hidden rounded-none h-full border border-gray-100 hover:border-antique-gold/50 transition-colors duration-700 bg-white">
             <div className={`relative w-full ${variant === 'tall' ? 'h-[400px]' : 'h-[300px]'} overflow-hidden`}>
                 <Image
-                    src={destination.images[0] || 'https://images.unsplash.com/photo-1546708773-e57be64fa2e3?w=800&auto=format&fit=crop'}
+                    src={destination.images[0] || 'https://picsum.photos/seed/dest-fallback/800/600'}
                     alt={destination.title}
                     fill
                     className="object-cover transform group-hover:scale-110 transition-transform duration-1000"

@@ -29,7 +29,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
             {/* Image */}
             <div className="relative h-52 overflow-hidden">
                 <Image
-                    src={pkg.images[0] || 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop'}
+                    src={pkg.images[0] || 'https://picsum.photos/seed/pkg-fallback/800/600'}
                     alt={pkg.title}
                     fill
                     className="object-cover transform group-hover:scale-110 transition-transform duration-700"

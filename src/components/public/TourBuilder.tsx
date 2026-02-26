@@ -18,8 +18,10 @@ interface TourBuilderProps {
     places: any[];
 }
 
-export default function TourBuilder({ districts, places }: TourBuilderProps) {
+export default function TourBuilder({ districts: rawDistricts, places: rawPlaces }: TourBuilderProps) {
     const router = useRouter();
+    const districts = Array.isArray(rawDistricts) ? rawDistricts : [];
+    const places = Array.isArray(rawPlaces) ? rawPlaces : [];
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
     const [draftLoading, setDraftLoading] = useState(false);

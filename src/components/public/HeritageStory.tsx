@@ -12,7 +12,7 @@ export default function HeritageStory() {
                     <div className="relative">
                         <div className="relative h-[650px] w-full lg:w-11/12 rounded-none overflow-hidden shadow-2xl">
                             <Image
-                                src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?w=800&auto=format&fit=crop&q=80"
+                                src="https://picsum.photos/seed/heritage-ceylon/800/1000"
                                 alt="Sri Lankan Heritage"
                                 fill
                                 className="object-cover transform hover:scale-105 transition-transform duration-1000"

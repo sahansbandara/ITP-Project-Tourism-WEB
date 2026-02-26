@@ -8,19 +8,19 @@ const curatedJourneys = [
         id: 'hill-country',
         title: 'The Hill Country Odyssey',
         description: 'A bespoke journey through misty tea plantations, colonial bungalows, and cascading waterfalls. Experience the refined slow pace of Ceylon.',
-        image: 'https://images.unsplash.com/photo-1586724236151-583d789ca73f?w=800&auto=format&fit=crop&q=80',
+        image: 'https://picsum.photos/seed/hillcountry/800/600',
     },
     {
         id: 'southern-coast',
         title: 'Southern Coast Serenity',
         description: 'Private villas, secluded golden beaches, and the heritage of Galle Fort. Unwind where the Indian Ocean meets curated luxury.',
-        image: 'https://images.unsplash.com/photo-1578637387939-43c525550085?w=800&auto=format&fit=crop&q=80',
+        image: 'https://picsum.photos/seed/southcoast/800/600',
     },
     {
         id: 'ancient-kingdoms',
         title: 'Ancient Kingdom Trails',
         description: 'Exclusive access to the cultural triangle. Discover Sigiriya and Polonnaruwa with private historians and boutique eco-lodges.',
-        image: 'https://images.unsplash.com/photo-1546708973-547e1927cabe?w=800&auto=format&fit=crop&q=80',
+        image: 'https://picsum.photos/seed/kingdoms/800/600',
     }
 ];
 

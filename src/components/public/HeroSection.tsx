@@ -49,7 +49,7 @@ export default function HeroSection() {
                     muted
                     playsInline
                     className="object-cover w-full h-full"
-                    poster="https://images.unsplash.com/photo-1588258387711-540e53db3838?q=80&w=1920&auto=format&fit=crop"
+                    poster="https://picsum.photos/seed/hero-ceylon/1920/1080"
                 >
                     <source src="/Hero-Section.mp4" type="video/mp4" />
                 </video>
