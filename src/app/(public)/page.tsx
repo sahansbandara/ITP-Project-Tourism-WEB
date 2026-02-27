@@ -9,7 +9,7 @@ import YataraStandard from '@/components/public/YataraStandard';
 
 export default async function HomePage() {
     return (
-        <div className="min-h-screen bg-off-white">
+        <div className="min-h-screen bg-off-white flex flex-col gap-24 md:gap-32 pb-24">
             {/* The Cinematic Hero Section */}
             <HeroSection />
 

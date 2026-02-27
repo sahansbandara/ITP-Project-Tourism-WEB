@@ -46,7 +46,7 @@ export default function SignatureExperiences() {
                 />
 
                 {/* Featured Journey — Large Editorial Panel */}
-                <div className="mt-20 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-700 border border-deep-emerald/5">
+                <div className="mt-20 group relative overflow-hidden rounded-xl border border-white/60 hover:border-antique-gold/40 transition-all duration-700 bg-white/60 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="relative h-[400px] lg:h-[550px] overflow-hidden">
                             <Image
@@ -104,14 +104,14 @@ export default function SignatureExperiences() {
                 {/* Supporting Journeys — Smaller Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                     {supportingJourneys.map((exp) => (
-                        <div key={exp.id} className="group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-700 border border-deep-emerald/5 h-[420px] flex flex-col justify-end">
+                        <div key={exp.id} className="group relative overflow-hidden rounded-xl border border-white/20 hover:border-antique-gold/40 transition-all duration-700 flex flex-col h-[420px] bg-black/10 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] justify-end">
                             <Image
                                 src={exp.image}
                                 alt={exp.title}
                                 fill
-                                className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-1000 ease-out opacity-90 group-hover:opacity-100"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/90 via-deep-emerald/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/95 via-deep-emerald/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-700" />
 
                             <div className="relative z-10 p-8 md:p-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                 <div className="flex items-center gap-4 mb-3 text-off-white/60 text-xs tracking-[0.15em] uppercase">

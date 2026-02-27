@@ -24,9 +24,9 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
     const { currency, convertRate } = useCurrency();
 
     return (
-        <div className="group bg-white rounded-none overflow-hidden hover:bg-off-white/50 shadow-sm border border-transparent hover:border-antique-gold/30 transition-all duration-700 flex flex-col h-full">
+        <div className="group rounded-xl overflow-hidden bg-white/60 backdrop-blur-md border border-white/60 hover:border-antique-gold/40 transition-all duration-700 flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] relative">
             {/* Image section */}
-            <div className="relative h-[260px] w-full overflow-hidden bg-gray-50 flex items-center justify-center">
+            <div className="relative h-[260px] w-full overflow-hidden bg-gray-50/50 flex items-center justify-center">
                 {vehicle.images && vehicle.images.length > 0 ? (
                     <Image
                         src={vehicle.images[0]}
@@ -48,7 +48,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
             </div>
 
             {/* Content section */}
-            <div className="p-8 flex flex-col flex-grow">
+            <div className="p-8 flex flex-col flex-grow bg-gradient-to-b from-white/40 to-transparent">
                 <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl font-serif text-deep-emerald group-hover:text-antique-gold transition-colors duration-500 line-clamp-2 pr-4 leading-snug">
                         {vehicle.model}

@@ -148,7 +148,12 @@
 
   /* Premium glass card effect */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg;
+    @apply bg-white/60 backdrop-blur-md border border-white/60 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] hover:shadow-[0_0_40px_rgba(212, 175, 55, 0.15)] hover:border-antique-gold/40 transition-all duration-700 rounded-xl relative overflow-hidden;
+  }
+
+  /* Dark luxury glass card effect */
+  .glass-card-dark {
+    @apply bg-black/10 backdrop-blur-sm border border-white/20 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] hover:shadow-[0_0_40px_rgba(212, 175, 55, 0.15)] hover:border-antique-gold/40 transition-all duration-700 rounded-xl relative overflow-hidden;
   }
 
   /* Gradient text */

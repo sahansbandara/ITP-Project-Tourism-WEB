@@ -36,24 +36,24 @@ export default function HeroSection() {
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col justify-center items-center text-off-white px-4 md:px-8 max-w-5xl mx-auto">
                 <div className="text-center space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                    <span className="inline-block py-1.5 px-5 text-[11px] tracking-[0.25em] uppercase font-medium text-antique-gold border border-antique-gold/30 bg-deep-emerald/40 backdrop-blur-md">
-                        Tailor-Made Sri Lanka
+                    <span className="inline-block py-2 px-6 text-[10px] tracking-[0.4em] uppercase font-medium text-white/90 border border-white/30 bg-black/20 backdrop-blur-md mb-2">
+                        Bespoke Sri Lanka
                     </span>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif tracking-normal leading-[1.1]">
-                        <span className="italic font-light">The Soul of Your</span> <br />
-                        Island Journey.
+                    <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-normal leading-[1.05] text-white drop-shadow-2xl">
+                        Discover the <span className="italic font-light text-antique-gold">Elite</span> <br />
+                        Island Experience
                     </h1>
-                    <p className="text-lg md:text-xl text-off-white/80 max-w-2xl mx-auto font-light leading-relaxed">
-                        Bespoke itineraries, private chauffeur-guides, and heritage unlocked —
-                        crafted around you by our Sri Lanka concierge team.
+                    <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed tracking-wide drop-shadow-md">
+                        Curated itineraries, private chauffeur-guides, and unparalleled luxury —
+                        crafted around you by our dedicated concierge team.
                     </p>
 
                     {/* Primary CTA */}
                     <div className="mt-10 flex flex-col items-center gap-4">
                         <Link href="/inquire">
-                            <Button className="h-14 px-10 bg-antique-gold hover:bg-antique-gold/90 text-deep-emerald font-semibold uppercase tracking-[0.2em] text-sm transition-all duration-300 rounded-none flex items-center gap-3 shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                            <Button className="h-14 px-12 bg-transparent border border-white hover:bg-white hover:text-deep-emerald text-white font-semibold uppercase tracking-[0.2em] text-xs transition-all duration-500 rounded-none flex items-center gap-4 group">
                                 Request a Curated Proposal
-                                <ArrowRight className="w-4 h-4" />
+                                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
                             </Button>
                         </Link>
                         <p className="text-off-white/50 text-xs tracking-[0.15em] uppercase font-light">

@@ -25,7 +25,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
     const { currency, convertRate } = useCurrency();
 
     return (
-        <div className="group rounded-none overflow-hidden bg-white hover:bg-off-white/50 border border-transparent hover:border-antique-gold/30 transition-all duration-700 flex flex-col h-full shadow-sm">
+        <div className="group rounded-xl overflow-hidden bg-white/60 backdrop-blur-md border border-white/60 hover:border-antique-gold/40 transition-all duration-700 flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] relative">
             {/* Image */}
             <div className="relative h-[280px] overflow-hidden">
                 <Image
@@ -43,7 +43,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
             </div>
 
             {/* Content gap-8 for spaciousness */}
-            <div className="p-8 flex flex-col flex-grow">
+            <div className="p-8 flex flex-col flex-grow bg-gradient-to-b from-white/40 to-transparent">
                 {/* Tags */}
                 {pkg.tags && pkg.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-4">

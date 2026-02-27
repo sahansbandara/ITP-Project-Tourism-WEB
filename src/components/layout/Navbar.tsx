@@ -59,7 +59,12 @@ export function Navbar() {
                 </nav>
 
                 {/* Desktop Right Actions */}
-                <div className="hidden xl:flex items-center gap-4 shrink-0">
+                <div className="hidden xl:flex items-center gap-6 shrink-0">
+                    {/* Login Link */}
+                    <Link href="/auth/login" className="text-[11px] font-sans tracking-[0.2em] text-[#043927]/90 hover:text-[#D4AF37] transition-colors font-semibold uppercase">
+                        LOGIN
+                    </Link>
+
                     {/* Distinctive Currency Toggle */}
                     <button
                         onClick={() => setCurrency(currency === 'LKR' ? 'USD' : 'LKR')}
@@ -103,6 +108,13 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <div className="border-t border-[#D4AF37]/20 pt-8 mt-4 flex flex-col gap-6">
+                                <Link
+                                    href="/auth/login"
+                                    onClick={() => setOpen(false)}
+                                    className="text-[14px] font-sans tracking-[0.15em] text-white hover:text-[#D4AF37] transition-colors"
+                                >
+                                    LOGIN
+                                </Link>
                                 <button
                                     onClick={() => { setCurrency(currency === 'LKR' ? 'USD' : 'LKR'); setOpen(false); }}
                                     className="currency-toggle-btn self-start"
