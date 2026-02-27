@@ -6,10 +6,10 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+        <div className="grid min-h-screen w-full md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr]">
             <DashboardSidebar />
-            <div className="flex flex-col">
-                <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+            <div className="flex flex-col dashboard-content-glass">
+                <main className="flex flex-1 flex-col gap-6 p-4 lg:gap-8 lg:p-8">
                     {children}
                 </main>
             </div>

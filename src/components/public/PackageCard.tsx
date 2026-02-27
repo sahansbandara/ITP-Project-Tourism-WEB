@@ -25,7 +25,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
     const { currency, convertRate } = useCurrency();
 
     return (
-        <div className="group rounded-xl overflow-hidden bg-white/60 backdrop-blur-md border border-white/60 hover:border-antique-gold/40 transition-all duration-700 flex flex-col h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] relative">
+        <div className="group rounded-2xl overflow-hidden liquid-glass-card flex flex-col h-full relative">
             {/* Image */}
             <div className="relative h-[280px] overflow-hidden">
                 <Image
@@ -35,15 +35,15 @@ export default function PackageCard({ pkg }: PackageCardProps) {
                     className="object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                 />
                 <div className="absolute top-4 right-4">
-                    <Badge className="bg-white/90 text-deep-emerald hover:bg-white backdrop-blur-sm font-serif shadow-sm rounded-none tracking-widest text-[10px] uppercase px-3 py-1.5">
+                    <Badge className="liquid-glass-button text-white font-sans shadow-sm rounded-lg tracking-widest text-[10px] uppercase px-3 py-1.5 border-white/30">
                         {pkg.durationDays} Days, {pkg.durationNights || pkg.durationDays - 1} Nights
                     </Badge>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/80 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-700" />
             </div>
 
-            {/* Content gap-8 for spaciousness */}
-            <div className="p-8 flex flex-col flex-grow bg-gradient-to-b from-white/40 to-transparent">
+            {/* Content */}
+            <div className="p-8 flex flex-col flex-grow">
                 {/* Tags */}
                 {pkg.tags && pkg.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -58,7 +58,7 @@ export default function PackageCard({ pkg }: PackageCardProps) {
                     </div>
                 )}
 
-                <h3 className="text-2xl font-serif text-deep-emerald group-hover:text-antique-gold transition-colors duration-500 mb-4 leading-snug">
+                <h3 className="text-2xl font-display text-deep-emerald group-hover:text-antique-gold transition-colors duration-500 mb-4 leading-snug">
                     {pkg.title}
                 </h3>
 
@@ -66,17 +66,17 @@ export default function PackageCard({ pkg }: PackageCardProps) {
                     {pkg.description}
                 </p>
 
-                <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
+                <div className="mt-auto pt-6 border-t border-gray-100/50 flex items-center justify-between">
                     <div>
                         <p className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase mb-1">Starting from</p>
-                        <p className="text-xl font-serif text-deep-emerald">
+                        <p className="text-xl font-display text-deep-emerald">
                             {formatPrice(pkg.priceMin, currency, convertRate)}
                         </p>
                     </div>
                     <Link href={`/packages/${pkg.slug}`}>
                         <Button
                             variant="outline"
-                            className="border-deep-emerald text-deep-emerald hover:bg-deep-emerald hover:text-white rounded-none transition-all duration-500 h-10 px-6 uppercase tracking-widest text-xs font-semibold group-hover:bg-deep-emerald group-hover:text-white"
+                            className="border-deep-emerald text-deep-emerald hover:bg-deep-emerald hover:text-white rounded-xl transition-all duration-500 h-10 px-6 uppercase tracking-widest text-xs font-semibold group-hover:bg-deep-emerald group-hover:text-white"
                         >
                             Explore
                         </Button>

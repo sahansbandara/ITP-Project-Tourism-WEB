@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* ============================================
-   TOMS – Yatara Ceylon Design System
-   Ocean-themed premium tourism UI
+   TOMS – Yatara Ceylon Liquid Glass Design System
+   Futuristic Premium Tourism UI
    ============================================ */
 
 @layer base {
@@ -36,6 +36,16 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Liquid Glass Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-bg-light: rgba(255, 255, 255, 0.65);
+    --glass-bg-dark: rgba(4, 57, 39, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-border-gold: rgba(212, 175, 55, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.08);
+    --glass-glow-gold: rgba(212, 175, 55, 0.15);
+    --glass-blur: 20px;
   }
 
   * {
@@ -84,7 +94,215 @@
 }
 
 /* ============================================
-   Liquid Glass Navigation Bar
+   🔮 LIQUID GLASS SYSTEM — Core Effects
+   ============================================ */
+
+/* Standard Liquid Glass Panel */
+.liquid-glass {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.5) 40%,
+      rgba(248, 248, 248, 0.65) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Dark Liquid Glass Panel */
+.liquid-glass-dark {
+  background: linear-gradient(145deg,
+      rgba(4, 57, 39, 0.88) 0%,
+      rgba(4, 57, 39, 0.78) 50%,
+      rgba(2, 40, 26, 0.92) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(212, 175, 55, 0.1);
+}
+
+/* Gold-Accented Liquid Glass */
+.liquid-glass-gold {
+  background: linear-gradient(135deg,
+      rgba(212, 175, 55, 0.08) 0%,
+      rgba(255, 255, 255, 0.65) 40%,
+      rgba(212, 175, 55, 0.05) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 0 20px rgba(212, 175, 55, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Liquid Glass Card — with hover */
+.liquid-glass-card {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.4) 100%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.liquid-glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.08),
+    0 0 30px rgba(212, 175, 55, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+}
+
+/* Liquid Glass Dark Card */
+.liquid-glass-card-dark {
+  background: linear-gradient(145deg,
+      rgba(4, 57, 39, 0.75) 0%,
+      rgba(4, 57, 39, 0.6) 100%);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(212, 175, 55, 0.06);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.liquid-glass-card-dark:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(212, 175, 55, 0.15),
+    inset 0 1px 0 rgba(212, 175, 55, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Liquid Glass Input */
+.liquid-glass-input {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(4, 57, 39, 0.12);
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-input:focus {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.1),
+    0 4px 16px rgba(212, 175, 55, 0.08);
+  outline: none;
+}
+
+/* Liquid Glass Input — Dark Variant */
+.liquid-glass-input-dark {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FAFAFA;
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-input-dark:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  outline: none;
+}
+
+/* Liquid Glass Button */
+.liquid-glass-button {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.liquid-glass-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.liquid-glass-button:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.liquid-glass-button:hover::before {
+  transform: translateX(100%);
+}
+
+/* Liquid Glass Stat Card — Dashboard */
+.liquid-glass-stat {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.55) 100%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-stat::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.liquid-glass-stat:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 0 24px rgba(212, 175, 55, 0.1);
+  transform: translateY(-3px);
+}
+
+.liquid-glass-stat:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   🔮 Liquid Glass Navigation Bar
    ============================================ */
 .navbar-liquid-glass {
   background: linear-gradient(135deg,
@@ -100,7 +318,49 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* Currency Toggle – Distinctive Golden Pill */
+/* Transparent navbar state (over hero) */
+.navbar-transparent {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Scrolled navbar state */
+.navbar-scrolled {
+  background: linear-gradient(135deg,
+      rgba(248, 248, 248, 0.85) 0%,
+      rgba(255, 255, 255, 0.7) 40%,
+      rgba(248, 248, 248, 0.8) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow:
+    0 1px 3px rgba(4, 57, 39, 0.04),
+    0 8px 32px rgba(4, 57, 39, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Navbar Dropdown */
+.navbar-dropdown {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 255, 255, 0.85) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   🔮 Liquid Glass Currency Toggle
+   ============================================ */
 .currency-toggle-btn {
   display: inline-flex;
   align-items: center;
@@ -132,6 +392,10 @@
   animation: currencyPulse 2s ease-in-out infinite;
 }
 
+/* ============================================
+   🔮 KEYFRAME ANIMATIONS
+   ============================================ */
+
 @keyframes currencyPulse {
 
   0%,
@@ -144,14 +408,229 @@
   }
 }
 
+@keyframes glassShine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+@keyframes floatSoft {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes textReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes parallaxDrift {
+  0% {
+    transform: scale(1.05) translateY(0);
+  }
+
+  100% {
+    transform: scale(1.05) translateY(-20px);
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.5);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heroTextCycle {
+
+  0%,
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  35%,
+  65% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+@keyframes counterUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmerStrip {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes glowLine {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    width: 0;
+  }
+
+  50% {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes cardStaggerIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseDot {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================
+   🔮 COMPONENT LAYER
+   ============================================ */
+
 @layer components {
 
-  /* Premium glass card effect */
+  /* Legacy glass-card (kept for backward compatibility) */
   .glass-card {
     @apply bg-white/60 backdrop-blur-md border border-white/60 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] hover:shadow-[0_0_40px_rgba(212, 175, 55, 0.15)] hover:border-antique-gold/40 transition-all duration-700 rounded-xl relative overflow-hidden;
   }
 
-  /* Dark luxury glass card effect */
   .glass-card-dark {
     @apply bg-black/10 backdrop-blur-sm border border-white/20 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] hover:shadow-[0_0_40px_rgba(212, 175, 55, 0.15)] hover:border-antique-gold/40 transition-all duration-700 rounded-xl relative overflow-hidden;
   }
@@ -161,9 +640,25 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-ocean-600 to-ocean-400;
   }
 
+  /* Gold gradient text */
+  .gradient-text-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37];
+  }
+
   /* Section container */
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section divider — glowing gold line */
+  .section-divider-glass {
+    @apply relative h-px mx-auto max-w-3xl overflow-hidden;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(212, 175, 55, 0.4) 30%,
+        rgba(212, 175, 55, 0.6) 50%,
+        rgba(212, 175, 55, 0.4) 70%,
+        transparent 100%);
   }
 
   /* Premium button styles */
@@ -179,13 +674,32 @@
     @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/30 hover:-translate-y-0.5 transition-all duration-300;
   }
 
-  /* Dashboard sidebar */
+  /* Liquid Glass Premium CTA */
+  .btn-glass-cta {
+    @apply inline-flex items-center justify-center px-8 py-4 tracking-[0.2em] text-xs uppercase font-semibold relative overflow-hidden transition-all duration-500;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+
+  .btn-glass-cta:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Dashboard sidebar with glass */
   .sidebar-link {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-ocean-800/70 hover:text-ocean-800 hover:bg-ocean-50 transition-all duration-200;
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300;
   }
 
   .sidebar-link-active {
-    @apply bg-ocean-50 text-ocean-700 font-semibold;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.08);
   }
 
   /* Status badges */
@@ -221,26 +735,34 @@
     @apply bg-green-100 text-green-700;
   }
 
-  /* Data table styles */
+  /* Data table styles — Liquid Glass */
   .data-table {
     @apply w-full text-sm;
   }
 
   .data-table th {
-    @apply px-4 py-3 text-left font-semibold text-ocean-800 bg-ocean-50/50 border-b border-ocean-100;
+    @apply px-4 py-3 text-left font-semibold text-deep-emerald border-b;
+    background: linear-gradient(135deg, rgba(4, 57, 39, 0.05) 0%, rgba(212, 175, 55, 0.03) 100%);
+    border-color: rgba(212, 175, 55, 0.15);
   }
 
   .data-table td {
-    @apply px-4 py-3 border-b border-ocean-100/50;
+    @apply px-4 py-3;
+    border-bottom: 1px solid rgba(4, 57, 39, 0.06);
   }
 
   .data-table tr:hover td {
-    @apply bg-ocean-50/30;
+    background: rgba(212, 175, 55, 0.03);
   }
 
   /* Card hover effect */
   .hover-lift {
-    @apply transition-all duration-400 hover:-translate-y-2 hover:shadow-xl;
+    @apply transition-all duration-500;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08), 0 0 24px rgba(212, 175, 55, 0.1);
   }
 
   /* Leaflet map overrides */
@@ -251,7 +773,7 @@
 }
 
 /* ============================================
-   Build Tour – Premium Planner Styles
+   🔮 Build Tour – Premium Planner Styles
    ============================================ */
 
 /* Glass drawer panel */
@@ -270,23 +792,6 @@
 }
 
 /* Place card entrance animation */
-@keyframes cardStaggerIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.92);
-  }
-
-  60% {
-    opacity: 1;
-    transform: translateY(-4px) scale(1.01);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 .place-card-enter {
   opacity: 0;
   animation: cardStaggerIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -387,50 +892,16 @@
 }
 
 /* Pulse dot animation */
-@keyframes pulseDot {
-
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
-  }
-
-  50% {
-    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
-  }
-}
-
 .pulse-dot {
   animation: pulseDot 2s ease-in-out infinite;
 }
 
 /* Fade-in-up for overlay elements */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .animate-fade-in-up {
   animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Gold shimmer text effect */
-@keyframes goldShimmer {
-  0% {
-    background-position: -200% center;
-  }
-
-  100% {
-    background-position: 200% center;
-  }
-}
-
 .gold-shimmer-text {
   background: linear-gradient(90deg, #D4AF37 0%, #F5E6A3 25%, #D4AF37 50%, #F5E6A3 75%, #D4AF37 100%);
   background-size: 200% auto;
@@ -439,6 +910,83 @@
   -webkit-text-fill-color: transparent;
   animation: goldShimmer 4s linear infinite;
 }
+
+/* Glass shine sweep effect */
+.glass-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+  animation: glassShine 3s ease-in-out infinite;
+}
+
+/* Marquee scroll strip */
+.marquee-strip {
+  display: flex;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.marquee-strip:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   🔮 DASHBOARD GLASS THEME
+   ============================================ */
+
+/* Dashboard sidebar — dark glass */
+.dashboard-sidebar-glass {
+  background: linear-gradient(180deg,
+      rgba(4, 57, 39, 0.97) 0%,
+      rgba(2, 40, 26, 0.98) 100%);
+  border-right: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Dashboard content area */
+.dashboard-content-glass {
+  background: linear-gradient(135deg,
+      #f8f9fa 0%,
+      #f0f1f2 50%,
+      #f5f6f7 100%);
+  position: relative;
+}
+
+.dashboard-content-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Dashboard header glass */
+.dashboard-header-glass {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+/* ============================================
+   🔮 UTILITY LAYER
+   ============================================ */
 
 @layer utilities {
   .text-balance {
@@ -457,11 +1005,27 @@
     animation-delay: 300ms;
   }
 
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+
   .animate-delay-500 {
     animation-delay: 500ms;
   }
 
-  /* Scrollbar styling */
+  .animate-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animate-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animate-delay-800 {
+    animation-delay: 800ms;
+  }
+
+  /* Scrollbar styling — light */
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
   }
@@ -477,9 +1041,25 @@
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     @apply bg-ocean-300;
   }
+
+  /* Scrollbar styling — dark glass */
+  .scrollbar-glass-dark::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .scrollbar-glass-dark::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-glass-dark::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+  }
+
+  .scrollbar-glass-dark::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.4);
+  }
 }
-
-
 
 @layer base {
   * {

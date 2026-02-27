@@ -6,10 +6,11 @@ import SignatureExperiences from '@/components/public/SignatureExperiences';
 import CuratedCollection from '@/components/public/CuratedCollection';
 import HeritageStory from '@/components/public/HeritageStory';
 import YataraStandard from '@/components/public/YataraStandard';
+import DestinationShowcase from '@/components/public/DestinationShowcase';
 
 export default async function HomePage() {
     return (
-        <div className="min-h-screen bg-off-white flex flex-col gap-24 md:gap-32 pb-24">
+        <div className="min-h-screen bg-off-white flex flex-col">
             {/* The Cinematic Hero Section */}
             <HeroSection />
 
@@ -22,11 +23,20 @@ export default async function HomePage() {
             {/* Signature Experiences — Editorial layout */}
             <SignatureExperiences />
 
-            {/* The Curated Collection Grid */}
+            {/* Glass Divider */}
+            <div className="section-divider-glass my-4" />
+
+            {/* The Curated Collection Carousel */}
             <CuratedCollection />
+
+            {/* Why Sri Lanka — Destination Showcase + Marquee */}
+            <DestinationShowcase />
 
             {/* The Founders / Heritage Story */}
             <HeritageStory />
+
+            {/* Glass Divider */}
+            <div className="section-divider-glass my-4" />
 
             {/* Yatara Trust Badges */}
             <YataraStandard />

@@ -4,8 +4,11 @@ import { Phone, Mail, MapPin, Instagram, Facebook, Twitter, ArrowRight } from 'l
 
 export function Footer() {
     return (
-        <footer className="bg-deep-emerald text-off-white/80 border-t border-antique-gold/20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <footer className="bg-deep-emerald text-off-white/80 border-t border-antique-gold/20 relative overflow-hidden">
+            {/* Decorative background */}
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-antique-gold/3 rounded-full blur-3xl -mr-48 -mt-48" />
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
 
                     {/* Brand & Story */}
@@ -22,22 +25,18 @@ export function Footer() {
                         <p className="text-sm font-light leading-relaxed mb-6 pe-4">
                             Curators of bespoke Sri Lankan journeys. We synchronize your travel with the authentic heartbeat of Ceylon, delivering uncompromising luxury and profound heritage.
                         </p>
-                        <div className="flex gap-4">
-                            <a href="#" className="h-10 w-10 rounded-full border border-antique-gold/30 flex items-center justify-center hover:bg-antique-gold hover:text-deep-emerald transition-all duration-300">
-                                <Instagram className="h-4 w-4" />
-                            </a>
-                            <a href="#" className="h-10 w-10 rounded-full border border-antique-gold/30 flex items-center justify-center hover:bg-antique-gold hover:text-deep-emerald transition-all duration-300">
-                                <Facebook className="h-4 w-4" />
-                            </a>
-                            <a href="#" className="h-10 w-10 rounded-full border border-antique-gold/30 flex items-center justify-center hover:bg-antique-gold hover:text-deep-emerald transition-all duration-300">
-                                <Twitter className="h-4 w-4" />
-                            </a>
+                        <div className="flex gap-3">
+                            {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                                <a key={i} href="#" className="h-10 w-10 rounded-full liquid-glass-card-dark flex items-center justify-center hover:border-antique-gold/50 transition-all duration-300 group">
+                                    <Icon className="h-4 w-4 text-off-white/60 group-hover:text-antique-gold transition-colors" />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     {/* Explore Links */}
                     <div>
-                        <h4 className="text-antique-gold font-serif text-lg font-semibold tracking-widest uppercase mb-6">Explore</h4>
+                        <h4 className="text-antique-gold font-display text-lg font-semibold tracking-widest uppercase mb-6">Explore</h4>
                         <ul className="space-y-4">
                             {[
                                 { href: '/packages', label: 'The Curated Collection' },
@@ -62,7 +61,7 @@ export function Footer() {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="text-antique-gold font-serif text-lg font-semibold tracking-widest uppercase mb-6">Contact</h4>
+                        <h4 className="text-antique-gold font-display text-lg font-semibold tracking-widest uppercase mb-6">Contact</h4>
                         <ul className="space-y-4 font-light text-sm">
                             <li className="flex items-start gap-4">
                                 <MapPin className="h-5 w-5 text-antique-gold shrink-0 mt-0.5" strokeWidth={1.5} />
@@ -79,9 +78,9 @@ export function Footer() {
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
+                    {/* Newsletter — Glass Input */}
                     <div>
-                        <h4 className="text-antique-gold font-serif text-lg font-semibold tracking-widest uppercase mb-6">The Dispatch</h4>
+                        <h4 className="text-antique-gold font-display text-lg font-semibold tracking-widest uppercase mb-6">The Dispatch</h4>
                         <p className="text-sm font-light mb-4 text-off-white/80 leading-relaxed">
                             Subscribe to receive exclusive itineraries and insider access to luxury Ceylon.
                         </p>
@@ -89,12 +88,12 @@ export function Footer() {
                             <input
                                 type="email"
                                 placeholder="Email Address"
-                                className="w-full bg-black/20 border border-off-white/20 h-12 pl-4 pr-12 focus:outline-none focus:border-antique-gold focus:ring-1 focus:ring-antique-gold rounded-none text-sm font-light placeholder:text-off-white/40 transition-all"
+                                className="w-full liquid-glass-input-dark h-12 pl-4 pr-12 rounded-xl text-sm font-light placeholder:text-off-white/30 transition-all"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="absolute right-0 top-0 bottom-0 px-4 text-antique-gold hover:text-off-white hover:bg-antique-gold/20 transition-all duration-300"
+                                className="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-antique-gold/10 text-antique-gold hover:bg-antique-gold/20 transition-all duration-300 flex items-center justify-center"
                             >
                                 <ArrowRight className="h-5 w-5" />
                             </button>

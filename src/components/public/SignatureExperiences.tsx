@@ -37,45 +37,54 @@ const supportingJourneys = [
 
 export default function SignatureExperiences() {
     return (
-        <section className="py-28 bg-off-white/50 border-t border-antique-gold/10">
-            <div className="container mx-auto px-6 max-w-7xl">
+        <section className="py-32 bg-off-white/50 relative overflow-hidden">
+            {/* Decorative background */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-antique-gold/3 rounded-full blur-3xl -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-deep-emerald/3 rounded-full blur-3xl -ml-48 -mb-48" />
+
+            <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <SectionHeading
                     title="Signature Experiences"
                     description="Curated luxury journeys across the most breathtaking landscapes of Sri Lanka — each one fully private, fully bespoke."
                     align="center"
                 />
 
-                {/* Featured Journey — Large Editorial Panel */}
-                <div className="mt-20 group relative overflow-hidden rounded-xl border border-white/60 hover:border-antique-gold/40 transition-all duration-700 bg-white/60 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]">
+                {/* Featured Journey — Large Editorial Panel with Asymmetric Layout */}
+                <div className="mt-20 group relative overflow-hidden rounded-2xl liquid-glass-card">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="relative h-[400px] lg:h-[550px] overflow-hidden">
+                        {/* Image side — overlapping effect */}
+                        <div className="relative h-[400px] lg:h-[600px] overflow-hidden">
                             <Image
                                 src={featuredJourney.image}
                                 alt={featuredJourney.title}
                                 fill
                                 className="object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 lg:bg-gradient-to-r lg:from-transparent lg:to-white/5" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/5" />
+                            {/* Overlapping glass label */}
+                            <div className="absolute bottom-6 left-6 liquid-glass-button px-5 py-2.5 rounded-lg">
+                                <span className="text-[10px] tracking-[0.2em] font-semibold uppercase text-white">Featured Journey</span>
+                            </div>
                         </div>
 
                         <div className="p-10 lg:p-16 flex flex-col justify-center">
-                            <span className="inline-block mb-4 text-xs tracking-[0.2em] font-medium text-antique-gold uppercase">
-                                Featured Journey
+                            <span className="inline-block mb-4 text-xs tracking-[0.3em] font-medium text-antique-gold uppercase">
+                                ✦ Editor&apos;s Choice
                             </span>
-                            <h3 className="text-3xl lg:text-4xl font-serif text-deep-emerald mb-6 leading-tight">
+                            <h3 className="text-3xl lg:text-5xl font-display text-deep-emerald mb-6 leading-tight">
                                 {featuredJourney.title}
                             </h3>
-                            <p className="text-gray-500 font-light leading-relaxed mb-8 max-w-lg">
+                            <p className="text-gray-500 font-light leading-relaxed mb-8 max-w-lg text-[15px]">
                                 {featuredJourney.description}
                             </p>
 
-                            {/* Highlights */}
-                            <div className="flex flex-wrap gap-6 mb-8 text-sm">
-                                <span className="flex items-center gap-2 text-deep-emerald/70">
+                            {/* Highlights with glass pills */}
+                            <div className="flex flex-wrap gap-4 mb-8">
+                                <span className="flex items-center gap-2 text-sm text-deep-emerald/70 liquid-glass-gold px-4 py-2 rounded-lg">
                                     <Clock className="w-4 h-4 text-antique-gold" strokeWidth={1.5} />
                                     {featuredJourney.duration}
                                 </span>
-                                <span className="flex items-center gap-2 text-deep-emerald/70">
+                                <span className="flex items-center gap-2 text-sm text-deep-emerald/70 liquid-glass-gold px-4 py-2 rounded-lg">
                                     <Users className="w-4 h-4 text-antique-gold" strokeWidth={1.5} />
                                     {featuredJourney.style}
                                 </span>
@@ -92,24 +101,24 @@ export default function SignatureExperiences() {
 
                             <Link
                                 href={featuredJourney.href}
-                                className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.2em] text-deep-emerald border border-deep-emerald/30 px-8 py-4 hover:bg-deep-emerald hover:text-antique-gold transition-all duration-300 w-fit"
+                                className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.2em] text-deep-emerald border border-deep-emerald/30 px-8 py-4 hover:bg-deep-emerald hover:text-antique-gold transition-all duration-500 w-fit rounded-none group/btn"
                             >
                                 View Full Itinerary
-                                <ArrowRight className="w-4 h-4 ml-1" />
+                                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-500 group-hover/btn:translate-x-1" />
                             </Link>
                         </div>
                     </div>
                 </div>
 
-                {/* Supporting Journeys — Smaller Cards */}
+                {/* Supporting Journeys — Glass Overlay Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                     {supportingJourneys.map((exp) => (
-                        <div key={exp.id} className="group relative overflow-hidden rounded-xl border border-white/20 hover:border-antique-gold/40 transition-all duration-700 flex flex-col h-[420px] bg-black/10 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] justify-end">
+                        <div key={exp.id} className="group relative overflow-hidden rounded-2xl flex flex-col h-[450px] justify-end">
                             <Image
                                 src={exp.image}
                                 alt={exp.title}
                                 fill
-                                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-1000 ease-out opacity-90 group-hover:opacity-100"
+                                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/95 via-deep-emerald/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-700" />
 
@@ -120,7 +129,7 @@ export default function SignatureExperiences() {
                                         {exp.duration}
                                     </span>
                                 </div>
-                                <h3 className="text-2xl font-serif text-antique-gold font-medium mb-3">
+                                <h3 className="text-2xl lg:text-3xl font-display text-antique-gold font-medium mb-3">
                                     {exp.title}
                                 </h3>
                                 <p className="text-off-white/70 font-light text-sm mb-2 leading-relaxed">
@@ -132,7 +141,7 @@ export default function SignatureExperiences() {
 
                                 <Link
                                     href={exp.href}
-                                    className="inline-flex items-center gap-2 text-xs font-serif uppercase tracking-[0.2em] text-antique-gold border border-antique-gold/50 px-6 py-3 hover:bg-antique-gold hover:text-deep-emerald transition-all duration-300 opacity-0 group-hover:opacity-100"
+                                    className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-[0.2em] text-antique-gold border border-antique-gold/50 px-6 py-3 hover:bg-antique-gold hover:text-deep-emerald transition-all duration-300 opacity-0 group-hover:opacity-100 rounded-none"
                                 >
                                     View Itinerary
                                     <ArrowRight className="w-4 h-4 ml-1" />

@@ -1,179 +1,114 @@
-# Yatara Ceylon - Sovereign Tourism Management System (TOMS)
+# 🌴 Yatara Ceylon — TOMS
 
-An exclusive, highly-curated luxury travel platform designed for high-net-worth foreign travelers seeking profound heritage experiences in Sri Lanka. This ecosystem includes an elite public interface with a premium glass-morphic design system, a dynamic map-based bespoke tour builder, and a robust administrative backend for Concierge, Fleet, and Finance management.
+> **Tour Operations Management System**
+> Sri Lanka's first futuristic, modern, elite tourism website powered by the **Liquid Glass Design System**.
 
----
-
-## 🏛️ Live Sovereign Access
-
-**Public Gateway**: [https://yatara-ceylon.vercel.app](https://yatara-ceylon.vercel.app)
-
-**Elite Concierge Portal (Admin)**:
-Access the internal management dashboard using the official credentials:
-- **Login Portal**: `/login` *(Glassmorphic Access)*
-- **Username**: `admin@yataraceylon.com`
-- **Password**: `Admin@123`
-
-*(Note: The database natively seeds core 'Yatara Gems' via `npm run seed` if initializing a sandbox)*
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)](https://mongodb.com)
 
 ---
 
-## 💎 Elite Features & Architecture
+## ✨ Highlights
 
-### **The Public Journey:**
-- **Signature Experiences**: A curated collection of Sri Lanka's finest pre-built itineraries (e.g., The Hill Country Tea Trail).
-- **Interactive GeoJSON Explorer**: A custom map enabling guests to visually select districts, view curated 'Yatara Gems', and pull live data from the Headless CMS.
-- **Bespoke Tour Builder**: A multi-day draft generator allowing granular customization of places, interests, and Sovereign Investment Scales (LKR Focus).
-- **Premium Glassmorphic UI**: High-end aesthetic utilizing frosted glass, translucent dark gradients, and golden interactive hover effects for an elite user experience.
-- **Dual Currency Engine**: Seamlessly converts internal LKR base pricing to USD aesthetics dynamically.
-- **Concierge API Integration**: Direct floating Tawk.to chat bridge styled natively to the brand.
-
-### **The Management Engine (TOMS):**
-- **Multi-Role Protocol (RBAC)**: Secure routing systems granting distinct access to 5 tiers: `Admin`, `Staff`, `User`, `Vehicle Owner`, and `Hotel Owner`.
-- **Financial Module & Receipt Generator**: Native Server-side generation of branded PDF 'Luxury Receipts' outlining Order IDs, Advances, Remaining Balances, and the official HQ Address (142 Sir James Peiris Mawatha, Colombo 02).
-- **Automated Fleet Calendar**: Mongoose pre/post save hooks instantly block `VehicleBlock` databases when a booking confirms, eliminating double-booking flaws natively.
-- **Supplier Rate Cards**: Instantly align Guide, Driver, or Hotel service providers with active client bookings.
-- **PayHere Advance Gateway**: Dynamic 20% Advance calculation natively triggering the Sandbox PayHere SDK Popup.
+- 🔮 **Liquid Glass Design System** — Premium glassmorphic UI with frosted surfaces, golden accents, and liquid glass animations
+- 🗺️ **Interactive Tour Builder** — Drag-and-drop bespoke itinerary planner with GeoJSON Sri Lanka map
+- 💱 **Dual Currency Engine** — Real-time LKR ↔ USD conversion across all pages
+- 🎞️ **Cinematic Hero** — Full-viewport video background with rotating text carousel
+- 👤 **Multi-Role Dashboard** — Admin, Staff, Vehicle Owner, Hotel Owner portals
+- 📊 **Finance Module** — Revenue tracking, invoicing, PayHere payment integration
+- 📱 **Fully Responsive** — Mobile-first design with glass-styled mobile navigation
 
 ---
 
-## 📐 System Architecture
-
-The following diagram illustrates the flow of data and interaction between the differing layers of the Yatara Ceylon platform.
-
-```mermaid
-graph TD
-    Client[Travelers & Consumers] -->|HTTPS| Vercel(Vercel Edge Network)
-    Admin[Concierge / Fleet / Staff] -->|HTTPS| Vercel
-    
-    subgraph Frontend Delivery & Routing
-        Vercel -->|Auth Check| Middleware{Next.js Edge Middleware}
-        Middleware -->|Public Access| PublicApp[App Router: Public Pages]
-        Middleware -->|RBAC Guard| AdminApp[App Router: Admin Dashboards]
-    end
-    
-    subgraph Backend Infrastructure
-        PublicApp --> NextAPI[Next.js Server Actions / API Routes]
-        AdminApp --> NextAPI
-    end
-    
-    subgraph External Services & Core Data
-        NextAPI -->|Mongoose ORM| MongoDB[(MongoDB Atlas Document Store)]
-        NextAPI -->|Secure Hash| PayHere[PayHere Payment SDK sandbox]
-        NextAPI -->|Dynamic PDF| JSPDF[jsPDF Invoice Generator]
-    end
-    
-    classDef edge stroke:#333,stroke-width:2px;
-    classDef core fill:#043927,stroke:#D4AF37,stroke-width:2px,color:#fff;
-    classDef db fill:#00684a,stroke:#333,stroke-width:2px,color:#fff;
-    
-    class Middleware,NextAPI,PublicApp,AdminApp core;
-    class MongoDB db;
-```
-
----
-
-## 📂 Project Folder Structure
-
-The project utilizes a modern strict modular approach via Next.js App Router paradigm.
-
-```text
-ITP-Project-Tourism-WEB/
-├── public/                 # Static assets (images, fonts, raw icons)
-├── src/                    # Core source code
-│   ├── app/                # Next.js App Router (Pages, Layouts, API Routes)
-│   │   ├── (admin)/        # Authenticated portals with dedicated layouts
-│   │   ├── (public)/       # Elite public-facing marketing & booking pages
-│   │   ├── api/            # Serverless HTTP endpoints (auth, payhere, webhooks)
-│   │   ├── auth/           # Login, registration, and role selection systems
-│   │   └── globals.css     # Global stylesheets (Tailwind config & Liquid Glass classes)
-│   ├── components/         # Reusable React UI Components
-│   │   ├── admin/          # Dashboard specialized components (datatables, charts)
-│   │   ├── layout/         # High-level structure (Navbar, Footer, Sidebars)
-│   │   ├── public/         # Interactive public cards (DestinationCard, PackageCard)
-│   │   └── ui/             # Shadcn base primitive components (Buttons, Inputs)
-│   ├── lib/                # Utility core logic
-│   │   ├── db.ts           # Mongoose native connection pooling strings
-│   │   ├── utils.ts        # Tailwind merge & layout helpers
-│   │   └── CurrencyContext # Dual LKR/USD real-time conversion state
-│   └── models/             # Mongoose Schemas (User, Booking, Vehicle, Destination)
-├── scripts/                # Database seeders to initially populating data
-├── next.config.ts          # Core Next.js compilation, images, & environment settings
-├── tailwind.config.ts      # UI Design System enforcing custom luxury colors/fonts
-└── package.json            # NPM dependencies and script executions
-```
-
----
-
-## 🛠️ The Tech Stack
-
-| Module | Technology | Purpose |
-|-------------|--------------|----------------|
-| **Framework** | Next.js | App Router, Server Actions, API Routes |
-| **Aesthetics** | Tailwind CSS & shadcn/ui | Custom Deep Emerald (`#043927`) & Gold (`#D4AF37`) themes with liquid glass filters |
-| **Logic** | TypeScript | Strict type safety across financial and map domains |
-| **Database** | MongoDB & Mongoose 8.9 | High-performance document clustering |
-| **Maps** | Leaflet.js | GeoJSON plotting and CircleMarker rendering |
-| **Financials**| jsPDF & autoTable | Dynamic Server-Side PDF rendering |
-
----
-
-## ⚙️ Initializing the System
-
-### Prerequisites
-- Node.js 18.x or higher
-- MongoDB Atlas Connection String
-- PayHere Sandbox Merchant Account
-
-### 1. Installation
+## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/sahansbandara/ITP-Project-Tourism-WEB.git
-cd ITP-Project-Tourism-WEB
+git clone https://github.com/YourOrg/Yatara-Ceylon.git
+cd Yatara-Ceylon
 npm install
+cp .env.example .env.local   # Configure your environment
+npm run dev                   # http://localhost:3000
 ```
 
-### 2. Environment Configuration
-
-Create a `.env.local` file in the root structure matching this blueprint:
-
-```env
-# Database
-MONGODB_URI=your_mongodb_cluster_string
-
-# Authentication & Security
-JWT_SECRET=your_secure_jwt_secret
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# PayHere Integration (Vercel Build Requirements)
-PAYHERE_MODE=sandbox
-PAYHERE_MERCHANT_ID=your_merchant_id
-PAYHERE_MERCHANT_SECRET=your_merchant_secret
-PAYHERE_CURRENCY=LKR
-```
-
-### 3. Native Seeding & Compilation
-
-Populate the database with sample Sovereign Data, compile the TS framework, and start the local environment:
-
-```bash
-npm run seed
-npm run build
-npm run dev
-```
-Execute the build globally at `http://localhost:3000`.
+> See [docs/SETUP.md](./docs/SETUP.md) for detailed setup instructions.
 
 ---
 
-## 📜 Official Office & Contact
+## 📚 Documentation
 
-**Yatara Ceylon Headquarters**
-142 Sir James Peiris Mawatha,
-Colombo 02, Sri Lanka
+All documentation is in the [`docs/`](./docs/) folder:
 
-**Concierge Contact**: concierge@yataraceylon.com
+| Document | Description |
+|----------|-------------|
+| [📖 Architecture](./docs/ARCHITECTURE.md) | System architecture, diagrams, database schema |
+| [🚀 Setup Guide](./docs/SETUP.md) | Local development, environment variables, deployment |
+| [🔌 API Reference](./docs/API.md) | REST endpoints, auth, request/response schemas |
+| [🎨 Design System](./docs/DESIGN-SYSTEM.md) | Liquid Glass CSS classes, colors, typography |
+| [📋 Features](./docs/FEATURES.md) | Complete feature breakdown with user flows |
 
 ---
 
-## 🛡️ License
-Distributed under the MIT License. See `LICENSE` for more information.
+## 🏗️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS + Liquid Glass System |
+| Database | MongoDB Atlas (Mongoose) |
+| Auth | JWT + bcrypt + role middleware |
+| Payments | PayHere |
+| Maps | Leaflet + GeoJSON |
+| UI | Radix UI + custom glass components |
+| Fonts | Playfair Display · Cormorant Garamond · Montserrat |
+
+---
+
+## 🎨 Design System — Liquid Glass
+
+The UI uses a custom **Liquid Glass Design System** featuring:
+
+- `liquid-glass` — Standard frosted glass panel
+- `liquid-glass-dark` — Deep emerald glass (dark sections)
+- `liquid-glass-gold` — Gold-accented glass (highlights)
+- `liquid-glass-card` — Hoverable glass cards with gold halos
+- `liquid-glass-stat` — Dashboard KPI stat cards
+- `navbar-transparent` / `navbar-scrolled` — Dynamic navbar states
+
+> Full class reference: [docs/DESIGN-SYSTEM.md](./docs/DESIGN-SYSTEM.md)
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── (public)/       # Public pages (Homepage, Packages, etc.)
+│   ├── dashboard/      # Admin dashboard
+│   ├── api/            # REST API routes
+│   ├── auth/           # Login/register
+│   └── globals.css     # Liquid Glass CSS
+├── components/
+│   ├── layout/         # Navbar, Footer, DashboardSidebar
+│   ├── public/         # Homepage sections, cards
+│   ├── dashboard/      # Dashboard tables, forms
+│   └── ui/             # Radix UI primitives
+├── lib/                # Utilities (DB, auth, currency)
+├── models/             # Mongoose schemas
+└── middleware.ts       # Auth guards
+```
+
+---
+
+## 📜 License
+
+Proprietary. All rights reserved.
+
+---
+
+<p align="center">
+  <strong>Built with ❤️ for Sri Lanka 🇱🇰</strong>
+</p>
