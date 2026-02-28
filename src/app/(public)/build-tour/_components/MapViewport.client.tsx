@@ -4,6 +4,7 @@ import { useEffect, useRef, useCallback, useState } from 'react';
 import { useBuildTourStore } from '@/lib/trip/store/useBuildTourStore';
 import { getCategoryColor } from '@/lib/trip/types';
 import type { Place } from '@/lib/trip/types';
+import { MapPin, Route, Clock } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
@@ -17,6 +18,7 @@ export default function MapViewport() {
     const markersRef = useRef<any>(null);
     const routeLayerRef = useRef<any>(null);
     const geoJsonLayerRef = useRef<any>(null);
+    const highlightedLayerRef = useRef<any>(null);
 
     const places = useBuildTourStore((s) => s.places);
     const stops = useBuildTourStore((s) => s.stops);
@@ -28,6 +30,7 @@ export default function MapViewport() {
 
     const [L, setL] = useState<any>(null);
     const [geoData, setGeoData] = useState<any>(null);
+    const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
 
     // Load Leaflet + GeoJSON data
     useEffect(() => {
@@ -80,7 +83,7 @@ export default function MapViewport() {
         };
     }, [L]);
 
-    // Add GeoJSON district boundaries
+    // Add GeoJSON district boundaries with hover + click
     useEffect(() => {
         if (!L || !mapRef.current || !geoData) return;
 
@@ -88,14 +91,35 @@ export default function MapViewport() {
             mapRef.current.removeLayer(geoJsonLayerRef.current);
         }
 
+        const defaultStyle = {
+            fillColor: '#16a34a',
+            weight: 1,
+            opacity: 0.4,
+            color: '#D4AF37',
+            fillOpacity: 0.06,
+        };
+
+        const hoverStyle = {
+            fillOpacity: 0.18,
+            weight: 2,
+            color: '#D4AF37',
+            opacity: 0.8,
+        };
+
+        const selectedStyle = {
+            fillColor: '#D4AF37',
+            fillOpacity: 0.15,
+            weight: 2.5,
+            color: '#D4AF37',
+            opacity: 1,
+        };
+
         geoJsonLayerRef.current = L.geoJSON(geoData, {
-            style: () => ({
-                fillColor: '#16a34a',
-                weight: 1,
-                opacity: 0.4,
-                color: '#D4AF37',
-                fillOpacity: 0.08,
-            }),
+            style: (feature: any) => {
+                const name = (feature?.properties?.shapeName || '').replace(/\s*District$/i, '').trim();
+                if (name === selectedDistrict) return selectedStyle;
+                return defaultStyle;
+            },
             onEachFeature: (feature: any, layer: any) => {
                 const name = (feature.properties.shapeName || '')
                     .replace(/\s*District$/i, '')
@@ -105,9 +129,26 @@ export default function MapViewport() {
                     direction: 'center',
                     className: 'build-tour-district-tooltip',
                 });
+
+                // Hover effect
+                layer.on('mouseover', () => {
+                    if (name !== selectedDistrict) {
+                        layer.setStyle(hoverStyle);
+                    }
+                });
+                layer.on('mouseout', () => {
+                    if (name !== selectedDistrict) {
+                        layer.setStyle(defaultStyle);
+                    }
+                });
+
+                // Click to select district
+                layer.on('click', () => {
+                    setSelectedDistrict((prev) => (prev === name ? null : name));
+                });
             },
         }).addTo(mapRef.current);
-    }, [L, geoData]);
+    }, [L, geoData, selectedDistrict]);
 
     // Create place markers with clustering
     const updateMarkers = useCallback(() => {
@@ -221,14 +262,19 @@ export default function MapViewport() {
         }
     }, [L, route, stops]);
 
-    // Fit bounds to stops
+    // Fit bounds to stops with smooth animation
     useEffect(() => {
         if (!L || !mapRef.current || stops.length === 0) return;
 
         const bounds = L.latLngBounds(
             stops.map((s) => [s.place.lat, s.place.lng])
         );
-        mapRef.current.fitBounds(bounds, { padding: [60, 60], maxZoom: 11 });
+        mapRef.current.fitBounds(bounds, {
+            padding: [60, 60],
+            maxZoom: 11,
+            animate: true,
+            duration: 0.8,
+        });
     }, [L, stops]);
 
     // Fetch route when stops change
@@ -237,16 +283,50 @@ export default function MapViewport() {
         return () => clearTimeout(timer);
     }, [stops, fetchRoute]);
 
+    // Calculate unique districts in stops
+    const uniqueDistricts = new Set(stops.map((s) => s.place.district));
+
     return (
         <div className="w-full h-full relative">
             <div ref={mapContainerRef} className="w-full h-full" />
 
-            {/* Route info overlay */}
-            {route && (
-                <div className="absolute bottom-4 left-4 z-[1000] build-tour-route-label px-4 py-2 rounded-lg">
-                    <p className="text-white/60 text-[10px] font-serif tracking-wider">
-                        ~{route.totalKm} km · ~{route.totalHours} hrs driving
-                    </p>
+            {/* Floating Stats Overlay */}
+            <div className="absolute top-4 left-4 z-[1000]">
+                <div className="map-stats-overlay rounded-xl px-4 py-3 flex items-center gap-5">
+                    <div className="flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-antique-gold/70" />
+                        <span className="text-white/80 text-[11px] font-serif">{stops.length}</span>
+                        <span className="text-white/30 text-[9px] font-nav uppercase tracking-wider">stops</span>
+                    </div>
+                    {route && (
+                        <>
+                            <div className="w-px h-4 bg-white/10" />
+                            <div className="flex items-center gap-1.5">
+                                <Route className="w-3.5 h-3.5 text-antique-gold/70" />
+                                <span className="text-white/80 text-[11px] font-serif">~{route.totalKm}</span>
+                                <span className="text-white/30 text-[9px] font-nav uppercase tracking-wider">km</span>
+                            </div>
+                            <div className="w-px h-4 bg-white/10" />
+                            <div className="flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5 text-antique-gold/70" />
+                                <span className="text-white/80 text-[11px] font-serif">~{route.totalHours}</span>
+                                <span className="text-white/30 text-[9px] font-nav uppercase tracking-wider">hrs</span>
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+
+            {/* Selected district indicator */}
+            {selectedDistrict && (
+                <div className="absolute top-4 right-16 z-[1000]">
+                    <button
+                        onClick={() => setSelectedDistrict(null)}
+                        className="map-stats-overlay rounded-full px-3 py-1.5 flex items-center gap-2 hover:border-antique-gold/40 transition-all"
+                    >
+                        <span className="text-antique-gold text-[10px] font-nav uppercase tracking-wider">{selectedDistrict}</span>
+                        <span className="text-white/30 text-[10px]">✕</span>
+                    </button>
                 </div>
             )}
         </div>

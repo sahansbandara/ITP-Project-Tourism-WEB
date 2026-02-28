@@ -1,199 +1,102 @@
 'use client';
 
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Star } from 'lucide-react';
 
 const testimonials = [
     {
-        name: 'Charlotte & James',
-        country: 'United Kingdom',
-        quote: 'Yatara didn\'t just plan our honeymoon — they orchestrated a love letter to Sri Lanka. Every detail, from the private tuk-tuk through Galle Fort to sunrise at Sigiriya, was flawless.',
+        quote: "Every detail was flawless. Yatara understood exactly what we wanted from our honeymoon and delivered beyond expectation.",
+        author: "Eleanor & James",
+        location: "London, UK",
         rating: 5,
+        image: "/images/home/curated-southcoast.png" // placeholder
     },
     {
-        name: 'Marc Delafosse',
-        country: 'France',
-        quote: 'As someone who has traveled extensively through Asia, I can say the level of personal attention Yatara provides is genuinely rare. Our guide felt like a friend, not a service.',
+        quote: "The private access to landmarks and the knowledge of our guide transformed a good trip into a life-changing expedition.",
+        author: "Marcus T.",
+        location: "Sydney, AU",
         rating: 5,
-    },
-    {
-        name: 'Sarah Mitchell',
-        country: 'Australia',
-        quote: 'We had three children under 10 and Yatara made it effortless. The private vehicle, the curated kid-friendly stops, the concierge checking in daily — it was a dream.',
-        rating: 5,
-    },
-    {
-        name: 'Thomas & Anna Weber',
-        country: 'Germany',
-        quote: 'The fixed-price guarantee gave us peace of mind, and the itinerary exceeded our expectations in every way. We\'re already planning our return.',
-        rating: 5,
-    },
-    {
-        name: 'Yuki Tanaka',
-        country: 'Japan',
-        quote: 'The attention to culinary detail was extraordinary. Every meal was a discovery — from street-side hoppers to private dining at a tea estate. Unforgettable.',
-        rating: 5,
-    },
+        image: "/images/home/curated-kingdoms.png" // placeholder
+    }
 ];
-
-const stats = [
-    { value: 500, suffix: '+', label: 'Bespoke Journeys Crafted' },
-    { value: 4.9, suffix: ' / 5', label: 'Average Guest Rating', isFloat: true },
-    { value: 12, suffix: '+', label: 'Years of Excellence' },
-];
-
-function AnimatedCounter({ value, suffix, isFloat }: { value: number; suffix: string; isFloat?: boolean }) {
-    const [display, setDisplay] = useState(0);
-    const ref = useRef<HTMLDivElement>(null);
-    const [visible, setVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-            { threshold: 0.3 }
-        );
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        if (!visible) return;
-        const step = value / 40;
-        let current = 0;
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= value) {
-                current = value;
-                clearInterval(timer);
-            }
-            setDisplay(isFloat ? parseFloat(current.toFixed(1)) : Math.floor(current));
-        }, 30);
-        return () => clearInterval(timer);
-    }, [visible, value, isFloat]);
-
-    return (
-        <div ref={ref}>
-            <p className="text-4xl font-display text-antique-gold mb-2 tracking-tight">
-                {display}{suffix}
-            </p>
-        </div>
-    );
-}
 
 export default function SocialProof() {
-    const [current, setCurrent] = useState(0);
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-    const next = useCallback(() => {
-        setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, []);
-
-    const prev = useCallback(() => {
-        setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    }, []);
-
-    // Auto-advance every 6 seconds
-    useEffect(() => {
-        timerRef.current = setInterval(next, 6000);
-        return () => { if (timerRef.current) clearInterval(timerRef.current); };
-    }, [next]);
-
-    const t = testimonials[current];
-
     return (
-        <section className="relative overflow-hidden">
-            {/* Background image with dark overlay */}
-            <div className="absolute inset-0">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: "url('/images/home/heritage-story.png')" }}
-                />
-                <div className="absolute inset-0 bg-deep-emerald/90" />
-                <div className="absolute inset-0 bg-gradient-to-b from-deep-emerald/60 via-transparent to-deep-emerald/80" />
-            </div>
+        <section className="py-20 md:py-24 bg-white border-t border-b border-black/[0.03]">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+                {/* Logo Strip */}
+                <div className="mb-20">
+                    <p className="text-center text-[10px] tracking-[0.2em] font-nav font-semibold text-deep-emerald/40 uppercase mb-8">
+                        Recognized For Excellence
+                    </p>
+                    <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale">
+                        {/* Placeholder Logos - use real SVGs in production */}
+                        <div className="h-8 w-32 bg-gray-300 rounded-sm" />
+                        <div className="h-8 w-32 bg-gray-300 rounded-sm" />
+                        <div className="h-8 w-32 bg-gray-300 rounded-sm" />
+                        <div className="h-8 w-32 bg-gray-300 rounded-sm" />
+                    </div>
+                </div>
 
-            <div className="relative z-10 py-28">
-                <div className="max-w-5xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <span className="inline-block mb-4 text-xs tracking-[0.3em] font-medium text-antique-gold uppercase">
-                            Trusted by Discerning Travelers
+                {/* Testimonials */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+                    {/* Intro / CTA Side */}
+                    <div className="max-w-md">
+                        <span className="block text-[10px] tracking-[0.2em] font-nav text-deep-emerald/50 uppercase mb-4">
+                            Client Experiences
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-display text-off-white leading-tight">
-                            Voices from <span className="italic font-light text-antique-gold">Our Guests</span>
+                        <h2 className="text-3xl md:text-4xl font-display text-deep-emerald leading-tight mb-6">
+                            Don't Just Take Our <span className="italic font-light">Word For It</span>
                         </h2>
-                    </div>
-
-                    {/* Featured Testimonial Carousel */}
-                    <div className="relative max-w-3xl mx-auto">
-                        {/* Navigation Arrows */}
-                        <button
-                            onClick={prev}
-                            className="absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-antique-gold hover:border-antique-gold/50 transition-all z-20 backdrop-blur-sm bg-white/5"
+                        <p className="text-deep-emerald/60 font-light text-sm leading-relaxed mb-8">
+                            Over 500 successful itineraries crafted for the world's most discerning travelers. Discover why 98% of our clients return for their next Asian journey.
+                        </p>
+                        <Link
+                            href="/inquire"
+                            className="inline-flex items-center gap-3 text-[10px] tracking-[0.2em] font-nav font-semibold text-deep-emerald hover:text-antique-gold uppercase transition-colors group"
                         >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                            onClick={next}
-                            className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-antique-gold hover:border-antique-gold/50 transition-all z-20 backdrop-blur-sm bg-white/5"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
-
-                        {/* Card */}
-                        <div className="text-center px-4 md:px-12 transition-all duration-700">
-                            <Quote className="w-12 h-12 text-antique-gold/20 mx-auto mb-8" />
-
-                            {/* Stars */}
-                            <div className="flex gap-1.5 justify-center mb-8">
-                                {Array.from({ length: t.rating }).map((_, i) => (
-                                    <Star key={i} className="w-5 h-5 fill-antique-gold text-antique-gold" />
-                                ))}
-                            </div>
-
-                            <p className="text-off-white/90 font-light leading-relaxed text-xl md:text-2xl italic mb-10 min-h-[120px]">
-                                &ldquo;{t.quote}&rdquo;
-                            </p>
-
-                            {/* Author */}
-                            <div className="flex items-center justify-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-antique-gold/20 border border-antique-gold/30 flex items-center justify-center text-antique-gold font-display text-lg">
-                                    {t.name[0]}
-                                </div>
-                                <div className="text-left">
-                                    <p className="text-antique-gold font-medium text-base tracking-wide">{t.name}</p>
-                                    <p className="text-off-white/40 text-xs tracking-[0.15em] uppercase mt-0.5">{t.country}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Dot Indicators */}
-                        <div className="flex gap-2.5 justify-center mt-12">
-                            {testimonials.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setCurrent(idx)}
-                                    className={`h-1.5 rounded-full transition-all duration-500 ${idx === current
-                                        ? 'bg-antique-gold w-8'
-                                        : 'bg-white/20 w-1.5 hover:bg-white/40'
-                                        }`}
-                                />
-                            ))}
-                        </div>
+                            Read More Stories
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
                     </div>
 
-                    {/* Animated Trust Indicators */}
-                    <div className="border-t border-off-white/10 pt-16 mt-20">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                            {stats.map((stat, idx) => (
-                                <div key={idx} className="group">
-                                    <AnimatedCounter value={stat.value} suffix={stat.suffix} isFloat={stat.isFloat} />
-                                    <p className="text-xs tracking-[0.2em] uppercase text-off-white/40 font-light group-hover:text-off-white/60 transition-colors">
-                                        {stat.label}
-                                    </p>
+                    {/* Cards Side */}
+                    <div className="grid gap-6">
+                        {testimonials.map((t, idx) => (
+                            <div key={idx} className="bg-[#f9f9f9] p-8 rounded-md border border-black/[0.03] group hover:shadow-lg transition-all duration-500">
+                                <div className="flex gap-1 mb-4">
+                                    {[...Array(t.rating)].map((_, i) => (
+                                        <Star key={i} className="w-4 h-4 text-antique-gold fill-antique-gold" />
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                                <p className="text-deep-emerald/80 font-display text-lg leading-relaxed mb-6 italic">
+                                    "{t.quote}"
+                                </p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-500">
+                                        <Image
+                                            src={t.image}
+                                            alt={t.author}
+                                            fill
+                                            className="object-cover"
+                                            sizes="48px"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-xs font-nav font-semibold uppercase tracking-wider text-deep-emerald">
+                                            {t.author}
+                                        </h4>
+                                        <p className="text-[10px] font-nav text-deep-emerald/50 tracking-wider">
+                                            {t.location}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
+
                 </div>
             </div>
         </section>

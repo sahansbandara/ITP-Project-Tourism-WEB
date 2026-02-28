@@ -106,6 +106,12 @@ const config: Config = {
 					'"Playfair Display"',
 					'"Cormorant Garamond"',
 					'serif'
+				],
+				nav: [
+					'Manrope',
+					'Montserrat',
+					'system-ui',
+					'sans-serif'
 				]
 			},
 			animation: {

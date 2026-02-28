@@ -1,47 +1,44 @@
-import { Suspense } from 'react';
 import HeroSection from '@/components/public/HeroSection';
 import TourCategoriesCarousel from '@/components/public/TourCategoriesCarousel';
-import TestimonialsOverlay from '@/components/public/TestimonialsOverlay';
+import FeaturedJourneys from '@/components/public/FeaturedJourneys';
+import SocialProof from '@/components/public/SocialProof';
 import HowItWorks from '@/components/public/HowItWorks';
-import SignatureExperiences from '@/components/public/SignatureExperiences';
-import CuratedCollection from '@/components/public/CuratedCollection';
-import HeritageStory from '@/components/public/HeritageStory';
-import DestinationShowcase from '@/components/public/DestinationShowcase';
-import YataraStandard from '@/components/public/YataraStandard';
-import ParallaxDivider from '@/components/public/ParallaxDivider';
+import BuildTourTeaser from '@/components/public/BuildTourTeaser';
+import PremiumStory from '@/components/public/PremiumStory';
+import ExperiencesCarousel from '@/components/public/ExperiencesCarousel';
+import FinalCTA from '@/components/public/FinalCTA';
 
 export default async function HomePage() {
     return (
-        <div className="min-h-screen bg-off-white flex flex-col">
-            {/* The Split Hero Section — Walkers-style 3-column */}
+        <main className="min-h-screen bg-off-white flex flex-col">
+            {/* 1. Hook */}
             <HeroSection />
 
-            {/* Tour Categories — Swiper carousel with tinted bg */}
+            {/* 2. Browse fast */}
             <TourCategoriesCarousel />
 
-            {/* How It Works — 3-step concierge flow */}
+            {/* 3. Featured journeys */}
+            <FeaturedJourneys />
+
+            {/* 4. Social proof */}
+            <SocialProof />
+
+            {/* 5. Clarity - How It Works */}
             <HowItWorks />
 
-            {/* Signature Experiences — Editorial layout */}
-            <SignatureExperiences />
+            {/* 6. Drive to differentiator */}
+            <BuildTourTeaser />
 
-            {/* The Curated Collection Carousel */}
-            <CuratedCollection />
+            {/* 7. Premium justification */}
+            <PremiumStory />
 
-            {/* Testimonials — Background overlay + watermark typography */}
-            <TestimonialsOverlay />
+            {/* 8. Emotion - Testimonials */}
+            <ExperiencesCarousel />
 
-            {/* Why Sri Lanka — Destination Showcase + Marquee */}
-            <DestinationShowcase />
+            {/* 9. Convert */}
+            <FinalCTA />
 
-            {/* The Founders / Heritage Story */}
-            <HeritageStory />
-
-            {/* Parallax Scroll Divider */}
-            <ParallaxDivider />
-
-            {/* Yatara Trust Badges — 2-column layout */}
-            <YataraStandard />
-        </div>
+            {/* 10. Footer is handled in layout.tsx */}
+        </main>
     );
 }

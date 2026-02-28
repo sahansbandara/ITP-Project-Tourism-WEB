@@ -49,7 +49,7 @@ export default function BuildTourShell() {
             {/* ── Desktop Layout ─────────────────────────────────── */}
             <div className="hidden lg:flex h-[85vh] min-h-[600px]">
                 {/* Left Panel */}
-                <div className="w-[460px] flex-shrink-0 flex flex-col build-tour-panel border-r border-antique-gold/10">
+                <div className="w-[480px] flex-shrink-0 flex flex-col build-tour-panel border-r border-antique-gold/10">
                     {/* Tab bar */}
                     <div className="flex border-b border-white/5">
                         {TABS.map((tab) => {
@@ -60,8 +60,8 @@ export default function BuildTourShell() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-[10px] uppercase tracking-[0.2em] font-serif transition-all duration-300 relative ${isActive
-                                            ? 'text-antique-gold'
-                                            : 'text-white/30 hover:text-white/50'
+                                        ? 'text-antique-gold'
+                                        : 'text-white/30 hover:text-white/50'
                                         }`}
                                 >
                                     <Icon className="w-3.5 h-3.5" />
@@ -140,8 +140,8 @@ export default function BuildTourShell() {
                                                 key={tab.id}
                                                 onClick={() => setActiveTab(tab.id)}
                                                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[9px] uppercase tracking-wider font-serif transition-all ${isActive
-                                                        ? 'text-antique-gold border-b-2 border-antique-gold'
-                                                        : 'text-white/30'
+                                                    ? 'text-antique-gold border-b-2 border-antique-gold'
+                                                    : 'text-white/30'
                                                     }`}
                                             >
                                                 <Icon className="w-3 h-3" />

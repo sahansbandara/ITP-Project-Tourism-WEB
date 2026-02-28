@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useRef } from 'react';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Image from 'next/image';
@@ -60,8 +60,8 @@ export function Navbar() {
     };
 
     return (
-        <header className="fixed top-0 z-50 w-full bg-[#0a1f15]/80 backdrop-blur-md border-b border-white/5">
-            <div className="section-container flex h-16 items-center justify-between px-4 lg:px-8">
+        <header className="fixed top-0 z-50 w-full bg-[#0a1f15]/30 backdrop-blur-xl border-b border-white/[0.08] transition-all duration-500">
+            <div className="max-w-[1400px] mx-auto flex h-[72px] items-center justify-between px-6 lg:px-10">
                 {/* Logo */}
                 <Link href="/" className="flex items-center shrink-0">
                     <Image
@@ -69,12 +69,12 @@ export function Navbar() {
                         alt="Yatara Ceylon Logo"
                         width={180}
                         height={40}
-                        className="object-contain h-[40px] w-auto hover:opacity-90 transition-all duration-500 brightness-0 invert drop-shadow-md"
+                        className="object-contain h-[38px] w-auto hover:opacity-90 transition-all duration-500 brightness-0 invert drop-shadow-md"
                     />
                 </Link>
 
                 {/* Desktop Nav Center */}
-                <nav className="hidden xl:flex flex-1 justify-center items-center gap-5 2xl:gap-8">
+                <nav className="hidden xl:flex flex-1 justify-center items-center gap-10 2xl:gap-12">
                     {navLinks.map((link) => (
                         <div
                             key={link.href}
@@ -84,27 +84,35 @@ export function Navbar() {
                         >
                             <Link
                                 href={link.href}
-                                className={`text-[12px] 2xl:text-[13px] font-sans tracking-[0.15em] transition-all duration-300 whitespace-nowrap relative py-1 flex items-center gap-1
+                                className={`font-nav text-[11px] tracking-[0.18em] uppercase transition-all duration-300 whitespace-nowrap relative py-2 flex items-center gap-1 group
                                     ${isActive(link.href)
-                                        ? 'text-[#D4AF37] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#D4AF37]'
-                                        : 'text-white/70 hover:text-white'
+                                        ? 'text-white'
+                                        : 'text-white/50 hover:text-white/90'
                                     }`}
                             >
                                 {link.label}
                                 {link.dropdown && (
                                     <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180' : ''}`} />
                                 )}
+                                {/* Animated underline */}
+                                <span
+                                    className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#D4AF37] transition-transform duration-300 origin-center
+                                        ${isActive(link.href)
+                                            ? 'scale-x-100'
+                                            : 'scale-x-0 group-hover:scale-x-100'
+                                        }`}
+                                />
                             </Link>
 
                             {/* Dropdown Panel */}
                             {link.dropdown && activeDropdown === link.label && (
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 animate-slide-down">
-                                    <div className="bg-[#0a1f15]/95 backdrop-blur-xl border border-white/10 rounded-xl py-4 px-2 min-w-[220px] shadow-2xl">
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 animate-slide-down">
+                                    <div className="bg-[#0a1f15]/90 backdrop-blur-2xl border border-white/[0.08] rounded-2xl py-4 px-2 min-w-[240px] shadow-2xl">
                                         {link.dropdown.map((item) => (
                                             <Link
                                                 key={item.href}
                                                 href={item.href}
-                                                className="block px-4 py-2.5 text-[11px] tracking-[0.15em] text-white/60 hover:text-[#D4AF37] hover:bg-white/5 rounded-lg transition-all duration-200 font-medium"
+                                                className="block px-5 py-2.5 font-nav text-[10px] tracking-[0.15em] text-white/50 hover:text-[#D4AF37] hover:bg-white/[0.04] rounded-xl transition-all duration-200 uppercase"
                                             >
                                                 {item.label}
                                             </Link>
@@ -116,28 +124,17 @@ export function Navbar() {
                     ))}
                 </nav>
 
-                {/* Desktop Right Actions */}
-                <div className="hidden xl:flex items-center gap-6 shrink-0">
-                    <Link
-                        href="/auth/login"
-                        className="text-[11px] font-sans tracking-[0.2em] text-white/70 hover:text-[#D4AF37] transition-colors font-semibold uppercase"
-                    >
-                        LOGIN
-                    </Link>
-
+                {/* Desktop Right Actions — Simplified: Search + Inquire only */}
+                <div className="hidden xl:flex items-center gap-5 shrink-0">
                     <button
-                        onClick={() => setCurrency(currency === 'LKR' ? 'USD' : 'LKR')}
-                        className="currency-toggle-btn"
-                        style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+                        className="p-2 rounded-full text-white/40 hover:text-white hover:bg-white/[0.06] transition-all duration-300"
+                        aria-label="Search"
                     >
-                        <span className="currency-toggle-indicator" />
-                        <span className="text-[11px] font-semibold tracking-[0.2em]">
-                            {currency}
-                        </span>
+                        <Search className="w-[18px] h-[18px]" strokeWidth={1.5} />
                     </button>
 
                     <Link href="/inquire">
-                        <Button className="h-9 px-7 tracking-[0.15em] text-[11px] rounded-full transition-all duration-500 font-semibold shadow-md hover:shadow-lg whitespace-nowrap bg-[#D4AF37] text-[#0a1f15] hover:bg-[#D4AF37]/90 border-0">
+                        <Button className="h-9 px-8 tracking-[0.18em] text-[10px] rounded-full transition-all duration-500 font-nav font-semibold shadow-md hover:shadow-lg hover:shadow-antique-gold/20 whitespace-nowrap bg-[#D4AF37] text-[#0a1f15] hover:bg-[#D4AF37]/90 border-0 uppercase">
                             INQUIRE
                         </Button>
                     </Link>
@@ -162,7 +159,7 @@ export function Navbar() {
                                     <Link
                                         href={link.href}
                                         onClick={() => setOpen(false)}
-                                        className={`text-[14px] font-sans tracking-[0.15em] transition-colors block
+                                        className={`font-nav text-[13px] tracking-[0.15em] transition-colors block uppercase
                                             ${isActive(link.href)
                                                 ? 'text-[#D4AF37] border-b border-[#D4AF37] pb-1 w-fit'
                                                 : 'text-white/80 hover:text-[#D4AF37]'
@@ -177,7 +174,7 @@ export function Navbar() {
                                                     key={sub.href}
                                                     href={sub.href}
                                                     onClick={() => setOpen(false)}
-                                                    className="block text-[12px] tracking-[0.12em] text-white/40 hover:text-[#D4AF37] transition-colors"
+                                                    className="block font-nav text-[11px] tracking-[0.12em] text-white/40 hover:text-[#D4AF37] transition-colors"
                                                 >
                                                     {sub.label}
                                                 </Link>
@@ -188,7 +185,7 @@ export function Navbar() {
                             ))}
 
                             <div className="border-t border-[#D4AF37]/20 pt-8 mt-4 flex flex-col gap-6">
-                                <Link href="/auth/login" onClick={() => setOpen(false)} className="text-[14px] font-sans tracking-[0.15em] text-white/80 hover:text-[#D4AF37] transition-colors">
+                                <Link href="/auth/login" onClick={() => setOpen(false)} className="font-nav text-[13px] tracking-[0.15em] text-white/80 hover:text-[#D4AF37] transition-colors uppercase">
                                     LOGIN
                                 </Link>
                                 <button
@@ -197,10 +194,10 @@ export function Navbar() {
                                     style={{ borderColor: 'rgba(212,175,55,0.5)', color: 'white' }}
                                 >
                                     <span className="currency-toggle-indicator" />
-                                    <span className="text-[11px] font-semibold tracking-[0.2em]">{currency}</span>
+                                    <span className="font-nav text-[10px] font-semibold tracking-[0.2em]">{currency}</span>
                                 </button>
                                 <Link href="/inquire" onClick={() => setOpen(false)}>
-                                    <Button className="w-full h-12 bg-[#D4AF37] text-[#0a1f15] hover:bg-[#D4AF37]/90 tracking-[0.15em] text-[13px] rounded-full font-semibold shadow-md transition-all duration-500">
+                                    <Button className="w-full h-12 bg-[#D4AF37] text-[#0a1f15] hover:bg-[#D4AF37]/90 tracking-[0.15em] text-[12px] rounded-full font-nav font-semibold shadow-md transition-all duration-500 uppercase">
                                         INQUIRE NOW
                                     </Button>
                                 </Link>
@@ -208,7 +205,7 @@ export function Navbar() {
 
                             <div className="absolute bottom-8 left-6 right-6">
                                 <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
-                                <p className="text-center text-[9px] tracking-[0.3em] text-white/20 mt-4 uppercase">
+                                <p className="text-center text-[9px] tracking-[0.3em] text-white/20 mt-4 uppercase font-nav">
                                     Bespoke Sri Lanka
                                 </p>
                             </div>
