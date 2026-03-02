@@ -75,24 +75,29 @@ const navLinks = [
         ],
     },
     {
-        href: '/services',
-        label: 'SERVICES',
+        href: '/transfers',
+        label: 'TRANSFERS',
         dropdown: [
             {
-                title: 'Travel Services',
+                title: 'Transfer Services',
                 links: [
-                    { href: '/services', label: 'All Services' },
                     { href: '/transfers', label: 'Private Transfers' },
                     { href: '/about/fleet', label: 'Our Fleet' },
-                    { href: '/mice', label: 'MICE & Events' },
                 ]
-            },
+            }
+        ]
+    },
+    {
+        href: '/build-tour',
+        label: 'BESPOKE TOUR',
+        dropdown: [
             {
-                title: 'Plan Your Trip',
+                title: 'Custom Travel',
                 links: [
                     { href: '/build-tour', label: 'Build Your Tour' },
                     { href: '/build-tour/how-it-works', label: 'How It Works' },
-                    { href: '/offers', label: 'Special Offers' },
+                    { href: '/build-tour/proposal', label: 'Proposal in 24 Hours' },
+                    { href: '/faq', label: 'FAQs' },
                 ]
             }
         ]
