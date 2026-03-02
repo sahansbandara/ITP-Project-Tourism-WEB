@@ -201,7 +201,7 @@ export function Navbar() {
                 onClick={() => setActiveDropdown(null)}
             />
 
-            <header className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ${scrolled || !isHome ? 'bg-[#0a1f15]/95 backdrop-blur-lg border-white/10 shadow-lg' : 'bg-black/10 backdrop-blur-md border-white/10'}`}>
+            <header className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ${scrolled || !isHome ? 'bg-[#0a1f15]/65 backdrop-blur-md border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]' : 'bg-black/10 backdrop-blur-md border-white/10'}`}>
                 <div className="max-w-[1400px] mx-auto flex h-[72px] items-center justify-between px-6 lg:px-10">
                     {/* Logo */}
                     <Link href="/" className="flex items-center shrink-0">
