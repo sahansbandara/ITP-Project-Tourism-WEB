@@ -11,7 +11,19 @@ const config: Config = {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
-    }
+    },
 }
 
-export default createJestConfig(config)
+// next/jest overrides transformIgnorePatterns, so we modify the
+// resolved config to ensure ESM-only packages like `jose` are transformed.
+const jestConfig = createJestConfig(config)
+
+export default async () => {
+    const resolvedConfig = await jestConfig()
+    resolvedConfig.transformIgnorePatterns = [
+        '/node_modules/(?!.pnpm)(?!(jose|geist)/)',
+        '/node_modules/.pnpm/(?!(jose|geist)@)',
+        '^.+\\.module\\.(css|sass|scss)$',
+    ]
+    return resolvedConfig
+}
