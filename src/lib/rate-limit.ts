@@ -40,3 +40,8 @@ export async function rateLimit(req: NextRequest, config: RateLimitConfig = { li
 
     return null; // No limit hit
 }
+
+/** Reset all tracked IPs — exposed for testing only */
+export function _resetTrackers() {
+    trackers.clear();
+}
