@@ -25,9 +25,11 @@ export function Footer() {
                         </h4>
                         <ul className="space-y-4">
                             <li><Link href="/packages" className="text-sm font-light text-white/70 hover:text-white transition-colors">The Collection</Link></li>
+                            <li><Link href="/tours/cultural" className="text-sm font-light text-white/70 hover:text-white transition-colors">Cultural Tours</Link></li>
+                            <li><Link href="/tours/wildlife-adventure" className="text-sm font-light text-white/70 hover:text-white transition-colors">Wildlife & Adventure</Link></li>
+                            <li><Link href="/tours/experiences" className="text-sm font-light text-white/70 hover:text-white transition-colors">Experiences</Link></li>
                             <li><Link href="/build-tour" className="text-sm font-light text-white/70 hover:text-white transition-colors">Bespoke Planning</Link></li>
                             <li><Link href="/destinations" className="text-sm font-light text-white/70 hover:text-white transition-colors">Destinations</Link></li>
-                            <li><Link href="/vehicles" className="text-sm font-light text-white/70 hover:text-white transition-colors">Private Transfers</Link></li>
                         </ul>
                     </div>
 
@@ -37,9 +39,15 @@ export function Footer() {
                         </h4>
                         <ul className="space-y-4">
                             <li><Link href="/about" className="text-sm font-light text-white/70 hover:text-white transition-colors">Our Story</Link></li>
-                            <li><Link href="/journal" className="text-sm font-light text-white/70 hover:text-white transition-colors">The Journal</Link></li>
-                            <li><Link href="/contact" className="text-sm font-light text-white/70 hover:text-white transition-colors">Contact Concierge</Link></li>
-                            <li><Link href="/terms" className="text-sm font-light text-white/70 hover:text-white transition-colors">Policies</Link></li>
+                            <li><Link href="/about/team" className="text-sm font-light text-white/70 hover:text-white transition-colors">Our Team</Link></li>
+                            <li><Link href="/about/brands" className="text-sm font-light text-white/70 hover:text-white transition-colors">Our Brands</Link></li>
+                            <li><Link href="/services" className="text-sm font-light text-white/70 hover:text-white transition-colors">Services</Link></li>
+                            <li><Link href="/mice" className="text-sm font-light text-white/70 hover:text-white transition-colors">MICE & Events</Link></li>
+                            <li><Link href="/about/sustainability" className="text-sm font-light text-white/70 hover:text-white transition-colors">Sustainability</Link></li>
+                            <li><Link href="/news" className="text-sm font-light text-white/70 hover:text-white transition-colors">Travel Bites</Link></li>
+                            <li><Link href="/careers" className="text-sm font-light text-white/70 hover:text-white transition-colors">Careers</Link></li>
+                            <li><Link href="/faq" className="text-sm font-light text-white/70 hover:text-white transition-colors">FAQ</Link></li>
+                            <li><Link href="/contact" className="text-sm font-light text-white/70 hover:text-white transition-colors">Contact Us</Link></li>
                         </ul>
                     </div>
 

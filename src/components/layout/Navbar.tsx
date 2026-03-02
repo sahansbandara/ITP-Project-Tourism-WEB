@@ -24,20 +24,20 @@ const navLinks = [
                 ]
             },
             {
+                title: 'By Style',
+                links: [
+                    { href: '/tours/cultural', label: 'Cultural Tours' },
+                    { href: '/tours/wildlife-adventure', label: 'Wildlife & Adventure' },
+                    { href: '/tours/experiences', label: 'Experiences' },
+                    { href: '/packages', label: 'View all →', special: true },
+                ]
+            },
+            {
                 title: 'By Duration',
                 links: [
                     { href: '/packages?duration=5-7', label: '5–7 Days' },
                     { href: '/packages?duration=8-10', label: '8–10 Days' },
                     { href: '/packages?duration=11-14', label: '11–14 Days' },
-                    { href: '/packages', label: 'View all →', special: true },
-                ]
-            },
-            {
-                title: 'By Style',
-                links: [
-                    { href: '/packages?tag=luxury', label: 'Luxury' },
-                    { href: '/packages?tag=honeymoon', label: 'Honeymoon' },
-                    { href: '/packages?tag=family', label: 'Family' },
                     { href: '/packages', label: 'View all →', special: true },
                 ]
             }
@@ -75,32 +75,48 @@ const navLinks = [
         ],
     },
     {
-        href: '/transfers',
-        label: 'TRANSFERS',
+        href: '/services',
+        label: 'SERVICES',
         dropdown: [
             {
-                title: 'Services',
+                title: 'Travel Services',
                 links: [
-                    { href: '/transfers/airport', label: 'Airport Transfers' },
-                    { href: '/transfers/private', label: 'Private Driver' },
-                    { href: '/transfers/intercity', label: 'Intercity Transfers' },
-                    { href: '/transfers/fleet', label: 'Fleet Standards' },
-                    { href: '/transfers', label: 'View all →', special: true },
+                    { href: '/services', label: 'All Services' },
+                    { href: '/transfers', label: 'Private Transfers' },
+                    { href: '/about/fleet', label: 'Our Fleet' },
+                    { href: '/mice', label: 'MICE & Events' },
+                ]
+            },
+            {
+                title: 'Plan Your Trip',
+                links: [
+                    { href: '/build-tour', label: 'Build Your Tour' },
+                    { href: '/build-tour/how-it-works', label: 'How It Works' },
+                    { href: '/offers', label: 'Special Offers' },
                 ]
             }
         ]
     },
     {
-        href: '/build-tour',
-        label: 'BESPOKE TOUR',
+        href: '/about',
+        label: 'ABOUT',
         dropdown: [
             {
-                title: 'Custom Travel',
+                title: 'Company',
                 links: [
-                    { href: '/build-tour', label: 'Build Your Tour' },
-                    { href: '/build-tour/how-it-works', label: 'How It Works' },
-                    { href: '/build-tour/proposal', label: 'Proposal in 24 Hours' },
-                    { href: '/build-tour/faqs', label: 'FAQs' },
+                    { href: '/about', label: 'Our Story' },
+                    { href: '/about/team', label: 'Our Team' },
+                    { href: '/about/brands', label: 'Our Brands' },
+                    { href: '/about/sustainability', label: 'Sustainability' },
+                ]
+            },
+            {
+                title: 'More',
+                links: [
+                    { href: '/careers', label: 'Careers' },
+                    { href: '/news', label: 'Travel Bites' },
+                    { href: '/faq', label: 'FAQ' },
+                    { href: '/contact', label: 'Contact Us' },
                 ]
             }
         ]
