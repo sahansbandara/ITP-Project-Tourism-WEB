@@ -108,7 +108,7 @@ export default function EliteLoginPage() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
             >
-                <source src="/Hero-Section.mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/sahansbandara/Yatara-Ceylon/main/public/Hero-Section.mp4" type="video/mp4" />
             </video>
 
             {/* Overlays */}
