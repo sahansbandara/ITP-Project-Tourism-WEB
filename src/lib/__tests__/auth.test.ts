@@ -49,18 +49,18 @@ describe('auth utilities', () => {
 
         it('should include Secure flag in production', () => {
             const origEnv = process.env.NODE_ENV;
-            process.env.NODE_ENV = 'production';
+            Object.defineProperty(process.env, 'NODE_ENV', { value: 'production', writable: true, configurable: true });
             const cookie = setAuthCookie('mytoken');
             expect(cookie).toContain('Secure');
-            process.env.NODE_ENV = origEnv;
+            Object.defineProperty(process.env, 'NODE_ENV', { value: origEnv, writable: true, configurable: true });
         });
 
         it('should not include Secure flag in development', () => {
             const origEnv = process.env.NODE_ENV;
-            process.env.NODE_ENV = 'development';
+            Object.defineProperty(process.env, 'NODE_ENV', { value: 'development', writable: true, configurable: true });
             const cookie = setAuthCookie('mytoken');
             expect(cookie).not.toContain('Secure');
-            process.env.NODE_ENV = origEnv;
+            Object.defineProperty(process.env, 'NODE_ENV', { value: origEnv, writable: true, configurable: true });
         });
     });
 
