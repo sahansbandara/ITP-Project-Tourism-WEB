@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ArrowRight, Clock, Sparkles } from 'lucide-react';
 import connectDB from '@/lib/mongodb';
 import Package from '@/models/Package';
+import PackagePriceDisplay from '@/components/public/PackagePriceDisplay';
 
 export const dynamic = 'force-dynamic';
 
@@ -217,12 +218,7 @@ export default async function PackagesPage() {
                                     <div className="mt-auto pt-5 border-t border-gray-100/50 flex items-center justify-between">
                                         <div>
                                             {pkg.priceMin > 0 && (
-                                                <>
-                                                    <p className="text-[10px] text-gray-400 font-medium tracking-widest uppercase mb-0.5">From</p>
-                                                    <p className="text-lg font-display text-deep-emerald">
-                                                        LKR {pkg.priceMin?.toLocaleString()}
-                                                    </p>
-                                                </>
+                                                <PackagePriceDisplay priceMin={pkg.priceMin} />
                                             )}
                                         </div>
                                         <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.15em] uppercase font-semibold text-deep-emerald group-hover:text-antique-gold transition-colors duration-300">

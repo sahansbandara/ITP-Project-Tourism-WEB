@@ -6,8 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Check, X, Clock, MapPin, Star, ArrowRight, Sparkles, Users, Compass } from 'lucide-react';
 import connectDB from '@/lib/mongodb';
 import Package from '@/models/Package';
+import PackagePriceDisplay from '@/components/public/PackagePriceDisplay';
 
 export const dynamic = 'force-dynamic';
+
+import { tourCategories } from '@/data/tourCategories';
 
 const MOCK_PACKAGES = [
     {
@@ -80,7 +83,32 @@ async function getPackage(slug: string) {
         // Fall through to mock
     }
     const mockPkg = MOCK_PACKAGES.find(p => p.slug === slug);
-    return mockPkg || null;
+    if (mockPkg) return mockPkg;
+
+    // Dynamic mock for valid categories that aren't in DB yet
+    const catalogPkg = tourCategories.find(c => c.href === `/packages/${slug}`);
+    if (catalogPkg) {
+        return {
+            _id: slug,
+            title: catalogPkg.title,
+            slug: slug,
+            summary: catalogPkg.promise,
+            fullDescription: catalogPkg.description,
+            priceMin: 200000,
+            priceMax: 400000,
+            duration: catalogPkg.tags.find(t => t.includes('Nights')) || 'Custom Duration',
+            images: [catalogPkg.image, catalogPkg.image],
+            tags: catalogPkg.tags,
+            highlights: ['Custom signature experiences', 'Premium comfort'],
+            itinerary: [
+                { day: 1, title: 'Arrival in Sri Lanka', description: 'Welcome and transfer.' }
+            ],
+            inclusions: ['Premium Accommodation', 'Private Guide', 'Transport'],
+            exclusions: ['International Flights', 'Visas']
+        };
+    }
+
+    return null;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -296,15 +324,7 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
                             {/* Booking Card */}
                             <div className="bg-white rounded-2xl p-7 shadow-lg border border-gray-100/80">
                                 <div className="mb-6">
-                                    <p className="text-[11px] tracking-[0.2em] uppercase text-gray-400 font-medium mb-1">Starting from</p>
-                                    <h3 className="text-3xl font-display text-deep-emerald">
-                                        LKR {pkg.priceMin?.toLocaleString()}
-                                    </h3>
-                                    {pkg.priceMax > 0 && pkg.priceMax !== pkg.priceMin && (
-                                        <p className="text-xs text-gray-400 font-light mt-1">
-                                            up to LKR {pkg.priceMax?.toLocaleString()} per person
-                                        </p>
-                                    )}
+                                    <PackagePriceDisplay priceMin={pkg.priceMin} priceMax={pkg.priceMax} size="lg" />
                                 </div>
 
                                 <div className="space-y-3.5 border-t border-gray-100 pt-5 mb-6">
