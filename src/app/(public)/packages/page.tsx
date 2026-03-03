@@ -1,138 +1,255 @@
 import { Metadata } from 'next';
-import PackageCard from '@/components/public/PackageCard';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, Clock, Sparkles } from 'lucide-react';
+import connectDB from '@/lib/mongodb';
+import Package from '@/models/Package';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: 'Signature Journeys | Yatara Ceylon',
-    description: 'Explore our elite collection of Sri Lanka tour packages. Handcrafted luxury itineraries for the discerning traveler.',
+    description: 'Explore our curated collection of Sri Lanka luxury itineraries. Handcrafted journeys designed around pace, privacy, and purpose.',
 };
 
-const PACKAGES = [
+// Fallback packages when DB is empty
+const FALLBACK_PACKAGES = [
     {
         _id: 'p1',
         title: 'The Ramayana Heritage Trail',
         slug: 'ramayana-heritage-trail',
-        description: 'A spiritual and cultural odyssey tracing the ancient Ramayana saga across sacred temples, mystical caves, and legendary landmarks — perfect for families and pilgrims seeking profound heritage.',
+        summary: 'A spiritual and cultural odyssey tracing the ancient Ramayana saga across sacred temples, mystical caves, and legendary landmarks.',
         priceMin: 128000,
-        durationDays: 6,
-        durationNights: 5,
+        duration: '6 Days / 5 Nights',
         images: ['/images/home/pkg_ramayana_1772119639135.png'],
-        difficulty: 'LEISURE',
         tags: ['Families', 'Pilgrims', 'Culture'],
+        highlights: ['Key temple circuit with comfortable routing', 'Private guide days', 'Upgraded stays for recovery'],
     },
     {
         _id: 'p2',
         title: 'The Ceylon Highlights Express',
         slug: 'ceylon-highlights-express',
-        description: 'An essential 7-day immersion through Sri Lanka\'s crown jewels — from Sigiriya\'s lion fortress to Galle\'s colonial charm. Ideal for first-time visitors, couples, and families.',
+        summary: "An essential 7-day immersion through Sri Lanka's crown jewels — from Sigiriya's lion fortress to Galle's colonial charm.",
         priceMin: 155000,
-        durationDays: 7,
-        durationNights: 6,
+        duration: '7 Days / 6 Nights',
         images: ['/images/home/pkg_ceylon_express_1772119662402.png'],
-        difficulty: 'EASY',
         tags: ['First-Time Visitors', 'Couples', 'Families'],
+        highlights: ['Sigiriya sunrise option', 'Scenic train segment', 'Galle Fort walk'],
     },
     {
         _id: 'p3',
         title: 'The Cultural & Scenic Escape',
         slug: 'cultural-scenic-escape',
-        description: 'A curated journey blending ancient kingdoms with breathtaking hill country landscapes. Experience the Cultural Triangle, tea plantations, and scenic train rides in refined luxury.',
+        summary: 'A curated journey blending ancient kingdoms with breathtaking hill country landscapes.',
         priceMin: 168000,
-        durationDays: 7,
-        durationNights: 6,
+        duration: '7 Days / 6 Nights',
         images: ['/images/home/pkg_cultural_scenic_1772119769964.png'],
-        difficulty: 'MODERATE',
         tags: ['Culture Enthusiasts', 'Couples'],
+        highlights: ['Cultural Triangle private tour', 'Tea estate afternoon', 'Scenic rail segment'],
     },
     {
         _id: 'p4',
         title: 'Heritage & Wildlife Adventure',
         slug: 'heritage-wildlife-adventure',
-        description: 'The ultimate Sri Lanka experience — from UNESCO heritage sites to thrilling safari encounters at Yala National Park. Designed for wildlife lovers and history buffs alike.',
+        summary: 'The ultimate Sri Lanka experience — from UNESCO heritage sites to thrilling safari encounters at Yala National Park.',
         priceMin: 195000,
-        durationDays: 7,
-        durationNights: 6,
+        duration: '7 Days / 6 Nights',
         images: ['/images/home/pkg_heritage_wildlife_1772119687299.png'],
-        difficulty: 'MODERATE',
         tags: ['Wildlife Lovers', 'History Buffs'],
+        highlights: ['Private jeep safari', 'UNESCO site access', 'Boutique lodge stays'],
     },
     {
         _id: 'p5',
         title: 'The Classic Ceylon Getaway',
         slug: 'classic-ceylon-getaway',
-        description: 'A leisurely circuit through the island\'s timeless gems — Kandy, Nuwara Eliya, and the southern coast. Perfect for general travelers and families seeking a quintessential Sri Lanka experience.',
+        summary: "A leisurely circuit through the island's timeless gems — Kandy, Nuwara Eliya, and the southern coast.",
         priceMin: 142000,
-        durationDays: 7,
-        durationNights: 6,
+        duration: '7 Days / 6 Nights',
         images: ['/images/home/pkg_classic_ceylon_1772119707902.png'],
-        difficulty: 'EASY',
         tags: ['General Travelers', 'Families'],
+        highlights: ['Kandy temple visit', 'Nuwara Eliya tea country', 'Southern coast relaxation'],
     },
     {
         _id: 'p6',
         title: 'The East Coast Explorer',
         slug: 'east-coast-explorer',
-        description: 'Sun-drenched beaches, world-class surf breaks, and hidden lagoons along Sri Lanka\'s pristine eastern shoreline. An exclusive retreat for beach lovers and summer travelers.',
+        summary: "Sun-drenched beaches, world-class surf breaks, and hidden lagoons along Sri Lanka's pristine eastern shoreline.",
         priceMin: 175000,
-        durationDays: 8,
-        durationNights: 7,
+        duration: '8 Days / 7 Nights',
         images: ['/images/home/pkg_east_coast_1772119793935.png'],
-        difficulty: 'LEISURE',
         tags: ['Beach Lovers', 'Summer Travelers'],
+        highlights: ['Long beach base (4+ nights)', 'Snorkeling options', 'Lagoon sunset'],
     },
     {
         _id: 'p7',
         title: 'Tea, Temples & Safari',
         slug: 'tea-temples-safari',
-        description: 'A harmonious blend of misty tea estates, ancient temples, and thrilling game drives. An immersive 8-day journey for nature enthusiasts and history devotees.',
+        summary: 'A harmonious blend of misty tea estates, ancient temples, and thrilling game drives.',
         priceMin: 189000,
-        durationDays: 8,
-        durationNights: 7,
+        duration: '8 Days / 7 Nights',
         images: ['/images/home/pkg_tea_temples_1772119728527.png'],
-        difficulty: 'MODERATE',
         tags: ['Nature Lovers', 'History Buffs'],
+        highlights: ['Tea tasting experience', 'Temple heritage tour', 'Safari game drives'],
     },
 ];
 
-export default function PackagesPage() {
+async function getPackages() {
+    try {
+        await connectDB();
+        const packages = await Package.find({ isPublished: true, isDeleted: false })
+            .sort({ createdAt: -1 })
+            .lean();
+        if (packages && packages.length > 0) {
+            return JSON.parse(JSON.stringify(packages));
+        }
+    } catch {
+        // Fall through to fallback
+    }
+    return FALLBACK_PACKAGES;
+}
+
+const themeChips = ['All', 'Honeymoon', 'Family', 'Wildlife', 'Wellness', 'Heritage', 'Beaches', 'Culture'];
+
+export default async function PackagesPage() {
+    const packages = await getPackages();
+
     return (
         <div className="min-h-screen bg-off-white pt-32 pb-24">
-            <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
                 {/* Header */}
-                <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000 max-w-3xl mx-auto">
-                    <span className="inline-block py-1.5 px-5 text-xs tracking-[0.2em] uppercase font-medium text-antique-gold border border-antique-gold/30 mb-8 bg-deep-emerald/5">
-                        Our Signature Itineraries
+                <div className="mb-16 max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    <span className="inline-block py-1.5 px-5 text-[11px] tracking-[0.25em] uppercase font-medium text-antique-gold border border-antique-gold/30 mb-8 bg-deep-emerald/5">
+                        Curated Itineraries
                     </span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-deep-emerald mb-6 leading-tight">
-                        Signature Journeys
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-deep-emerald mb-6 leading-[1.1]">
+                        Signature <span className="italic font-light">Journeys</span>
                     </h1>
-                    <p className="text-gray-600 text-lg font-light leading-relaxed">
+                    <p className="text-gray-500 text-lg font-light leading-relaxed max-w-2xl">
                         Handcrafted luxury itineraries for the discerning traveler. Each journey is meticulously designed to unveil the authentic soul of Ceylon with private guides and elite comforts.
                     </p>
+                    <div className="h-px w-20 bg-gradient-to-r from-antique-gold to-transparent mt-8" />
                 </div>
 
-                {/* Grid Layout - 2 columns on desktop for larger, more luxurious cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-16">
-                    {PACKAGES.map((pkg: any) => (
-                        <PackageCard key={pkg._id} pkg={pkg} />
+                {/* Bespoke CTA Banner */}
+                <div className="mb-16 p-8 md:p-12 rounded-2xl bg-deep-emerald relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-deep-emerald via-deep-emerald/95 to-deep-emerald/80" />
+                    <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-antique-gold/[0.06] rounded-full blur-3xl" />
+                    <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div>
+                            <div className="flex items-center gap-2 mb-3">
+                                <Sparkles className="w-4 h-4 text-antique-gold" />
+                                <span className="text-[11px] tracking-[0.25em] uppercase text-antique-gold font-medium">Bespoke Service</span>
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-display text-white mb-2">
+                                Design Your Own Journey
+                            </h3>
+                            <p className="text-white/60 font-light text-sm max-w-md">
+                                Tell us your dates and pace. We build the itinerary around your vision with private guiding, boutique stays, and concierge-level timing.
+                            </p>
+                        </div>
+                        <Link
+                            href="/build-tour"
+                            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-antique-gold text-deep-emerald hover:bg-white text-[11px] tracking-[0.2em] uppercase font-semibold rounded-full transition-all duration-300 shrink-0"
+                        >
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Design My Trip
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Package Grid — 2 columns for editorial feel */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-16">
+                    {packages.map((pkg: any) => (
+                        <Link key={pkg._id} href={`/packages/${pkg.slug}`} className="group block">
+                            <article className="rounded-2xl overflow-hidden liquid-glass-card flex flex-col h-full">
+                                {/* Image */}
+                                <div className="relative h-[300px] md:h-[340px] overflow-hidden">
+                                    <Image
+                                        src={pkg.images?.[0] || '/images/home/curated-kingdoms.png'}
+                                        alt={pkg.title}
+                                        fill
+                                        className="object-cover transform group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                                    {/* Duration badge */}
+                                    <div className="absolute top-5 right-5">
+                                        <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-white/90 bg-white/15 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                                            {pkg.duration}
+                                        </span>
+                                    </div>
+
+                                    {/* Tags on image */}
+                                    <div className="absolute bottom-5 left-5 flex flex-wrap gap-1.5">
+                                        {(pkg.tags || []).slice(0, 3).map((tag: string) => (
+                                            <span
+                                                key={tag}
+                                                className="text-[9px] tracking-[0.15em] uppercase font-medium text-white/80 bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full border border-white/10"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-7 md:p-8 flex flex-col flex-grow">
+                                    <h3 className="text-xl md:text-2xl font-display text-deep-emerald group-hover:text-antique-gold transition-colors duration-500 mb-3 leading-snug">
+                                        {pkg.title}
+                                    </h3>
+
+                                    <p className="text-gray-500 font-light text-sm line-clamp-2 leading-relaxed mb-5 flex-grow">
+                                        {pkg.summary || pkg.description}
+                                    </p>
+
+                                    {/* Highlights preview */}
+                                    {pkg.highlights && pkg.highlights.length > 0 && (
+                                        <div className="mb-5 space-y-1.5">
+                                            {pkg.highlights.slice(0, 2).map((h: string, i: number) => (
+                                                <p key={i} className="text-[12px] text-gray-400 font-light flex items-start gap-2">
+                                                    <span className="text-antique-gold mt-0.5">&#9670;</span>
+                                                    {h}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div className="mt-auto pt-5 border-t border-gray-100/50 flex items-center justify-between">
+                                        <div>
+                                            {pkg.priceMin > 0 && (
+                                                <>
+                                                    <p className="text-[10px] text-gray-400 font-medium tracking-widest uppercase mb-0.5">From</p>
+                                                    <p className="text-lg font-display text-deep-emerald">
+                                                        LKR {pkg.priceMin?.toLocaleString()}
+                                                    </p>
+                                                </>
+                                            )}
+                                        </div>
+                                        <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.15em] uppercase font-semibold text-deep-emerald group-hover:text-antique-gold transition-colors duration-300">
+                                            Explore
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </Link>
                     ))}
                 </div>
 
-                {/* View All Tours / Inquiry CTA */}
-                <div className="mt-20 flex flex-col md:flex-row items-center justify-center gap-6">
+                {/* Bottom CTAs */}
+                <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-5">
                     <Link
                         href="/build-tour"
-                        className="inline-flex items-center gap-3 px-10 py-5 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 border border-antique-gold/30 font-serif uppercase tracking-[0.2em] text-sm transition-all duration-300 shadow-lg"
+                        className="inline-flex items-center gap-3 px-9 py-4 bg-deep-emerald text-antique-gold hover:bg-deep-emerald/90 border border-antique-gold/30 font-display uppercase tracking-[0.2em] text-[12px] transition-all duration-300 rounded-full"
                     >
+                        <Sparkles className="w-4 h-4" />
                         Build Custom Tour
-                        <ArrowRight className="w-4 h-4" />
                     </Link>
                     <Link
                         href="/inquire"
-                        className="inline-flex items-center gap-3 px-10 py-5 bg-white text-deep-emerald hover:bg-off-white border border-deep-emerald/30 font-serif uppercase tracking-[0.2em] text-sm transition-all duration-300"
+                        className="inline-flex items-center gap-3 px-9 py-4 bg-white text-deep-emerald hover:bg-off-white border border-deep-emerald/20 font-display uppercase tracking-[0.2em] text-[12px] transition-all duration-300 rounded-full"
                     >
-                        Request A Proposal
+                        Request a Proposal
                     </Link>
                 </div>
             </div>
