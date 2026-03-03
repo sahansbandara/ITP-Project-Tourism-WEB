@@ -11,7 +11,6 @@ const curatedJourneys = [
         tags: ['Heritage', 'Nature'],
         duration: '7 Days',
         image: '/images/home/curated-hillcountry.png',
-        href: '/packages?tag=heritage',
     },
     {
         id: 'southern-coast',
@@ -19,7 +18,6 @@ const curatedJourneys = [
         tags: ['Beach', 'Culture'],
         duration: '5 Days',
         image: '/images/home/curated-southcoast.png',
-        href: '/packages?tag=beach',
     },
     {
         id: 'ancient-kingdoms',
@@ -27,7 +25,6 @@ const curatedJourneys = [
         tags: ['History', 'Temples'],
         duration: '8 Days',
         image: '/images/home/curated-kingdoms.png',
-        href: '/packages?tag=heritage',
     },
     {
         id: 'wildlife-safari',
@@ -35,7 +32,6 @@ const curatedJourneys = [
         tags: ['Wildlife', 'Adventure'],
         duration: '6 Days',
         image: '/images/home/signature-wildlife.png',
-        href: '/packages?tag=wildlife',
     },
     {
         id: 'spiritual-journey',
@@ -43,15 +39,13 @@ const curatedJourneys = [
         tags: ['Culture', 'Spiritual'],
         duration: '10 Days',
         image: '/images/home/signature-heritage.png',
-        href: '/packages?tag=culture',
     },
     {
         id: 'east-coast',
         title: 'Trincomalee Escapes',
         tags: ['Beach', 'Marine'],
         duration: '4 Days',
-        image: '/images/hints/beach.jpg',
-        href: '/packages?tag=beach',
+        image: '/images/hints/beach.jpg', // fallback image
     },
 ];
 
@@ -86,7 +80,7 @@ export default function FeaturedJourneys() {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {curatedJourneys.map((journey) => (
-                        <Link key={journey.id} href={journey.href} className="group flex flex-col h-full bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.03]">
+                        <Link key={journey.id} href={`/packages#${journey.id}`} className="group flex flex-col h-full bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-black/[0.03]">
                             {/* Card Image */}
                             <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
                                 <Image
