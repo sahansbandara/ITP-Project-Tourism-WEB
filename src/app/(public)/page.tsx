@@ -6,7 +6,7 @@ import FeaturedJourneys from '@/components/public/FeaturedJourneys';
 import HowItWorks from '@/components/public/HowItWorks';
 import BuildTourTeaser from '@/components/public/BuildTourTeaser';
 import PremiumStory from '@/components/public/PremiumStory';
-import ExperiencesCarousel from '@/components/public/ExperiencesCarousel';
+import RealExperiencesSection from '@/components/public/RealExperiencesSection';
 import FinalCTA from '@/components/public/FinalCTA';
 
 export default async function HomePage() {
@@ -37,7 +37,7 @@ export default async function HomePage() {
             <PremiumStory />
 
             {/* 8. Emotion - Testimonials */}
-            <ExperiencesCarousel />
+            <RealExperiencesSection />
 
             {/* 9. Convert */}
             <FinalCTA />
