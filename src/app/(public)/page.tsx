@@ -6,6 +6,7 @@ import HowItWorks from '@/components/public/HowItWorks';
 import BuildTourTeaser from '@/components/public/BuildTourTeaser';
 import PremiumStory from '@/components/public/PremiumStory';
 import ExperiencesCarousel from '@/components/public/ExperiencesCarousel';
+import WhyYataraTextSection from '@/components/public/WhyYataraTextSection';
 import FinalCTA from '@/components/public/FinalCTA';
 
 export default async function HomePage() {
@@ -19,6 +20,9 @@ export default async function HomePage() {
 
             {/* 3. Authority — editorial who-we-are */}
             <AuthoritySection />
+
+            {/* 3b. Why Yatara — text benefits + stats */}
+            <WhyYataraTextSection />
 
             {/* 4. Featured journeys */}
             <FeaturedJourneys />
