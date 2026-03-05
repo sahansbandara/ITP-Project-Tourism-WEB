@@ -135,7 +135,7 @@ const PREMIUM_PACKAGES = [
             { day: 6, title: 'Departure', description: 'Morning at leisure, airport transfer.', activity: 'Departure' },
         ],
         images: [
-            '/images/packages/heritage-triangle-private-edition-hero.png',
+            '/images/packages/heritage-triangle-private-edition-hero.webp',
             '/images/packages/heritage-triangle-private-edition-gallery-1.webp',
             '/images/packages/heritage-triangle-private-edition-gallery-2.webp',
             '/images/packages/heritage-triangle-private-edition-gallery-3.webp',

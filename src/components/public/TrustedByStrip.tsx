@@ -4,38 +4,57 @@ import Image from 'next/image';
 
 /**
  * Partner / press logos displayed below the hero.
- * Shows real logo images from /public/images/partners/.
+ * Uses an infinite auto-scrolling marquee to display all partners.
  */
 const PARTNERS = [
     { name: 'Sri Lanka Tourism', src: '/images/partners/sltda-logo.webp', alt: 'Sri Lanka Tourism Development Authority' },
-    { name: 'TripAdvisor', src: '/images/partners/tripadvisor-logo.webp', alt: 'TripAdvisor Travellers Choice' },
     { name: 'Lonely Planet', src: '/images/partners/lonely-planet-logo.webp', alt: 'Lonely Planet Recommended' },
-    { name: 'Booking.com', src: '/images/partners/booking-logo.webp', alt: 'Booking.com Partner' },
+    { name: 'Booking.com', src: '/images/partners/booking-logo.webp', alt: 'Booking.com Partner', scale: 0.8 },
+    // New partners added by user
+    { name: 'TourCert', src: '/images/partners/tourcert-logo.webp', alt: 'TourCert Qualified', scale: 1.2 },
+    { name: 'Carbon Neutral', src: '/images/partners/carbon-neutral-logo.webp', alt: 'Certified Carbon Neutral Fleet' },
+    { name: 'Travelife', src: '/images/partners/travelife-logo.webp', alt: 'Travelife Partner' },
+    { name: 'Biodiversity Sri Lanka', src: '/images/partners/biodiversity-logo.webp', alt: 'Biodiversity Sri Lanka' },
+    { name: 'PATA', src: '/images/partners/pata-logo.webp', alt: 'PATA Sri Lanka Chapter' },
+    { name: 'Plasticcycle', src: '/images/partners/plasticcycle-logo.webp', alt: 'Plasticcycle Initiative' },
 ];
 
 export default function TrustedByStrip() {
     return (
-        <section className="py-10 md:py-12 bg-white border-b border-black/[0.03]">
-            <div className="max-w-6xl mx-auto px-6">
+        <section className="py-8 md:py-10 bg-white border-y border-black/[0.03] overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 mb-6">
                 {/* Label */}
-                <p className="text-center text-[9px] tracking-[0.3em] font-nav text-deep-emerald/30 uppercase mb-8 font-medium">
-                    Trusted Partners &amp; Recognitions
-                </p>
+                <h2 className="text-center text-lg md:text-xl font-display text-deep-emerald font-medium tracking-tight">
+                    Global Accreditations & Prestigious Memberships
+                </h2>
+            </div>
 
-                {/* Logo row */}
-                <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 md:gap-x-16">
-                    {PARTNERS.map((partner) => (
-                        <div
-                            key={partner.name}
-                            className="relative h-8 md:h-10 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-80 transition-all duration-500"
-                        >
-                            <Image
-                                src={partner.src}
-                                alt={partner.alt}
-                                width={140}
-                                height={40}
-                                className="h-8 md:h-10 w-auto object-contain"
-                            />
+            {/* Marquee container */}
+            <div className="relative flex overflow-hidden group">
+                {/* Fade overlays for smooth edges */}
+                <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                {/* Animated scrolling track */}
+                <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
+                    {/* Render the sets multiple times for seamless loop */}
+                    {[...Array(2)].map((_, setIndex) => (
+                        <div key={setIndex} className="flex flex-nowrap shrink-0 items-center gap-x-4 md:gap-x-8 px-2 md:px-4">
+                            {PARTNERS.map((partner) => (
+                                <div
+                                    key={partner.name}
+                                    className="relative h-20 md:h-24 w-[160px] md:w-[200px] flex items-center justify-center transition-all duration-300 shrink-0"
+                                >
+                                    <Image
+                                        src={partner.src}
+                                        alt={partner.alt}
+                                        width={200}
+                                        height={120}
+                                        className="max-h-18 md:max-h-22 w-auto object-contain"
+                                        style={{ transform: partner.scale ? `scale(${partner.scale})` : undefined }}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     ))}
                 </div>

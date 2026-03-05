@@ -199,7 +199,7 @@ export default function TourCategoriesCarousel() {
                                     className={`relative rounded-[32px] overflow-hidden cursor-pointer flex-shrink-0 snap-center group w-[280px] md:w-[330px] lg:w-[370px] h-[420px] md:h-[500px]`}
                                     style={{
                                         transform: idx === centerIndex ? 'scale(1.05)' : 'scale(0.85)',
-                                        opacity: idx === centerIndex ? 1 : 0.65,
+                                        opacity: 1,
                                         transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                                     }}
                                 >

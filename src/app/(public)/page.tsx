@@ -7,6 +7,7 @@ import FeaturedJourneys from '@/components/public/FeaturedJourneys';
 import HowItWorks from '@/components/public/HowItWorks';
 import ProofStack from '@/components/public/ProofStack';
 import BuildTourTeaser from '@/components/public/BuildTourTeaser';
+import TransfersTeaser from '@/components/public/TransfersTeaser';
 import PremiumStory from '@/components/public/PremiumStory';
 import JourneyDayStory from '@/components/public/JourneyDayStory';
 import RealExperiencesSection from '@/components/public/RealExperiencesSection';
@@ -38,6 +39,9 @@ export default async function HomePage() {
 
             {/* 8. Proof — Evidence stack */}
             <ProofStack />
+
+            {/* 8.5. Transfers — Premium transport teaser */}
+            <TransfersTeaser />
 
             {/* 9. Drive to differentiator — Bespoke Tour Builder */}
             <BuildTourTeaser />

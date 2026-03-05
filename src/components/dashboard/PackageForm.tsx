@@ -28,6 +28,9 @@ export default function PackageForm({ initialData, isEdit = false }: PackageForm
         priceMin: initialData?.priceMin || 0,
         priceMax: initialData?.priceMax || 0,
         duration: initialData?.duration || '',
+        durationDays: initialData?.durationDays || '',
+        type: initialData?.type || 'journey',
+        style: initialData?.style || '',
         itinerary: initialData?.itinerary || [{ day: 1, title: '', description: '', activity: '' }],
         isPublished: initialData?.isPublished || false,
         isFeatured: initialData?.isFeatured || false,
@@ -63,7 +66,7 @@ export default function PackageForm({ initialData, isEdit = false }: PackageForm
         e.preventDefault();
         setLoading(true);
 
-        const payload = {
+        const payload: Record<string, any> = {
             title: formData.title,
             slug: formData.slug,
             summary: formData.summary,
@@ -71,6 +74,9 @@ export default function PackageForm({ initialData, isEdit = false }: PackageForm
             priceMin: formData.priceMin,
             priceMax: formData.priceMax,
             duration: formData.duration,
+            durationDays: formData.durationDays ? Number(formData.durationDays) : undefined,
+            type: formData.type,
+            style: formData.style || undefined,
             itinerary: formData.itinerary.map((item: any) => ({
                 day: item.day,
                 title: item.title,
@@ -83,6 +89,7 @@ export default function PackageForm({ initialData, isEdit = false }: PackageForm
             tags: tagsText.split('\n').filter((s: string) => s.trim()),
             images: imagesText.split('\n').filter((s: string) => s.trim()),
             isPublished: formData.isPublished,
+            isFeatured: formData.isFeatured,
         };
 
         try {
@@ -171,10 +178,62 @@ export default function PackageForm({ initialData, isEdit = false }: PackageForm
                                     <Input id="priceMax" type="number" required value={formData.priceMax} onChange={(e) => setFormData({ ...formData, priceMax: Number(e.target.value) })} />
                                 </div>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="duration">Duration</Label>
+                                    <Label htmlFor="duration">Duration (display)</Label>
                                     <Input id="duration" required placeholder="e.g. 10 Days / 9 Nights" value={formData.duration} onChange={(e) => setFormData({ ...formData, duration: e.target.value })} />
                                 </div>
                             </div>
+
+                            {/* Type / Style / Duration Days */}
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="type">Type</Label>
+                                    <select
+                                        id="type"
+                                        value={formData.type}
+                                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    >
+                                        <option value="journey">Journey</option>
+                                        <option value="transfer">Transfer</option>
+                                    </select>
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="style">Style</Label>
+                                    <select
+                                        id="style"
+                                        value={formData.style}
+                                        onChange={(e) => setFormData({ ...formData, style: e.target.value })}
+                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    >
+                                        <option value="">— No style —</option>
+                                        <option value="cultural">Cultural</option>
+                                        <option value="wildlife">Wildlife</option>
+                                        <option value="heritage">Heritage</option>
+                                        <option value="experiences">Experiences</option>
+                                        <option value="wellness">Wellness</option>
+                                        <option value="family">Family</option>
+                                        <option value="luxury">Luxury</option>
+                                        <option value="adventure">Adventure</option>
+                                        <option value="beach">Beach</option>
+                                        <option value="marine">Marine</option>
+                                    </select>
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="durationDays">Duration (days number)</Label>
+                                    <Input id="durationDays" type="number" min={1} placeholder="e.g. 10" value={formData.durationDays} onChange={(e) => setFormData({ ...formData, durationDays: e.target.value })} />
+                                </div>
+                            </div>
+
+                            {/* Featured toggle */}
+                            <label className="flex items-center gap-2 text-sm">
+                                <input
+                                    type="checkbox"
+                                    checked={formData.isFeatured}
+                                    onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                                    className="rounded border-gray-300"
+                                />
+                                Featured Journey (shown in featured row)
+                            </label>
                         </CardContent>
                     </Card>
                 </TabsContent>

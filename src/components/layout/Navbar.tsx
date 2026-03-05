@@ -17,19 +17,21 @@ const navLinks = [
             {
                 title: 'Curated',
                 links: [
-                    { href: '/packages?tag=featured', label: 'Featured' },
-                    { href: '/packages?tag=wildlife', label: 'Wildlife' },
-                    { href: '/packages?tag=heritage', label: 'Heritage' },
+                    { href: '/packages?featured=true', label: 'Featured Journeys' },
+                    { href: '/packages?style=wildlife', label: 'Wildlife' },
+                    { href: '/packages?style=heritage', label: 'Heritage' },
+                    { href: '/packages?style=luxury', label: 'Luxury' },
                     { href: '/packages', label: 'View all →', special: true },
                 ]
             },
             {
                 title: 'By Style',
                 links: [
-                    { href: '/tours/cultural', label: 'Cultural Tours' },
-                    { href: '/tours/wildlife-adventure', label: 'Wildlife & Adventure' },
-                    { href: '/tours/experiences', label: 'Experiences' },
-                    { href: '/packages', label: 'View all →', special: true },
+                    { href: '/packages?style=cultural', label: 'Cultural Tours' },
+                    { href: '/packages?style=adventure', label: 'Wildlife & Adventure' },
+                    { href: '/packages?style=experiences', label: 'Experiences' },
+                    { href: '/packages?style=wellness', label: 'Wellness' },
+                    { href: '/packages?style=beach', label: 'Beach & Coast' },
                 ]
             },
             {
@@ -38,7 +40,6 @@ const navLinks = [
                     { href: '/packages?duration=5-7', label: '5–7 Days' },
                     { href: '/packages?duration=8-10', label: '8–10 Days' },
                     { href: '/packages?duration=11-14', label: '11–14 Days' },
-                    { href: '/packages', label: 'View all →', special: true },
                 ]
             }
         ],
@@ -81,8 +82,18 @@ const navLinks = [
             {
                 title: 'Transfer Services',
                 links: [
-                    { href: '/transfers', label: 'Private Transfers' },
-                    { href: '/about/fleet', label: 'Our Fleet' },
+                    { href: '/transfers', label: 'Transfers Overview' },
+                    { href: '/transfers/airport-executive', label: 'Executive Airport Passage' },
+                    { href: '/transfers/intercity-executive', label: 'Intercity Executive' },
+                    { href: '/transfers/wilderness-safari', label: 'Wilderness Expeditions' },
+                ]
+            },
+            {
+                title: 'More Services',
+                links: [
+                    { href: '/transfers/capital-by-night', label: 'Capital & Coastal Evenings' },
+                    { href: '/transfers/chauffeur-reserve', label: 'On-Demand Chauffeur' },
+                    { href: '/transfers/signature-fleet', label: 'The Signature Fleet' },
                 ]
             }
         ]

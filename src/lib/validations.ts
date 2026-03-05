@@ -6,6 +6,9 @@ export const createPackageSchema = z.object({
     summary: z.string().min(1, 'Summary is required'),
     fullDescription: z.string().optional(),
     duration: z.string().min(1),
+    durationDays: z.number().min(1).optional(),
+    type: z.enum(['journey', 'transfer']).optional().default('journey'),
+    style: z.enum(['cultural', 'wildlife', 'heritage', 'experiences', 'wellness', 'family', 'luxury', 'adventure', 'beach', 'marine']).optional(),
     itinerary: z.array(z.object({
         day: z.number().min(1),
         title: z.string().min(1),
@@ -22,6 +25,7 @@ export const createPackageSchema = z.object({
     exclusions: z.array(z.string()).optional().default([]),
     tags: z.array(z.string()).optional().default([]),
     isPublished: z.boolean().optional().default(false),
+    isFeatured: z.boolean().optional().default(false),
     isFeaturedHome: z.boolean().optional().default(false),
     homeRank: z.number().optional().default(0),
 });

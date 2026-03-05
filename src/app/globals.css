@@ -188,6 +188,84 @@
   transform: translateY(-4px);
 }
 
+/* Liquid Glass Panel — Overlay info panels inside images/cards */
+.liquid-glass-panel {
+  background: linear-gradient(135deg,
+      rgba(4, 57, 39, 0.7) 0%,
+      rgba(4, 57, 39, 0.55) 50%,
+      rgba(2, 40, 26, 0.75) 100%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 -8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.liquid-glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.3) 30%,
+      rgba(212, 175, 55, 0.3) 70%,
+      transparent 100%);
+}
+
+/* Liquid Glass Menu — Dropdown/mega-menu panels */
+.liquid-glass-menu {
+  background: linear-gradient(145deg,
+      rgba(6, 20, 14, 0.88) 0%,
+      rgba(4, 30, 20, 0.82) 50%,
+      rgba(6, 20, 14, 0.92) 100%);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 30px 60px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Liquid Glass Toolbar — Control bars with filters/search */
+.liquid-glass-toolbar {
+  background: linear-gradient(135deg,
+      rgba(4, 57, 39, 0.6) 0%,
+      rgba(4, 57, 39, 0.45) 50%,
+      rgba(2, 40, 26, 0.6) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Destination Card — Specular shine overlay */
+.destination-card-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.destination-card-shine:hover::before {
+  opacity: 0.6;
+}
+
 /* Liquid Glass Input */
 .liquid-glass-input {
   background: rgba(255, 255, 255, 0.5);
