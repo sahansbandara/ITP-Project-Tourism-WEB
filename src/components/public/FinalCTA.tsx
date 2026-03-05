@@ -162,8 +162,8 @@ export default function FinalCTA() {
                                 </div>
                             </div>
 
-                            {/* Dual CTA row */}
-                            <div className="flex flex-col sm:flex-row items-center gap-4">
+                            {/* CTA row */}
+                            <div className="flex items-center justify-center pt-2">
                                 <Button
                                     type="submit"
                                     disabled={!canSubmit || loading}
@@ -178,14 +178,6 @@ export default function FinalCTA() {
                                         </>
                                     )}
                                 </Button>
-
-                                <Link
-                                    href="/inquire?type=concierge"
-                                    className="text-deep-emerald/60 hover:text-antique-gold text-xs font-nav tracking-[0.12em] uppercase transition-colors duration-300 flex items-center gap-1.5 group/link"
-                                >
-                                    Speak to a Designer
-                                    <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-0.5" />
-                                </Link>
                             </div>
                         </form>
                     )}

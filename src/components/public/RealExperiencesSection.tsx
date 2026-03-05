@@ -88,7 +88,7 @@ export default function RealExperiencesSection() {
                         sizes="100vw"
                         className="object-cover"
                         quality={85}
-                        priority
+                        loading="lazy"
                     />
                 </div>
             </motion.div>

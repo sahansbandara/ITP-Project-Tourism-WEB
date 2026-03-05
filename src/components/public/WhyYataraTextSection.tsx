@@ -170,10 +170,7 @@ export default function WhyYataraTextSection() {
               ))}
             </div>
 
-            <p className="mt-10 max-w-md text-sm text-neutral-600">
-              Prefer zero statistics? Remove the right column and keep only the
-              benefits—luxury brands often do.
-            </p>
+            {/* Stats grid end */}
           </div>
         </div>
       </div>
