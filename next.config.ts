@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
             { protocol: 'https', hostname: 'i.pravatar.cc' },
             { protocol: 'https', hostname: 'dxk1acp76n912.cloudfront.net' },
             { protocol: 'https', hostname: 'media-cdn.tripadvisor.com' },
+            { protocol: 'https', hostname: 's.yimg.com' },
         ],
     },
     experimental: {

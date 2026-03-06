@@ -68,7 +68,7 @@ export default function CreateInvoiceModal({ bookingId }: CreateInvoiceModalProp
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <Button variant="outline" className="border-antique-gold/40 text-antique-gold hover:bg-antique-gold/10 gap-2 transition-all">
+                <Button className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0a1f15] font-semibold text-xs tracking-widest rounded-xl transition-all hover:scale-105 gap-2">
                     <Plus className="h-4 w-4" />
                     Create Invoice
                 </Button>

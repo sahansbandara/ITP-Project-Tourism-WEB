@@ -61,7 +61,7 @@ export default function RecordPaymentModal({ bookingId, remainingBalance }: Reco
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2">
+                <Button className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#0a1f15] font-semibold text-xs tracking-widest rounded-xl transition-all hover:scale-105 gap-2">
                     <Plus className="h-4 w-4" /> Record Payment
                 </Button>
             </Dialog.Trigger>
