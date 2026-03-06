@@ -76,7 +76,7 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                     </td>
                                     <td className="px-5 py-3.5">
                                         <span className="text-white/85 text-xs font-bold">
-                                            {booking.totalAmount > 0 ? `$${booking.totalAmount.toLocaleString()}` : '-'}
+                                            {booking.totalAmount > 0 ? `LKR ${booking.totalAmount.toLocaleString()}` : '-'}
                                         </span>
                                     </td>
                                     <td className="px-5 py-3.5">
