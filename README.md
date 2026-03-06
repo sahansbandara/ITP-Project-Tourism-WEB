@@ -184,138 +184,116 @@ sequenceDiagram
 This entity-relationship diagram maps out how the primary collections in the MongoDB database interact to form the complete tourism management system.
 
 ```mermaid
-erDiagram
-    USER ||--o{ BOOKING : "makes or manages"
-    USER ||--o{ VEHICLE : "owns (Fleet Partner)"
-    USER ||--o{ PARTNER : "owns (Hotel Partner)"
-    USER ||--o{ SUPPORT_TICKET : "submits"
+flowchart TD
+    %% Entities
+    U[USER]
+    B[BOOKING]
+    PKG[PACKAGE]
+    DEST[DESTINATION]
+    V[VEHICLE]
+    P[PARTNER]
+    INV[INVOICE]
+    PAY[PAYMENT]
 
-    PACKAGE ||--o{ BOOKING : "booked in"
-    PACKAGE }|--|{ DESTINATION : "includes"
-    CUSTOM_PLAN ||--o{ BOOKING : "used in"
+    %% Relationships
+    R_MAKES{makes}
+    R_OWNS_V{owns}
+    R_OWNS_P{owns}
+    R_INCLUDES{includes}
+    R_ASSIGNED_V{assigned_to}
+    R_ASSIGNED_P{assigned_to}
+    R_HAS_P{creates}
+    R_HAS_I{generates}
+    R_BOOKED_IN{booked_in}
 
-    BOOKING ||--o{ PAYMENT : "creates"
-    BOOKING ||--o{ INVOICE : "generates"
-    BOOKING ||--|{ REVIEW : "receives"
-    
-    VEHICLE ||--o{ BOOKING : "assigned to"
-    VEHICLE ||--o{ VEHICLE_BLOCK : "has"
-    PARTNER ||--o{ BOOKING_PARTNER : "assigned via"
-    BOOKING ||--o{ BOOKING_PARTNER : "utilizes"
+    %% Connections - Entity to Relationship
+    U -- 1 --- R_MAKES
+    R_MAKES --- M --> B
 
-    USER {
-        ObjectId _id PK
-        string role "ADMIN | STAFF | USER | VEHICLE_OWNER | HOTEL_OWNER"
-        string name
-        string email
-        string phone
-        string passwordHash
-        string status "ACTIVE | INACTIVE | SUSPENDED"
-        date lastLogin
-        date createdAt
-    }
-    
-    PACKAGE {
-        ObjectId _id PK
-        string title
-        string type "WELLNESS | ADVENTURE | HISTORICAL | WILDLIFE"
-        number defaultPrice
-        number durationDays
-        string description
-        string[] imageGallery
-        boolean isPublished
-    }
-    
-    CUSTOM_PLAN {
-        ObjectId _id PK
-        ObjectId userId FK
-        string[] destinations
-        date preferredDates
-        number pax
-        string accommodationPref
-        string budgetRange
-        string status "DRAFT | SUBMITTED | CONVERTED"
-    }
+    U -- 1 --- R_OWNS_V
+    R_OWNS_V --- M --> V
 
-    BOOKING {
-        ObjectId _id PK
-        string bookingNo UK
-        string status "NEW | PAYMENT_PENDING | ADVANCE_PAID | CONFIRMED | IN_PROGRESS | COMPLETED | CANCELLED"
-        string type "PACKAGE | CUSTOM | TRANSFER"
-        ObjectId packageId FK
-        ObjectId customPlanId FK
-        ObjectId assignedVehicleId FK
-        ObjectId assignedStaffId FK
-        date dates_from
-        date dates_to
-        number pax
-        number totalCost
-        number paidAmount
-        number remainingBalance
-        string customerName
-        string email
-        string phone
-    }
+    U -- 1 --- R_OWNS_P
+    R_OWNS_P --- M --> P
 
-    PAYMENT {
-        ObjectId _id PK
-        ObjectId bookingId FK
-        string paymentNo UK
-        number amount
-        string currency
-        string method "PAYHERE | BANK_TRANSFER | CASH"
-        string status "INITIATED | SUCCESS | FAILED | REFUNDED"
-        string payhereOrderId
-        date paymentDate
-        string reference
-    }
+    PKG -- 1 --- R_BOOKED_IN
+    R_BOOKED_IN --- M --> B
 
-    INVOICE {
-        ObjectId _id PK
-        ObjectId bookingId FK
-        string invoiceNo UK
-        string status "DRAFT | FINAL | PAID | CANCELLED"
-        date issueDate
-        date dueDate
-        number subtotal
-        number discountAmount
-        number total
-        string notes
-    }
+    PKG -- M --- R_INCLUDES
+    R_INCLUDES --- N --> DEST
 
-    VEHICLE {
-        ObjectId _id PK
-        ObjectId ownerId FK
-        string registrationNumber UK
-        string type "CAR | VAN | MINI_BUS | LARGE_BUS"
-        string make
-        string model
-        number capacity
-        number ratePerKm
-        string status "AVAILABLE | MAINTENANCE | INACTIVE"
-    }
+    V -- 1 --- R_ASSIGNED_V
+    R_ASSIGNED_V --- M --> B
 
-    PARTNER {
-        ObjectId _id PK
-        ObjectId ownerId FK
-        string type "HOTEL | GUIDE | ACTIVITY"
-        string name
-        string contactName
-        string contactEmail
-        string contactPhone
-        string address
-        string status "ACTIVE | PENDING | SUSPENDED"
-    }
-    
-    SUPPORT_TICKET {
-        ObjectId _id PK
-        ObjectId userId FK
-        string ticketNo UK
-        string subject
-        string category
-        string priority "LOW | NORMAL | HIGH | URGENT"
-        string status "OPEN | IN_PROGRESS | RESOLVED | CLOSED"
-    }
+    P -- 1 --- R_ASSIGNED_P
+    R_ASSIGNED_P --- M --> B
+
+    B -- 1 --- R_HAS_I
+    R_HAS_I --- M --> INV
+
+    B -- 1 --- R_HAS_P
+    R_HAS_P --- M --> PAY
+
+    %% Attributes (Ovals)
+    U_email([email])
+    U_name([name])
+    U_role([role])
+    U -.- U_email
+    U -.- U_name
+    U -.- U_role
+
+    B_dates([dates])
+    B_pax([pax])
+    B_totalCost([totalCost])
+    B_status([status])
+    B -.- B_dates
+    B -.- B_pax
+    B -.- B_totalCost
+    B -.- B_status
+
+    PKG_title([title])
+    PKG_type([type])
+    PKG_price([price])
+    PKG -.- PKG_title
+    PKG -.- PKG_type
+    PKG -.- PKG_price
+
+    V_type([type])
+    V_status([status])
+    V_plate([plate])
+    V -.- V_type
+    V -.- V_status
+    V -.- V_plate
+
+    P_type([type])
+    P_name([name])
+    P -.- P_type
+    P -.- P_name
+
+    INV_status([status])
+    INV_total([total])
+    INV -.- INV_status
+    INV -.- INV_total
+
+    PAY_amount([amount])
+    PAY_method([method])
+    PAY_status([status])
+    PAY -.- PAY_amount
+    PAY -.- PAY_method
+    PAY -.- PAY_status
+
+    DEST_name([name])
+    DEST_loc([location])
+    DEST -.- DEST_name
+    DEST -.- DEST_loc
+
+    classDef entity fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef relationship fill:#e1f5fe,stroke:#333,stroke-width:1px;
+    classDef attribute fill:#fff,stroke:#666,stroke-width:1px;
+
+    class U,B,PKG,DEST,V,P,INV,PAY entity;
+    class R_MAKES,R_OWNS_V,R_OWNS_P,R_INCLUDES,R_ASSIGNED_V,R_ASSIGNED_P,R_HAS_P,R_HAS_I,R_BOOKED_IN relationship;
+    class U_email,U_name,U_role,B_dates,B_pax,B_totalCost,B_status,PKG_title,PKG_type,PKG_price,V_type,V_status,V_plate,P_type,P_name,INV_status,INV_total,PAY_amount,PAY_method,PAY_status,DEST_name,DEST_loc attribute;
 ```
 
 **Key Relationships Explained:**
