@@ -111,9 +111,9 @@ export default function EliteLoginPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/90 via-transparent to-black/40" />
 
             {/* Login Card */}
-            <div className="relative z-10 w-full max-w-lg">
-                {/* Glassmorphic Card */}
-                <div className="p-8 md:p-10 rounded-lg backdrop-blur-xl bg-black/25 border border-white/15 shadow-2xl">
+            <div className="relative z-10 w-full max-w-[520px]">
+                {/* Liquid Glass Card */}
+                <div className="p-8 md:p-12 rounded-3xl backdrop-blur-md bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
 
                     {/* Logo */}
                     <div className="flex justify-center mb-6">
@@ -138,21 +138,21 @@ export default function EliteLoginPage() {
                     </div>
 
                     {/* Auth Mode Toggle */}
-                    <div className="flex mb-6 bg-white/5 border border-white/10 rounded-sm overflow-hidden">
+                    <div className="flex mb-10 gap-3">
                         <button
                             onClick={() => { setAuthMode('login'); setRole('USER'); setShowPartnerOptions(false); }}
-                            className={`flex-1 py-2.5 text-xs tracking-[0.15em] uppercase font-medium transition-all duration-300 ${authMode === 'login'
-                                ? 'bg-antique-gold/20 text-antique-gold border-b-2 border-antique-gold'
-                                : 'text-white/60 hover:text-white/80'
+                            className={`flex-1 py-3.5 text-xs tracking-[0.1em] uppercase font-semibold transition-all duration-300 rounded-xl border ${authMode === 'login'
+                                ? 'border-antique-gold text-antique-gold bg-black/40 shadow-inner'
+                                : 'border-white/10 text-white/50 hover:text-white/80 hover:border-white/30 bg-transparent'
                                 }`}
                         >
                             Sign In
                         </button>
                         <button
                             onClick={() => { setAuthMode('signup'); setRole('USER'); setShowPartnerOptions(false); }}
-                            className={`flex-1 py-2.5 text-xs tracking-[0.15em] uppercase font-medium transition-all duration-300 ${authMode === 'signup'
-                                ? 'bg-antique-gold/20 text-antique-gold border-b-2 border-antique-gold'
-                                : 'text-white/60 hover:text-white/80'
+                            className={`flex-1 py-3.5 text-xs tracking-[0.1em] uppercase font-semibold transition-all duration-300 rounded-xl border ${authMode === 'signup'
+                                ? 'border-antique-gold text-antique-gold bg-black/40 shadow-inner'
+                                : 'border-white/10 text-white/50 hover:text-white/80 hover:border-white/30 bg-transparent'
                                 }`}
                         >
                             Sign Up
@@ -168,32 +168,32 @@ export default function EliteLoginPage() {
 
                     {/* Login Form */}
                     {authMode === 'login' && (
-                        <form onSubmit={handleLogin} className="space-y-4">
-                            <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                        <form onSubmit={handleLogin} className="space-y-5">
+                            <div className="relative group">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-4 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-white/5 backdrop-blur-md border border-white/10 text-white h-12 pl-11 pr-4 rounded-md focus:outline-none focus:border-antique-gold/70 focus:bg-white/10 placeholder:text-white/30 tracking-wide hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-300 shadow-inner"
                                 />
                             </div>
-                            <div className="relative">
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                            <div className="relative group">
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-12 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-transparent backdrop-blur-sm border border-white/10 text-white h-14 pl-12 pr-12 rounded-xl focus:outline-none focus:border-antique-gold focus:bg-black/20 placeholder:text-white/50 tracking-wide hover:border-white/30 transition-all duration-300"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-antique-gold transition-colors"
                                 >
                                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                 </button>
@@ -202,10 +202,14 @@ export default function EliteLoginPage() {
                             <Button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-gradient-to-r from-[#D4AF37] to-[#C5A028] text-deep-emerald font-serif text-base tracking-[0.15em] h-12 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.25)] border border-transparent hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-300"
+                                className="w-full mt-4 bg-transparent border border-white/20 hover:border-white/40 text-white hover:text-white font-medium text-sm tracking-[0.15em] h-14 rounded-xl shadow-lg hover:bg-white/5 transition-all duration-300 group flex items-center justify-center gap-2 uppercase"
                             >
-                                {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
-                                Enter Your Journey
+                                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                                    <>
+                                        ENTER YOUR JOURNEY
+                                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                    </>
+                                )}
                             </Button>
                         </form>
                     )}
@@ -213,52 +217,52 @@ export default function EliteLoginPage() {
                     {/* Signup Form */}
                     {authMode === 'signup' && (
                         <form onSubmit={handleSignup} className="space-y-4">
-                            <div className="relative">
-                                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                            <div className="relative group">
+                                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type="text"
                                     placeholder="Full Name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     required
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-4 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-transparent backdrop-blur-sm border border-white/10 text-white h-14 pl-12 pr-4 rounded-xl focus:outline-none focus:border-antique-gold focus:bg-black/20 placeholder:text-white/50 tracking-wide hover:border-white/30 transition-all duration-300"
                                 />
                             </div>
-                            <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                            <div className="relative group">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-4 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-transparent backdrop-blur-sm border border-white/10 text-white h-14 pl-12 pr-4 rounded-xl focus:outline-none focus:border-antique-gold focus:bg-black/20 placeholder:text-white/50 tracking-wide hover:border-white/30 transition-all duration-300"
                                 />
                             </div>
-                            <div className="relative">
-                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                            <div className="relative group">
+                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type="tel"
                                     placeholder="Phone Number"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-4 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-transparent backdrop-blur-sm border border-white/10 text-white h-14 pl-12 pr-4 rounded-xl focus:outline-none focus:border-antique-gold focus:bg-black/20 placeholder:text-white/50 tracking-wide hover:border-white/30 transition-all duration-300"
                                 />
                             </div>
-                            <div className="relative">
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-antique-gold/50" />
+                            <div className="relative group">
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 group-hover:text-antique-gold transition-colors duration-300" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     placeholder="Create Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full bg-white/8 border border-white/15 text-white h-12 pl-10 pr-12 rounded-sm focus:outline-none focus:border-antique-gold font-light tracking-wide backdrop-blur-sm placeholder:text-white/40 text-sm"
+                                    className="w-full bg-transparent backdrop-blur-sm border border-white/10 text-white h-14 pl-12 pr-12 rounded-xl focus:outline-none focus:border-antique-gold focus:bg-black/20 placeholder:text-white/50 tracking-wide hover:border-white/30 transition-all duration-300"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-antique-gold transition-colors"
                                 >
                                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                 </button>
@@ -267,10 +271,14 @@ export default function EliteLoginPage() {
                             <Button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-gradient-to-r from-[#D4AF37] to-[#C5A028] text-deep-emerald font-serif text-base tracking-[0.15em] h-12 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.25)] border border-transparent hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-300"
+                                className="w-full mt-4 bg-transparent border border-white/20 hover:border-white/40 text-white hover:text-white font-medium text-sm tracking-[0.15em] h-14 rounded-xl shadow-lg hover:bg-white/5 transition-all duration-300 group flex items-center justify-center gap-2 uppercase"
                             >
-                                {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
-                                Create Your Account
+                                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                                    <>
+                                        CREATE YOUR ACCOUNT
+                                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                    </>
+                                )}
                             </Button>
                         </form>
                     )}
