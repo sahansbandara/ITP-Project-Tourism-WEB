@@ -184,7 +184,8 @@ sequenceDiagram
 This entity-relationship diagram maps out how the primary collections in the MongoDB database interact to form the complete tourism management system.
 
 ```mermaid
-flowchart TD
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '16px', 'fontFamily': 'sans-serif'}}}%%
+flowchart TB
     %% Entities
     U[USER]
     B[BOOKING]
@@ -207,32 +208,32 @@ flowchart TD
     R_BOOKED_IN{booked_in}
 
     %% Connections - Entity to Relationship
-    U -- 1 --- R_MAKES
-    R_MAKES --- M --> B
+    U -- 1 ---- R_MAKES
+    R_MAKES ---- M --> B
 
-    U -- 1 --- R_OWNS_V
-    R_OWNS_V --- M --> V
+    U -- 1 ---- R_OWNS_V
+    R_OWNS_V ---- M --> V
 
-    U -- 1 --- R_OWNS_P
-    R_OWNS_P --- M --> P
+    U -- 1 ---- R_OWNS_P
+    R_OWNS_P ---- M --> P
 
-    PKG -- 1 --- R_BOOKED_IN
-    R_BOOKED_IN --- M --> B
+    PKG -- 1 ---- R_BOOKED_IN
+    R_BOOKED_IN ---- M --> B
 
-    PKG -- M --- R_INCLUDES
-    R_INCLUDES --- N --> DEST
+    PKG -- M ---- R_INCLUDES
+    R_INCLUDES ---- N --> DEST
 
-    V -- 1 --- R_ASSIGNED_V
-    R_ASSIGNED_V --- M --> B
+    V -- 1 ---- R_ASSIGNED_V
+    R_ASSIGNED_V ---- M --> B
 
-    P -- 1 --- R_ASSIGNED_P
-    R_ASSIGNED_P --- M --> B
+    P -- 1 ---- R_ASSIGNED_P
+    R_ASSIGNED_P ---- M --> B
 
-    B -- 1 --- R_HAS_I
-    R_HAS_I --- M --> INV
+    B -- 1 ---- R_HAS_I
+    R_HAS_I ---- M --> INV
 
-    B -- 1 --- R_HAS_P
-    R_HAS_P --- M --> PAY
+    B -- 1 ---- R_HAS_P
+    R_HAS_P ---- M --> PAY
 
     %% Attributes (Ovals)
     U_email([email])
@@ -287,9 +288,9 @@ flowchart TD
     DEST -.- DEST_name
     DEST -.- DEST_loc
 
-    classDef entity fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef relationship fill:#e1f5fe,stroke:#333,stroke-width:1px;
-    classDef attribute fill:#fff,stroke:#666,stroke-width:1px;
+    classDef entity fill:#ffffff,stroke:#000000,stroke-width:3px,color:#000000,font-weight:bold;
+    classDef relationship fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,color:#000000,font-weight:bold;
+    classDef attribute fill:#f3f4f6,stroke:#666666,stroke-width:1px,color:#000000;
 
     class U,B,PKG,DEST,V,P,INV,PAY entity;
     class R_MAKES,R_OWNS_V,R_OWNS_P,R_INCLUDES,R_ASSIGNED_V,R_ASSIGNED_P,R_HAS_P,R_HAS_I,R_BOOKED_IN relationship;
