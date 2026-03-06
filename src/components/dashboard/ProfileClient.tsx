@@ -180,6 +180,21 @@ export default function ProfileClient({ initialUser }: { initialUser: any }) {
                     </div>
                 </div>
 
+                {user.role === 'USER' && (
+                    <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-antique-gold/10 to-transparent border border-antique-gold/20 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h4 className="text-antique-gold font-bold text-lg mb-1">Become a Yatara Partner</h4>
+                            <p className="text-white/60 text-xs max-w-md">Do you own a luxury vehicle or a premium hotel? Join our elite network to offer your services to our discerning clientele.</p>
+                        </div>
+                        <a
+                            href="/dashboard/partner-application"
+                            className="shrink-0 px-6 py-3 rounded-full bg-antique-gold hover:bg-antique-gold/90 text-black text-xs font-bold uppercase tracking-widest transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)] whitespace-nowrap"
+                        >
+                            Apply Now
+                        </a>
+                    </div>
+                )}
+
                 <div className="mt-8 pt-6 border-t border-white/[0.05] flex justify-between items-center">
                     <p className="text-[10px] text-white/30 uppercase tracking-widest">
                         Member since {new Date(user.createdAt).toLocaleDateString()}

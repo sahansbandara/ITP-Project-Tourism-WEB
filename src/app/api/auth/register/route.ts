@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const { name, email, phone, password, role } = result.data;
+        const { name, email, phone, password } = result.data;
         await connectDB();
 
         // Check if user already exists
@@ -40,21 +40,6 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Determine status based on role and spam detection
-        let finalRole = role;
-        let setStatus = 'PENDING_APPROVAL';
-
-        if (role === 'USER') {
-            setStatus = 'ACTIVE';
-        } else if (role === 'ADMIN' || role === 'STAFF') {
-            const lowerEmail = email.toLowerCase();
-            if (!lowerEmail.endsWith('@yatara.com') && !lowerEmail.endsWith('@yataraceylon.com')) {
-                // SPAM PREVENTION: Admin/Staff must use internal email. Default external spammers back to standard USER.
-                finalRole = 'USER';
-                setStatus = 'ACTIVE';
-            }
-        }
-
         // Hash password and create user
         const passwordHash = await hashPassword(password);
         const user = await User.create({
@@ -62,8 +47,8 @@ export async function POST(request: NextRequest) {
             email: email.toLowerCase(),
             phone: phone || undefined,
             passwordHash,
-            role: finalRole,
-            status: setStatus,
+            role: 'USER',
+            status: 'ACTIVE',
         });
 
         return NextResponse.json({

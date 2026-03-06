@@ -10,10 +10,8 @@ type AuthMode = 'login' | 'signup';
 
 export default function EliteLoginPage() {
     const [authMode, setAuthMode] = useState<AuthMode>('login');
-    const [role, setRole] = useState('USER');
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [showPartnerOptions, setShowPartnerOptions] = useState(false);
 
     // Form fields
     const [name, setName] = useState('');
@@ -71,7 +69,7 @@ export default function EliteLoginPage() {
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, phone, password, role }),
+                body: JSON.stringify({ name, email, phone, password, role: 'USER' }),
             });
             const data = await res.json();
             if (!res.ok) {
@@ -79,14 +77,8 @@ export default function EliteLoginPage() {
                 return;
             }
 
-            if (role !== 'USER') {
-                setSuccessMsg('Account created successfully! Your partner/staff request is pending administrator approval. You will receive an email once activated.');
-                setAuthMode('login');
-            } else {
-                setSuccessMsg('Account created successfully! Please sign in.');
-                setAuthMode('login');
-            }
-            setRole('USER');
+            setSuccessMsg('Account created successfully! Please sign in.');
+            setAuthMode('login');
         } catch {
             setError('Network error. Please try again.');
         } finally {
@@ -142,7 +134,7 @@ export default function EliteLoginPage() {
                     <div className="flex mb-6 gap-3">
                         <button
                             type="button"
-                            onClick={() => { setAuthMode('login'); setError(''); setSuccessMsg(''); setRole('USER'); }}
+                            onClick={() => { setAuthMode('login'); setError(''); setSuccessMsg(''); }}
                             className={`flex-1 py-3 text-xs tracking-[0.1em] uppercase font-semibold transition-all duration-300 rounded-xl border ${authMode === 'login'
                                 ? 'border-antique-gold text-antique-gold bg-black/40 shadow-inner'
                                 : 'border-white/10 text-white/50 hover:text-white/80 hover:border-white/30 bg-transparent'
@@ -152,7 +144,7 @@ export default function EliteLoginPage() {
                         </button>
                         <button
                             type="button"
-                            onClick={() => { setAuthMode('signup'); setError(''); setSuccessMsg(''); setRole('USER'); setShowPartnerOptions(false); }}
+                            onClick={() => { setAuthMode('signup'); setError(''); setSuccessMsg(''); }}
                             className={`flex-1 py-3 text-xs tracking-[0.1em] uppercase font-semibold transition-all duration-300 rounded-xl border ${authMode === 'signup'
                                 ? 'border-antique-gold text-antique-gold bg-black/40 shadow-inner'
                                 : 'border-white/10 text-white/50 hover:text-white/80 hover:border-white/30 bg-transparent'
@@ -225,65 +217,6 @@ export default function EliteLoginPage() {
                     {/* Signup Form */}
                     {authMode === 'signup' && (
                         <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                            {/* Account Type Grid */}
-                            {showPartnerOptions && (
-                                <div className="mb-5 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <button
-                                            type="button"
-                                            onClick={() => setRole('USER')}
-                                            className={`p-2.5 border rounded-xl transition-all duration-300 flex items-center gap-2 col-span-2 group
-                                            ${role === 'USER' ? 'border-antique-gold/60 bg-antique-gold/10' : 'border-white/10 bg-white/5 hover:border-antique-gold/30'}`}
-                                        >
-                                            <User className={`h-4 w-4 shrink-0 ${role === 'USER' ? 'text-antique-gold' : 'text-white/50 group-hover:text-antique-gold/70'}`} />
-                                            <div className="text-left">
-                                                <p className={`text-xs font-semibold tracking-wide leading-tight ${role === 'USER' ? 'text-antique-gold' : 'text-white/80'}`}>Standard Customer</p>
-                                            </div>
-                                        </button>
-
-                                        {/* Primary Partners */}
-                                        <button
-                                            type="button"
-                                            onClick={() => setRole('VEHICLE_OWNER')}
-                                            className={`p-3 border rounded-xl transition-all duration-300 flex flex-col items-center justify-center text-center group
-                                            ${role === 'VEHICLE_OWNER' ? 'border-antique-gold/60 bg-antique-gold/10 shadow-[0_0_15px_rgba(212,175,55,0.1)]' : 'border-white/10 bg-white/5 hover:border-antique-gold/30'}`}
-                                        >
-                                            <Car className={`h-5 w-5 mb-1.5 ${role === 'VEHICLE_OWNER' ? 'text-antique-gold' : 'text-white/50 group-hover:text-antique-gold/70'}`} />
-                                            <p className={`text-[11px] font-semibold tracking-wide ${role === 'VEHICLE_OWNER' ? 'text-antique-gold' : 'text-white/80'}`}>Fleet Partner</p>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setRole('HOTEL_OWNER')}
-                                            className={`p-3 border rounded-xl transition-all duration-300 flex flex-col items-center justify-center text-center group
-                                            ${role === 'HOTEL_OWNER' ? 'border-antique-gold/60 bg-antique-gold/10 shadow-[0_0_15px_rgba(212,175,55,0.1)]' : 'border-white/10 bg-white/5 hover:border-antique-gold/30'}`}
-                                        >
-                                            <Building2 className={`h-5 w-5 mb-1.5 ${role === 'HOTEL_OWNER' ? 'text-antique-gold' : 'text-white/50 group-hover:text-antique-gold/70'}`} />
-                                            <p className={`text-[11px] font-semibold tracking-wide ${role === 'HOTEL_OWNER' ? 'text-antique-gold' : 'text-white/80'}`}>Hotel Partner</p>
-                                        </button>
-
-                                        {/* Admin/Staff - Smaller Profile */}
-                                        <button
-                                            type="button"
-                                            onClick={() => setRole('ADMIN')}
-                                            className={`py-1.5 px-2 border rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 group
-                                            ${role === 'ADMIN' ? 'border-antique-gold/50 bg-antique-gold/10' : 'border-white/5 bg-white/[0.02] hover:border-white/20'}`}
-                                        >
-                                            <Shield className={`h-3 w-3 ${role === 'ADMIN' ? 'text-antique-gold' : 'text-white/40 group-hover:text-white/60'}`} />
-                                            <p className={`text-[9px] font-medium tracking-wide uppercase ${role === 'ADMIN' ? 'text-antique-gold' : 'text-white/50 group-hover:text-white/80'}`}>Administrator</p>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setRole('STAFF')}
-                                            className={`py-1.5 px-2 border rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 group
-                                            ${role === 'STAFF' ? 'border-antique-gold/50 bg-antique-gold/10' : 'border-white/5 bg-white/[0.02] hover:border-white/20'}`}
-                                        >
-                                            <Users className={`h-3 w-3 ${role === 'STAFF' ? 'text-antique-gold' : 'text-white/40 group-hover:text-white/60'}`} />
-                                            <p className={`text-[9px] font-medium tracking-wide uppercase ${role === 'STAFF' ? 'text-antique-gold' : 'text-white/50 group-hover:text-white/80'}`}>Concierge Staff</p>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-
                             <form onSubmit={handleSignup} className="space-y-3">
                                 {/* Reduced input heights from h-14 to h-11 to fit 13inch screens easily */}
                                 <div className="grid grid-cols-2 gap-3">
@@ -314,26 +247,6 @@ export default function EliteLoginPage() {
                                     )}
                                 </Button>
                             </form>
-
-                            <div className="mt-6 text-center">
-                                {!showPartnerOptions ? (
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPartnerOptions(true)}
-                                        className="text-[10px] uppercase font-semibold tracking-widest text-white/40 hover:text-antique-gold transition-colors duration-300"
-                                    >
-                                        Or join as a partner / staff
-                                    </button>
-                                ) : (
-                                    <button
-                                        type="button"
-                                        onClick={() => { setShowPartnerOptions(false); setRole('USER'); }}
-                                        className="text-[10px] uppercase font-semibold tracking-widest text-white/40 hover:text-red-400 transition-colors duration-300"
-                                    >
-                                        Cancel Partner / Staff Sign Up
-                                    </button>
-                                )}
-                            </div>
                         </div>
                     )}
 
