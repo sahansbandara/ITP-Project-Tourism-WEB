@@ -79,7 +79,7 @@ export default function VehicleTable({ initialVehicles }: VehicleTableProps) {
                         <TableHead>Type</TableHead>
                         <TableHead>Plate No</TableHead>
                         <TableHead>Capacity</TableHead>
-                        <TableHead>Daily Rate</TableHead>
+                        <TableHead>Rate per km</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
@@ -111,7 +111,7 @@ export default function VehicleTable({ initialVehicles }: VehicleTableProps) {
                                         {vehicle.luggage && <div>{vehicle.luggage} Lugg.</div>}
                                     </div>
                                 </TableCell>
-                                <TableCell className="text-white/70">LKR {(vehicle.dailyRate ?? 0).toLocaleString()}</TableCell>
+                                <TableCell className="text-white/70">LKR {(vehicle.dailyRate ?? 0).toLocaleString()} per km</TableCell>
                                 <TableCell>
                                     <Badge variant="outline" className={getStatusColor(vehicle.status)}>
                                         {vehicle.status}

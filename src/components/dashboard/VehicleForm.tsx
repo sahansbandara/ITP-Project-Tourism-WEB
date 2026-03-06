@@ -120,7 +120,7 @@ export default function VehicleForm({ initialData, isEdit = false, redirectPath 
                         <Input id="luggage" type="number" min={0} value={formData.luggage} onChange={(e) => setFormData({ ...formData, luggage: Number(e.target.value) })} className="bg-white/[0.04] border-white/[0.08] text-white focus-visible:ring-antique-gold/20 h-11 rounded-xl" />
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="dailyRate" className="text-white/70">Daily Rate (LKR)</Label>
+                        <Label htmlFor="dailyRate" className="text-white/70">Rate per km (LKR)</Label>
                         <Input id="dailyRate" type="number" required min={0} value={formData.dailyRate} onChange={(e) => setFormData({ ...formData, dailyRate: Number(e.target.value) })} className="bg-white/[0.04] border-white/[0.08] text-white focus-visible:ring-antique-gold/20 h-11 rounded-xl" />
                     </div>
                 </div>
