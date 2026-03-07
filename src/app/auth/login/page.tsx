@@ -12,6 +12,7 @@ export default function EliteLoginPage() {
     const [authMode, setAuthMode] = useState<AuthMode>('login');
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [role, setRole] = useState('USER');
 
     // Form fields
     const [name, setName] = useState('');
@@ -69,7 +70,7 @@ export default function EliteLoginPage() {
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, phone, password, role: 'USER' }),
+                body: JSON.stringify({ name, email, phone, password, role }),
             });
             const data = await res.json();
             if (!res.ok) {
@@ -77,7 +78,11 @@ export default function EliteLoginPage() {
                 return;
             }
 
-            setSuccessMsg('Account created successfully! Please sign in.');
+            if (role === 'USER') {
+                setSuccessMsg('Account created successfully! Please sign in.');
+            } else {
+                setSuccessMsg('Application submitted! Pending admin approval before sign in.');
+            }
             setAuthMode('login');
         } catch {
             setError('Network error. Please try again.');
@@ -238,6 +243,40 @@ export default function EliteLoginPage() {
                                     <input type={showPassword ? 'text' : 'password'} placeholder="Create Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full bg-white/5 border border-white/10 text-white text-[13px] h-11 pl-10 pr-10 rounded-xl focus:border-antique-gold focus:outline-none placeholder:text-white/40" />
                                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-antique-gold">
                                         {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                                    </button>
+                                </div>
+
+                                {/* Role Selection */}
+                                <div className="grid grid-cols-3 gap-2 pb-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setRole('USER')}
+                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'USER'
+                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
+                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
+                                            }`}
+                                    >
+                                        Customer
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setRole('HOTEL_OWNER')}
+                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'HOTEL_OWNER'
+                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
+                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
+                                            }`}
+                                    >
+                                        Hotel
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setRole('VEHICLE_OWNER')}
+                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'VEHICLE_OWNER'
+                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
+                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
+                                            }`}
+                                    >
+                                        Fleet
                                     </button>
                                 </div>
 

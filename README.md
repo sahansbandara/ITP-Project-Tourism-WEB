@@ -182,7 +182,8 @@ flowchart TD
     %% Data Flows
     Cust -- "Browses Tours" --> P4
     P4 -- "Package Info" --> Cust
-    P4 <--> "Reads/Updates" D2
+    P4 -- "Reads/Updates" --> D2
+    D2 -- "Data" --> P4
 
     Cust -- "Submits Booking" --> P1
     P1 -- "Stores Booking" --> D3
@@ -197,7 +198,8 @@ flowchart TD
     Admin -- "Manages Bookings" --> P1
     Admin -- "Assigns Resources" --> P3
     P3 -- "Updates Assignment" --> D3
-    P3 <--> "Reads/Updates" D5
+    P3 -- "Reads/Updates" --> D5
+    D5 -- "Availability" --> P3
     
     Part -- "Updates Availability" --> P3
     P3 -- "Notifies Assignment" --> Part

@@ -10,7 +10,7 @@ const registerSchema = z.object({
     email: z.string().email('Invalid email address'),
     phone: z.string().optional(),
     password: z.string().min(6, 'Password must be at least 6 characters'),
-    role: z.enum(['USER', 'VEHICLE_OWNER', 'HOTEL_OWNER', 'STAFF', 'ADMIN']).default('USER'),
+    role: z.enum(['USER', 'VEHICLE_OWNER', 'HOTEL_OWNER']).default('USER'),
 });
 
 export async function POST(request: NextRequest) {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const { name, email, phone, password } = result.data;
+        const { name, email, phone, password, role } = result.data;
         await connectDB();
 
         // Check if user already exists
@@ -42,13 +42,17 @@ export async function POST(request: NextRequest) {
 
         // Hash password and create user
         const passwordHash = await hashPassword(password);
+
+        // Partner roles need approval, regular users are active immediately
+        const status = role === 'USER' ? 'ACTIVE' : 'PENDING_APPROVAL';
+
         const user = await User.create({
             name,
             email: email.toLowerCase(),
             phone: phone || undefined,
             passwordHash,
-            role: 'USER',
-            status: 'ACTIVE',
+            role,
+            status,
         });
 
         return NextResponse.json({
