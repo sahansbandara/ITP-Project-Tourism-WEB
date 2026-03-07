@@ -246,38 +246,30 @@ export default function EliteLoginPage() {
                                     </button>
                                 </div>
 
-                                {/* Role Selection */}
-                                <div className="grid grid-cols-3 gap-2 pb-1">
-                                    <button
-                                        type="button"
-                                        onClick={() => setRole('USER')}
-                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'USER'
-                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
-                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
-                                            }`}
+                                {/* Role Selection Dropdown */}
+                                <div className="relative group">
+                                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 group-hover:text-antique-gold transition-colors duration-300 pointer-events-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                            <path d="M19 11v2" />
+                                            <path d="M22 12h-6" />
+                                        </svg>
+                                    </div>
+                                    <select
+                                        title="Account Role"
+                                        value={role}
+                                        onChange={(e) => setRole(e.target.value)}
+                                        className="w-full bg-white/5 border border-white/10 text-white text-[13px] h-11 pl-10 pr-10 rounded-xl focus:border-antique-gold focus:outline-none appearance-none cursor-pointer placeholder:text-white/40"
+                                        style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
                                     >
-                                        Customer
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setRole('HOTEL_OWNER')}
-                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'HOTEL_OWNER'
-                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
-                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
-                                            }`}
-                                    >
-                                        Hotel
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setRole('VEHICLE_OWNER')}
-                                        className={`py-2 text-[10px] md:text-xs tracking-wider uppercase font-medium transition-all duration-300 rounded-xl border ${role === 'VEHICLE_OWNER'
-                                            ? 'border-antique-gold text-antique-gold bg-antique-gold/10 shadow-inner'
-                                            : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 bg-transparent'
-                                            }`}
-                                    >
-                                        Fleet
-                                    </button>
+                                        <option value="USER" className="bg-[#0a1f15] text-white">Customer Account</option>
+                                        <option value="HOTEL_OWNER" className="bg-[#0a1f15] text-white">Hotel Partner</option>
+                                        <option value="VEHICLE_OWNER" className="bg-[#0a1f15] text-white">Fleet Partner</option>
+                                    </select>
+                                    <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-white/40 group-hover:text-antique-gold transition-colors duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                    </div>
                                 </div>
 
                                 <Button type="submit" disabled={loading} className="w-full bg-antique-gold hover:bg-antique-gold/90 text-[#0a1f15] font-bold text-xs tracking-[0.15em] h-11 mt-2 rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all duration-300 flex items-center justify-center gap-2 uppercase">
