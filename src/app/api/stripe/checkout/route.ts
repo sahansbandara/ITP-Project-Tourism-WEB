@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Booking from '@/models/Booking';
 import Payment from '@/models/Payment';
-import { stripe, isStripeConfigured, STRIPE_CURRENCY, APP_BASE_URL } from '@/lib/stripe/config';
+import { getStripe, isStripeConfigured, STRIPE_CURRENCY, APP_BASE_URL } from '@/lib/stripe/config';
 import crypto from 'crypto';
 
 export async function POST(request: Request) {
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
         });
 
         // Create Stripe Checkout Session
-        const session = await stripe.checkout.sessions.create({
+        const session = await getStripe().checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
             customer_email: customer.email,

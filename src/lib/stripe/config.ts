@@ -5,13 +5,21 @@ export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 export const STRIPE_CURRENCY = process.env.STRIPE_CURRENCY || 'lkr';
 export const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
-export const stripe = new Stripe(STRIPE_SECRET_KEY, {
-    typescript: true,
-});
+let _stripe: Stripe | null = null;
+
+/** Lazy Stripe instance — only created when keys are available */
+export const getStripe = (): Stripe => {
+    if (!_stripe && STRIPE_SECRET_KEY && STRIPE_SECRET_KEY.startsWith('sk_')) {
+        _stripe = new Stripe(STRIPE_SECRET_KEY, { typescript: true });
+    }
+    if (!_stripe) {
+        throw new Error('Stripe is not configured. Add STRIPE_SECRET_KEY to .env');
+    }
+    return _stripe;
+};
 
 /**
  * Check if Stripe is configured with real keys.
- * If not, we fall back to dev-mode simulation.
  */
 export const isStripeConfigured = () => {
     return (

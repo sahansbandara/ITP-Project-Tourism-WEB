@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Payment from '@/models/Payment';
 import Booking from '@/models/Booking';
-import { stripe, STRIPE_WEBHOOK_SECRET } from '@/lib/stripe/config';
+import { getStripe, STRIPE_WEBHOOK_SECRET } from '@/lib/stripe/config';
 import { BookingStatus } from '@/lib/constants';
 import Stripe from 'stripe';
 
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
         let event: Stripe.Event;
 
         try {
-            event = stripe.webhooks.constructEvent(body, sig, STRIPE_WEBHOOK_SECRET);
+            event = getStripe().webhooks.constructEvent(body, sig, STRIPE_WEBHOOK_SECRET);
         } catch (err: any) {
             console.error('Stripe webhook signature verification failed:', err.message);
             return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
