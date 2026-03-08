@@ -1,151 +1,222 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowLeft, ShieldCheck } from 'lucide-react';
+'use client';
 
-export const metadata: Metadata = {
-    title: 'Privacy Policy',
-    description: 'Privacy policy for Yatara Ceylon — how we collect, use, and protect your personal information.',
-};
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowLeft, Shield, ChevronRight } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {
-    const lastUpdated = 'March 2026';
+    const lastUpdated = 'March 10, 2026';
+    const [activeSection, setActiveSection] = useState('information-collection');
+
+    // Smooth scroll to section
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const y = element.getBoundingClientRect().top + window.scrollY - 120;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    };
+
+    // Update active section on scroll
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-150px 0px -60% 0px' }
+        );
+
+        const sections = document.querySelectorAll('section[id]');
+        sections.forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
+
+    const sidebarLinks = [
+        { id: 'information-collection', label: '1. Information Collection' },
+        { id: 'data-usage', label: '2. Usage of Data' },
+        { id: 'payment-security', label: '3. Payment Security' },
+        { id: 'data-sharing', label: '4. Third-Party Sharing' },
+        { id: 'cookies', label: '5. Cookies & Tracking' },
+        { id: 'retention', label: '6. Data Retention' },
+        { id: 'your-rights', label: '7. Your Privacy Rights' },
+        { id: 'contact', label: '8. Contact the Data Controller' },
+    ];
 
     return (
-        <div className="min-h-screen bg-off-white">
-            {/* Hero */}
-            <section className="relative bg-deep-emerald py-20 md:py-28 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1f15]/90 to-deep-emerald/95" />
-                <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center">
-                    <ShieldCheck className="w-8 h-8 text-[#D4AF37] mx-auto mb-4" strokeWidth={1.5} />
-                    <h1 className="text-4xl md:text-6xl font-display text-white leading-tight mb-3">
-                        Privacy <span className="italic font-light text-[#D4AF37]">Policy</span>
+        <div className="min-h-screen bg-[#FDFBF7] selection:bg-antique-gold/20">
+            {/* Cinematic Hero */}
+            <div className="relative h-[55vh] min-h-[450px] w-full flex items-center justify-center overflow-hidden">
+                <Image
+                    src="/images/policies/privacy-hero.webp"
+                    alt="Privacy and Security"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-deep-emerald/75 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-deep-emerald/90 via-deep-emerald/50 to-transparent" />
+
+                <div className="relative z-10 text-center px-4 mt-16 max-w-4xl">
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border border-antique-gold/30 bg-black/10 backdrop-blur-sm mb-6">
+                        <Shield className="w-6 h-6 text-antique-gold" strokeWidth={1.5} />
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-display text-white mb-4 leading-[1.1]">
+                        Privacy <span className="italic font-light text-antique-gold">Policy</span>
                     </h1>
-                    <p className="text-white/50 text-sm">Last updated: {lastUpdated}</p>
-                </div>
-            </section>
-
-            {/* Content */}
-            <section className="py-16 md:py-24">
-                <div className="max-w-3xl mx-auto px-4 md:px-8 space-y-12">
-
-                    <PolicySection title="1. Introduction">
-                        <p>Yatara Ceylon (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) is committed to protecting the privacy and security of your personal information. This Privacy Policy explains how we collect, use, and safeguard information when you use our website <strong>yataraceylon.me</strong> and related services.</p>
-                    </PolicySection>
-
-                    <PolicySection title="2. Information We Collect">
-                        <p>When you make a booking or inquiry, we may collect:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li><strong>Personal details:</strong> Full name, email address, phone number</li>
-                            <li><strong>Address information:</strong> Street address, city, country</li>
-                            <li><strong>Travel details:</strong> Travel dates, number of passengers, special requirements</li>
-                            <li><strong>Account credentials:</strong> Email and password (encrypted) if you create an account</li>
-                            <li><strong>Usage data:</strong> Pages visited, browser type, IP address, cookies</li>
-                        </ul>
-                        <p className="mt-2"><strong>We do NOT collect or store payment card details.</strong> All payments are processed securely through our payment gateway partner, PayHere (payhere.lk), which is PCI-DSS compliant.</p>
-                    </PolicySection>
-
-                    <PolicySection title="3. How We Use Your Information">
-                        <p>We use your personal information to:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li>Process and manage your travel bookings</li>
-                            <li>Communicate with you about your reservations</li>
-                            <li>Send booking confirmations, reminders, and itinerary updates</li>
-                            <li>Provide customer support and respond to inquiries</li>
-                            <li>Improve our website and services</li>
-                            <li>Send promotional communications (only with your consent)</li>
-                            <li>Comply with legal obligations</li>
-                        </ul>
-                    </PolicySection>
-
-                    <PolicySection title="4. Payment Processing">
-                        <p>Payments are processed by <strong>PayHere (Digital Commerce (Pvt) Ltd)</strong>, a licensed payment gateway in Sri Lanka. When you make a payment:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li>You are redirected to PayHere&apos;s secure checkout page</li>
-                            <li>Card details are entered directly on PayHere&apos;s platform</li>
-                            <li>We receive only a transaction confirmation — never your card numbers</li>
-                            <li>PayHere is certified under PCI-DSS Level 1 standards</li>
-                        </ul>
-                    </PolicySection>
-
-                    <PolicySection title="5. Cookies &amp; Tracking">
-                        <p>Our website uses cookies and similar technologies to:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li><strong>Essential cookies:</strong> Maintain your session and preferences</li>
-                            <li><strong>Analytics cookies:</strong> Understand how visitors interact with our site (Google Analytics)</li>
-                            <li><strong>Chat widget:</strong> Provide live chat support (Tawk.to)</li>
-                        </ul>
-                        <p className="mt-2">You can manage cookie preferences through your browser settings.</p>
-                    </PolicySection>
-
-                    <PolicySection title="6. Data Sharing">
-                        <p>We do <strong>not</strong> sell, rent, or trade your personal information. We may share your information with:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li><strong>Service providers:</strong> Hotels, transport partners, and tour operators necessary to fulfil your booking</li>
-                            <li><strong>Payment processor:</strong> PayHere, for payment processing only</li>
-                            <li><strong>Legal authorities:</strong> Where required by Sri Lankan law or to protect our legitimate interests</li>
-                        </ul>
-                    </PolicySection>
-
-                    <PolicySection title="7. Data Security">
-                        <p>We implement appropriate technical and organisational measures to protect your data, including:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li>SSL/TLS encryption for all data transmission</li>
-                            <li>Encrypted password storage</li>
-                            <li>Access controls limiting data access to authorised staff only</li>
-                            <li>Regular security reviews of our systems</li>
-                        </ul>
-                    </PolicySection>
-
-                    <PolicySection title="8. Data Retention">
-                        <p>We retain your personal information for as long as necessary to provide services and comply with legal requirements. Booking records are retained for a minimum of <strong>3 years</strong> for accounting and regulatory purposes. You may request earlier deletion of non-essential data.</p>
-                    </PolicySection>
-
-                    <PolicySection title="9. Your Rights">
-                        <p>You have the right to:</p>
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
-                            <li>Access the personal information we hold about you</li>
-                            <li>Request correction of inaccurate data</li>
-                            <li>Request deletion of your data (subject to legal obligations)</li>
-                            <li>Withdraw consent for marketing communications at any time</li>
-                            <li>Lodge a complaint with the relevant data protection authority</li>
-                        </ul>
-                    </PolicySection>
-
-                    <PolicySection title="10. Third-Party Links">
-                        <p>Our website may contain links to third-party websites (e.g. social media, partner hotels). We are not responsible for the privacy practices of these external sites. We encourage you to read their privacy policies.</p>
-                    </PolicySection>
-
-                    <PolicySection title="11. Children&apos;s Privacy">
-                        <p>Our services are not directed at children under 16. We do not knowingly collect personal information from children. If you believe we have inadvertently collected data from a minor, please contact us immediately.</p>
-                    </PolicySection>
-
-                    <PolicySection title="12. Contact Us">
-                        <p>For any privacy-related queries or to exercise your data rights, contact us at:</p>
-                        <ul className="space-y-1 text-gray-600">
-                            <li>Email: <a href="mailto:info@yataraceylon.com" className="text-[#D4AF37] underline">info@yataraceylon.com</a></li>
-                            <li>WhatsApp: <a href="https://wa.me/94704239802" className="text-[#D4AF37] underline">+94 70 423 9802</a></li>
-                            <li>Address: Colombo, Sri Lanka</li>
-                        </ul>
-                    </PolicySection>
-
-                    {/* Back */}
-                    <div className="pt-8 border-t border-deep-emerald/10">
-                        <Link href="/" className="inline-flex items-center gap-2 text-sm text-deep-emerald hover:text-[#D4AF37] transition-colors">
-                            <ArrowLeft className="w-4 h-4" /> Back to Home
-                        </Link>
+                    <div className="flex items-center justify-center gap-2 text-white/60 text-xs tracking-[0.2em] font-nav uppercase">
+                        <span>Legal / Data Security</span>
+                        <div className="w-1 h-1 rounded-full bg-antique-gold/50" />
+                        <span>Last Updated: {lastUpdated}</span>
                     </div>
                 </div>
-            </section>
-        </div>
-    );
-}
+            </div>
 
-function PolicySection({ title, children }: { title: string; children: React.ReactNode }) {
-    return (
-        <div>
-            <h2 className="text-xl md:text-2xl font-display text-deep-emerald mb-4">{title}</h2>
-            <div className="space-y-3 text-gray-600 font-light text-[15px] leading-relaxed">
-                {children}
+            {/* Split Layout Content */}
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 md:py-32">
+                <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 relative items-start">
+
+                    {/* Sticky Sidebar Navigation */}
+                    <aside className="hidden lg:block w-72 shrink-0 sticky top-32">
+                        <div className="pb-6 border-b border-deep-emerald/10 mb-6">
+                            <h3 className="text-[10px] tracking-[0.25em] font-nav font-semibold text-deep-emerald uppercase">
+                                Table of Contents
+                            </h3>
+                        </div>
+                        <nav className="space-y-1">
+                            {sidebarLinks.map((link) => (
+                                <button
+                                    key={link.id}
+                                    onClick={() => scrollToSection(link.id)}
+                                    className={`w-full flex items-center justify-between py-2.5 px-3 rounded-lg text-sm transition-all duration-300 ${activeSection === link.id
+                                            ? 'bg-deep-emerald text-antique-gold shadow-md'
+                                            : 'text-gray-500 hover:bg-gray-100 hover:text-deep-emerald'
+                                        }`}
+                                >
+                                    <span className="font-light tracking-wide">{link.label}</span>
+                                    {activeSection === link.id && <ChevronRight className="w-3.5 h-3.5" />}
+                                </button>
+                            ))}
+                        </nav>
+
+                        {/* Elite Trust Badge */}
+                        <div className="mt-12 p-6 border border-deep-emerald/10 rounded-2xl bg-gradient-to-br from-white to-gray-50/50">
+                            <Image src="/images/yatara-symbol-dark.svg" alt="Yatara" width={32} height={32} className="mb-4 opacity-80" />
+                            <p className="text-xs text-gray-500 leading-relaxed font-light">
+                                Your privacy is our highest priority. We employ enterprise-grade security and adhere to strict data protection standards to ensure your information remains completely confidential.
+                            </p>
+                        </div>
+                    </aside>
+
+                    {/* Main Legal Content */}
+                    <main className="flex-1 max-w-4xl space-y-16">
+
+                        <div className="prose prose-lg prose-headings:font-display prose-headings:text-deep-emerald prose-headings:font-normal prose-h2:text-3xl prose-h2:mb-6 prose-p:text-gray-600 prose-p:font-light prose-p:leading-[1.8] prose-p:text-[15px] prose-a:text-antique-gold prose-a:font-medium prose-a:no-underline hover:prose-a:underline prose-li:text-gray-600 prose-li:font-light prose-li:text-[15px] marker:text-antique-gold">
+
+                            <p className="lead text-xl text-deep-emerald font-display italic mb-12">
+                                At Yatara Ceylon, we curate exclusive travel experiences while fiercely protecting the privacy and personal data of our esteemed clientele. This policy outlines how we collect, process, and safeguard your information.
+                            </p>
+
+                            <section id="information-collection" className="scroll-mt-32">
+                                <h2>1. Information We Collect</h2>
+                                <p>To perfectly tailor your journey, we collect essential personal parameters. This is done with your explicit consent when you interact with our concierge, application, or website.</p>
+                                <ul>
+                                    <li><strong>Identity Data:</strong> Full name, date of birth, passport details, and nationality (required for hotel bookings and transport permits).</li>
+                                    <li><strong>Contact Data:</strong> Primary email address, billing address, and direct telephone/WhatsApp numbers.</li>
+                                    <li><strong>Preference Data:</strong> Dietary requirements, medical conditions relevant to travel, room preferences, and specific lifestyle requirements to ensure a flawless experience.</li>
+                                    <li><strong>Technical Data:</strong> IP address, browser type, device identifiers, and anonymous usage telemetry collected via our digital platforms.</li>
+                                </ul>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="data-usage" className="scroll-mt-32">
+                                <h2>2. How We Use Your Data</h2>
+                                <p>We process your data exclusively to deliver our luxury services and maintain our high standards of hospitality. Specifically, your data is utilized to:</p>
+                                <ul>
+                                    <li>Fulfill your booking, secure accommodations, and arrange ground transportation.</li>
+                                    <li>Communicate itinerary updates, payment links, and critical journey advisories.</li>
+                                    <li>Personalize your experience (e.g., ensuring dietary needs are met at all partner restaurants).</li>
+                                    <li>Comply with statutory obligations under Sri Lankan law regarding foreign tourists.</li>
+                                </ul>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="payment-security" className="scroll-mt-32">
+                                <h2>3. Payment Security &amp; PayHere</h2>
+                                <p>Yatara Ceylon operates a strict <strong>Zero-Knowledge Payment Protocol</strong>. We do not digitally collect, process, or store your credit card numbers, CVV codes, or banking passwords on our servers.</p>
+                                <p>All financial transactions are seamlessly securely routed to <strong>PayHere</strong>, a Central Bank of Sri Lanka approved and PCI-DSS compliant payment gateway. When you make a payment, you interact directly with sophisticated banking infrastructure designed to protect your financial assets.</p>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="data-sharing" className="scroll-mt-32">
+                                <h2>4. Third-Party Sharing</h2>
+                                <p>We operate under strict confidentiality. We do not sell, trade, or recklessly share your data with advertisers. However, to execute your journey, necessary operational data is securely transmitted to our verified partners on a <em>need-to-know</em> basis:</p>
+                                <ul>
+                                    <li><strong>Boutique Hotels &amp; Villas:</strong> Names, passport details, and dietary preferences for check-in and bespoke service.</li>
+                                    <li><strong>Private Chauffeurs:</strong> Contact numbers and precise itinerary details to ensure seamless transfers.</li>
+                                    <li><strong>Legal Authorities:</strong> If legally compelled by a court of law or government mandate within the Democratic Socialist Republic of Sri Lanka.</li>
+                                </ul>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="cookies" className="scroll-mt-32">
+                                <h2>5. Cookies &amp; Tracking Technology</h2>
+                                <p>Our luxury digital platform employs minimal cookies to ensure technical functionality and observe aggregate user interactions. We use these purely to refine our website's performance and design. You retain the absolute right to configure your browser to decline all cookies, though this may restrict certain bespoke features of our site.</p>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="retention" className="scroll-mt-32">
+                                <h2>6. Data Retention Protocols</h2>
+                                <p>Your personal data is retained only for the duration required to fulfill the purposes detailed in this policy, including post-journey support and satisfying imperative legal, accounting, or reporting requirements. Standard financial transaction records are retained for a stipulated period of seven years as per corporate law.</p>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="your-rights" className="scroll-mt-32">
+                                <h2>7. Your Privacy Rights</h2>
+                                <p>We recognize and respect global data protection standards, extending the following rights to our international clientele:</p>
+                                <ul>
+                                    <li><strong>The Right to Access:</strong> You may request a comprehensive dossier of the personal data we hold associated with you.</li>
+                                    <li><strong>The Right to Rectification:</strong> You may instantaneously request the correction of any inaccurate or incomplete data.</li>
+                                    <li><strong>The Right to Erasure:</strong> Also known as "the right to be forgotten", you may request the deletion of your personal data, subject strictly to our overriding legal retention obligations.</li>
+                                </ul>
+                            </section>
+
+                            <hr className="my-10 border-deep-emerald/5" />
+
+                            <section id="contact" className="scroll-mt-32">
+                                <h2>8. Contact the Data Controller</h2>
+                                <p>For all inquiries, formal requests concerning your data, or to enact your privacy rights, please contact our dedicated data privacy office:</p>
+                                <ul className="not-prose space-y-3 mt-4">
+                                    <li><a href="mailto:privacy@yataraceylon.com" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> privacy@yataraceylon.com</a></li>
+                                    <li><span className="inline-flex items-center text-sm font-medium text-gray-600"><span className="w-16 text-gray-400 font-light">Address</span> Yatara Ceylon Headquarters, Colombo, Sri Lanka</span></li>
+                                </ul>
+                            </section>
+
+                        </div>
+
+                        {/* Back to Home CTA */}
+                        <div className="pt-12 border-t border-deep-emerald/10 mt-16">
+                            <Link
+                                href="/"
+                                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-deep-emerald/10 text-sm font-medium text-deep-emerald hover:bg-deep-emerald hover:text-antique-gold hover:border-deep-emerald transition-all duration-300 shadow-sm"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                Return to Homepage
+                            </Link>
+                        </div>
+                    </main>
+                </div>
             </div>
         </div>
     );
