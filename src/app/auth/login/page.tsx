@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Loader2, User, Building2, Car, Shield, Users, Mail, Lock, Phone, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
@@ -22,6 +23,8 @@ export default function EliteLoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get('redirect');
 
     // Role-based redirect mapping
     const getRoleRedirect = (role: string) => {
@@ -52,9 +55,14 @@ export default function EliteLoginPage() {
                 setError(data.error || 'Login failed');
                 return;
             }
-            // Redirect based on actual user role from DB
-            const userRole = data.user?.role || 'USER';
-            window.location.href = getRoleRedirect(userRole);
+            // If there's a redirect URL (e.g., from booking page), use that
+            if (redirectTo) {
+                window.location.href = redirectTo;
+            } else {
+                // Otherwise, redirect based on role
+                const userRole = data.user?.role || 'USER';
+                window.location.href = getRoleRedirect(userRole);
+            }
         } catch (err) {
             setError('Network error. Please try again.');
         } finally {

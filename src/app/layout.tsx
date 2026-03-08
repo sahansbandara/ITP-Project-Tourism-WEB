@@ -51,7 +51,7 @@ export default function RootLayout({
                 />
             </head>
             <body className="min-h-screen bg-background font-sans antialiased">
-                <Script src="https://sandbox.payhere.lk/lib/payhere.js" strategy="beforeInteractive" />
+                <Script src="https://www.payhere.lk/lib/payhere.js" strategy="beforeInteractive" />
                 <CurrencyProvider>
                     {children}
                 </CurrencyProvider>
