@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { motion, useInView as useFramerInView, useAnimation } from "framer-motion";
+import { CheckCircle2, Leaf } from "lucide-react";
 
 type Stat = { value: number; suffix?: string; label: string };
 type Benefit = { title: string; detail?: string };
@@ -16,27 +17,6 @@ function usePrefersReducedMotion() {
     return () => mq.removeEventListener?.("change", onChange);
   }, []);
   return reduced;
-}
-
-function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
-  const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setInView(true);
-        io.disconnect();
-      }
-    }, options);
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, [options]);
-
-  return { ref, inView };
 }
 
 function CountUp({
@@ -85,93 +65,152 @@ export default function WhyYataraTextSection() {
   const stats: Stat[] = useMemo(
     () => [
       { value: 24, suffix: "/7", label: "Concierge support" },
-      { value: 100, suffix: "+", label: "Curated routes & experiences" },
-      { value: 1, suffix: "", label: "Single point of contact" },
-      { value: 0, suffix: "", label: "Hidden service fees" },
+      { value: 100, suffix: "+", label: "Curated experiences" },
+      { value: 1, suffix: "", label: "Point of contact" },
+      { value: 0, suffix: "", label: "Hidden fees" },
     ],
     []
   );
 
   const benefits: Benefit[] = useMemo(
     () => [
-      { title: "Concierge-led planning", detail: "One specialist plans, books, and manages your journey." },
+      { title: "Concierge-led planning", detail: "One specialist books and manages your entire journey." },
       { title: "Private logistics", detail: "Seamless transfers with vetted driver-guides." },
-      { title: "Curated stays", detail: "Boutique and luxury properties chosen for experience, not volume." },
-      { title: "Pace-first itineraries", detail: "Routes built around comfort—no rushed checklist travel." },
-      { title: "On-trip support", detail: "Real-time adjustments when conditions or preferences change." },
+      { title: "Curated escapes", detail: "Luxury properties chosen for experience, not volume." },
+      { title: "Pace-first routes", detail: "Itineraries built around comfort—no rushed checklists." },
     ],
     []
   );
 
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.25 });
+  /* Framer Motion Integration for Viewport Triggering */
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useFramerInView(sectionRef, { once: true, margin: "-10%" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] } // Smooth elegant ease
+    }
+  };
 
   return (
-    <section className="bg-[#FCFBF9]">
-      <div ref={ref} className="mx-auto max-w-[1440px] px-6 md:px-12 lg:px-16 xl:px-24 py-32 lg:py-48">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-start">
+    <section className="relative bg-deep-emerald overflow-hidden py-16 md:py-24 text-white" ref={sectionRef}>
 
-          {/* ── Left: Headlines & Benefits List ── */}
+      {/* ── Background Liquid Glass / Greenery Abstraction ── */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute -top-[30%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[120px] bg-emerald-500/30 mix-blend-screen" />
+        <div className="absolute bottom-[10%] right-[5%] w-[50vw] h-[50vw] rounded-full blur-[100px] bg-antique-gold/20 mix-blend-screen" />
+      </div>
+
+      {/* Grid Overlay for Texture */}
+      <div className="absolute inset-0 bg-[url('/images/textures/grid-white.svg')] opacity-[0.03] pointer-events-none" />
+
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
+
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+        >
+
+          {/* ── Left: Intro Text & Animated Benefits ── */}
           <div className="lg:col-span-5 flex flex-col">
-            <h2 className="text-[2.5rem] md:text-[3.5rem] font-semibold text-neutral-900 leading-tight mb-12">
-              Why Book with<br />Yatara Ceylon?
-            </h2>
+            <motion.div variants={itemVariants} className="mb-8">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/90 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+                <Leaf className="w-3 h-3 text-antique-gold" />
+                Why Yatara
+              </span>
+              <h2 className="text-[2.5rem] md:text-[3.25rem] font-serif leading-[1.1] mb-6">
+                A private journey, <br />
+                <span className="text-antique-gold italic">executed quietly well.</span>
+              </h2>
+              <p className="text-sm md:text-base text-white/70 leading-[1.7] font-light max-w-sm">
+                We customize each itinerary to fit your exact preferences, ensuring a flawless and unique luxury journey across Sri Lanka.
+              </p>
+            </motion.div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col space-y-4">
               {benefits.map((b, i) => (
-                <div key={i} className="flex items-start gap-4 py-5 border-b border-neutral-200/80 last:border-0 group">
-                  <div className="mt-1">
-                    {/* Consistent branding icon style */}
-                    <CheckCircle2 className="w-5 h-5 text-neutral-400 group-hover:text-[#1A365D] transition-colors" strokeWidth={1.5} />
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-colors duration-300"
+                >
+                  <div className="mt-0.5">
+                    <CheckCircle2 className="w-5 h-5 text-antique-gold" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <h4 className="text-base text-neutral-900 font-medium mb-1 group-hover:text-[#1A365D] transition-colors">{b.title}</h4>
+                    <h4 className="text-sm md:text-base font-semibold mb-1 group-hover:text-antique-gold transition-colors">{b.title}</h4>
                     {b.detail && (
-                      <p className="text-sm text-neutral-500 font-light leading-relaxed">{b.detail}</p>
+                      <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">{b.detail}</p>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <div className="mt-12">
+            <motion.div variants={itemVariants} className="mt-10">
               <a
                 href="/inquire"
-                className="rounded-full bg-[#1A365D] px-8 py-3.5 text-sm font-bold tracking-[0.1em] text-white hover:bg-deep-emerald transition-colors inline-block"
+                className="rounded-full bg-antique-gold px-8 py-3.5 text-xs font-bold tracking-[0.15em] text-neutral-900 hover:bg-white hover:text-deep-emerald transition-all duration-300 inline-block shadow-[0_0_20px_rgba(207,181,89,0.3)]"
               >
                 START PLANNING
               </a>
-            </div>
+            </motion.div>
           </div>
 
-          {/* ── Right: Intro Text & Massive Stats ── */}
-          <div className="lg:col-span-6 lg:col-start-7 lg:mt-6">
-
-            <p className="text-xl md:text-2xl text-neutral-700 leading-[1.6] font-light mb-20 max-w-2xl">
-              At Yatara Ceylon, we meticulously customize each itinerary to fit your exact preferences, ensuring a flawless and unique private journey.
-            </p>
-
-            <div className="grid grid-cols-2 gap-x-8 gap-y-16">
+          {/* ── Right: Liquid Glass Stat Grid ── */}
+          <div className="lg:col-span-7 lg:pl-10 relative">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               {stats.map((s, i) => (
-                <div key={i} className="flex flex-col">
-                  {/* Huge Walker-Style numbers */}
-                  <div className="text-[4rem] md:text-[5rem] font-bold leading-none text-[#1A365D] tracking-tight mb-4">
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  className="relative overflow-hidden flex flex-col justify-center items-center text-center p-8 lg:p-12 min-h-[180px] lg:min-h-[220px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl group"
+                >
+                  {/* Subtle inner hover glow */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-antique-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  {/* Smooth Animated Numbers */}
+                  <div className="text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-serif leading-none tracking-tight mb-3 text-white drop-shadow-md">
                     <CountUp
                       value={s.value}
                       suffix={s.suffix ?? "+"}
-                      play={inView}
-                      durationMs={1100}
+                      play={isInView}
+                      durationMs={1600} // Smooth, elite counting
                     />
                   </div>
-                  {/* Small tracking caps label */}
-                  <p className="text-xs md:text-sm tracking-[0.15em] font-medium text-neutral-600 uppercase w-2/3">
+
+                  <p className="text-[10px] md:text-xs tracking-[0.2em] font-medium text-white/50 uppercase">
                     {s.label}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
-
           </div>
-        </div>
+
+        </motion.div>
       </div>
     </section>
   );
