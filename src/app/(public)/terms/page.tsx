@@ -94,8 +94,8 @@ export default function TermsPage() {
                                     key={link.id}
                                     onClick={() => scrollToSection(link.id)}
                                     className={`w-full flex items-center justify-between py-2.5 px-3 rounded-xl text-sm transition-all duration-300 ${activeSection === link.id
-                                            ? 'bg-white/40 border border-white/60 shadow-[0_4px_12px_rgba(0,0,0,0.05)] backdrop-blur-md text-deep-emerald font-medium relative overflow-hidden'
-                                            : 'text-gray-500 hover:bg-white/50 hover:text-deep-emerald border border-transparent'
+                                        ? 'bg-white/40 border border-white/60 shadow-[0_4px_12px_rgba(0,0,0,0.05)] backdrop-blur-md text-deep-emerald font-medium relative overflow-hidden'
+                                        : 'text-gray-500 hover:bg-white/50 hover:text-deep-emerald border border-transparent'
                                         }`}
                                 >
                                     {activeSection === link.id && (
@@ -202,7 +202,7 @@ export default function TermsPage() {
                                 <h2>8. Legal Contact</h2>
                                 <p>For corporate, legal, or partnership inquiries concerning these terms, direct communications to our executive office:</p>
                                 <ul className="not-prose space-y-3 mt-4">
-                                    <li><a href="mailto:legal@yataraceylon.com" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> legal@yataraceylon.com</a></li>
+                                    <li><a href="mailto:info@yataraceylon.me" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> info@yataraceylon.me</a></li>
                                     <li><span className="inline-flex items-center text-sm font-medium text-gray-600"><span className="w-16 text-gray-400 font-light">Entity</span> Yatara Ceylon Limited</span></li>
                                 </ul>
                             </section>

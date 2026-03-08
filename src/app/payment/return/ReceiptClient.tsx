@@ -75,7 +75,7 @@ export default function ReceiptClient({ data }: { data: any }) {
             </div>
 
             <div className="mt-12 text-center text-xs text-gray-400">
-                <p>If you have any questions about this receipt, please contact support@yataraceylon.com</p>
+                <p>If you have any questions about this receipt, please contact info@yataraceylon.me</p>
                 <p className="mt-1">Yatara Ceylon • No 123, Colombo Road, Sri Lanka</p>
             </div>
         </div>

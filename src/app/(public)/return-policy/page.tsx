@@ -151,7 +151,7 @@ export default function ReturnPolicyPage() {
 
                             <section id="cancellation-by-customer" className="scroll-mt-32">
                                 <h2>2. Cancellation by the Customer</h2>
-                                <p>We understand that circumstances may force a change of plans. To cancel a confirmed booking, formal written notice must be submitted to our concierge team at <a href="mailto:info@yataraceylon.com">info@yataraceylon.com</a>.</p>
+                                <p>We understand that circumstances may force a change of plans. To cancel a confirmed booking, formal written notice must be submitted to our concierge team at <a href="mailto:info@yataraceylon.me">info@yataraceylon.me</a>.</p>
                                 <p>The following tiered refund schedule applies to the <em>total value</em> of the booking, based on the notice period provided prior to your arrival date:</p>
 
                                 <div className="not-prose my-8 overflow-hidden rounded-2xl border border-deep-emerald/10 shadow-sm">
@@ -234,7 +234,7 @@ export default function ReturnPolicyPage() {
                                 <h2>8. Contact the Concierge</h2>
                                 <p>For all inquiries regarding cancellations, or to formally request a modification or refund, please liaise with your dedicated travel designer or our central desk:</p>
                                 <ul className="not-prose space-y-3 mt-4">
-                                    <li><a href="mailto:info@yataraceylon.com" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> info@yataraceylon.com</a></li>
+                                    <li><a href="mailto:info@yataraceylon.me" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> info@yataraceylon.me</a></li>
                                     <li><a href="https://wa.me/94704239802" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Phone</span> +94 70 423 9802 (WhatsApp)</a></li>
                                 </ul>
                             </section>

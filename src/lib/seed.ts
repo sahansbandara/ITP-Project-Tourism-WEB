@@ -11,11 +11,11 @@ async function seed() {
     const User = (await import('@/models/User')).default;
 
     const demoAccounts = [
-        { name: 'Admin', email: 'admin@yataraceylon.com', phone: '+94771234567', role: 'ADMIN', password: 'Admin@123' },
-        { name: 'Concierge Staff', email: 'concierge@yataraceylon.com', phone: '+94771234568', role: 'STAFF', password: 'Concierge@123' },
-        { name: 'Hotel Partner', email: 'hotel.partner@yataraceylon.com', phone: '+94771234569', role: 'HOTEL_OWNER', password: 'Hotel@123' },
-        { name: 'Fleet Partner', email: 'fleet.partner@yataraceylon.com', phone: '+94771234570', role: 'VEHICLE_OWNER', password: 'Fleet@123' },
-        { name: 'Customer Demo', email: 'customer1@yataraceylon.com', phone: '+94771234571', role: 'USER', password: 'Customer@123' },
+        { name: 'Admin', email: 'admin@yataraceylon.me', phone: '+94771234567', role: 'ADMIN', password: 'Admin@123' },
+        { name: 'Concierge Staff', email: 'concierge@yataraceylon.me', phone: '+94771234568', role: 'STAFF', password: 'Concierge@123' },
+        { name: 'Hotel Partner', email: 'hotel.partner@yataraceylon.me', phone: '+94771234569', role: 'HOTEL_OWNER', password: 'Hotel@123' },
+        { name: 'Fleet Partner', email: 'fleet.partner@yataraceylon.me', phone: '+94771234570', role: 'VEHICLE_OWNER', password: 'Fleet@123' },
+        { name: 'Customer Demo', email: 'customer1@yataraceylon.me', phone: '+94771234571', role: 'USER', password: 'Customer@123' },
         // Keep legacy admin for backward compatibility
         { name: 'Admin (Legacy)', email: 'admin@ceylonescapes.lk', phone: '+94771234567', role: 'ADMIN', password: 'Admin@123' },
     ];

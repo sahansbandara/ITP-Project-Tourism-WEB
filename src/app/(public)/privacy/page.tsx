@@ -94,8 +94,8 @@ export default function PrivacyPolicyPage() {
                                     key={link.id}
                                     onClick={() => scrollToSection(link.id)}
                                     className={`w-full flex items-center justify-between py-2.5 px-3 rounded-xl text-sm transition-all duration-300 ${activeSection === link.id
-                                            ? 'bg-white/40 border border-white/60 shadow-[0_4px_12px_rgba(0,0,0,0.05)] backdrop-blur-md text-deep-emerald font-medium relative overflow-hidden'
-                                            : 'text-gray-500 hover:bg-white/50 hover:text-deep-emerald border border-transparent'
+                                        ? 'bg-white/40 border border-white/60 shadow-[0_4px_12px_rgba(0,0,0,0.05)] backdrop-blur-md text-deep-emerald font-medium relative overflow-hidden'
+                                        : 'text-gray-500 hover:bg-white/50 hover:text-deep-emerald border border-transparent'
                                         }`}
                                 >
                                     {activeSection === link.id && (
@@ -217,7 +217,7 @@ export default function PrivacyPolicyPage() {
                                 <h2>8. Contact the Data Controller</h2>
                                 <p>For all inquiries, formal requests concerning your data, or to enact your privacy rights, please contact our dedicated data privacy office:</p>
                                 <ul className="not-prose space-y-3 mt-4">
-                                    <li><a href="mailto:privacy@yataraceylon.com" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> privacy@yataraceylon.com</a></li>
+                                    <li><a href="mailto:info@yataraceylon.me" className="inline-flex items-center text-sm font-medium text-antique-gold hover:text-deep-emerald transition-colors"><span className="w-16 text-gray-400 font-light">Email</span> info@yataraceylon.me</a></li>
                                     <li><span className="inline-flex items-center text-sm font-medium text-gray-600"><span className="w-16 text-gray-400 font-light">Address</span> Yatara Ceylon Headquarters, Colombo, Sri Lanka</span></li>
                                 </ul>
                             </section>
