@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { CopySlash, Users, ShieldCheck, MapPin, Sparkles } from "lucide-react";
 import { motion, useInView as useFramerInView, useAnimation } from "framer-motion";
-import { CheckCircle2, Leaf } from "lucide-react";
 
 type Stat = { value: number; suffix?: string; label: string };
-type Benefit = { title: string; detail?: string };
+type Benefit = { title: string; detail?: string; icon: React.ReactNode };
 
+/* Reduced Motion Hook as a fallback */
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
@@ -19,10 +20,11 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+/* Number Counting Animation Component */
 function CountUp({
   value,
   suffix = "+",
-  durationMs = 1200,
+  durationMs = 1500, // Smooth execution
   start = 0,
   play,
 }: {
@@ -64,20 +66,21 @@ function CountUp({
 export default function WhyYataraTextSection() {
   const stats: Stat[] = useMemo(
     () => [
-      { value: 24, suffix: "/7", label: "Concierge support" },
-      { value: 100, suffix: "+", label: "Curated experiences" },
-      { value: 1, suffix: "", label: "Point of contact" },
-      { value: 0, suffix: "", label: "Hidden fees" },
+      { value: 15, suffix: "+", label: "Years of Luxury Expertise" },
+      { value: 400, suffix: "+", label: "Boutique Stays Audited" },
+      { value: 24, suffix: "/7", label: "Concierge Availability" },
+      { value: 100, suffix: "%", label: "Bespoke Customization" },
     ],
     []
   );
 
   const benefits: Benefit[] = useMemo(
     () => [
-      { title: "Concierge-led planning", detail: "One specialist books and manages your entire journey." },
-      { title: "Private logistics", detail: "Seamless transfers with vetted driver-guides." },
-      { title: "Curated escapes", detail: "Luxury properties chosen for experience, not volume." },
-      { title: "Pace-first routes", detail: "Itineraries built around comfort—no rushed checklists." },
+      { icon: <Users className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "A dedicated travel concierge planning your entire trip" },
+      { icon: <MapPin className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Private logistics with vetted, premium driver-guides" },
+      { icon: <ShieldCheck className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Secure, seamless booking and elite-level support" },
+      { icon: <Sparkles className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Curated escapes chosen for exclusivity, not volume" },
+      { icon: <CopySlash className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Free cancellation up to 24 hours on all transport services" },
     ],
     []
   );
@@ -98,111 +101,75 @@ export default function WhyYataraTextSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.1, // Faster stagger
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] } // Smooth elegant ease
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
 
   return (
-    <section className="relative bg-deep-emerald overflow-hidden py-16 md:py-24 text-white" ref={sectionRef}>
-
-      {/* ── Background Liquid Glass / Greenery Abstraction ── */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute -top-[30%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[120px] bg-emerald-500/30 mix-blend-screen" />
-        <div className="absolute bottom-[10%] right-[5%] w-[50vw] h-[50vw] rounded-full blur-[100px] bg-antique-gold/20 mix-blend-screen" />
-      </div>
-
-      {/* Grid Overlay for Texture */}
-      <div className="absolute inset-0 bg-[url('/images/textures/grid-white.svg')] opacity-[0.03] pointer-events-none" />
-
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
+    <section className="relative bg-white pb-24 md:pb-32 lg:pb-48" ref={sectionRef}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 xl:px-20 relative z-10">
 
         <motion.div
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+          className="flex flex-col lg:flex-row justify-between lg:gap-24"
         >
 
-          {/* ── Left: Intro Text & Animated Benefits ── */}
-          <div className="lg:col-span-5 flex flex-col">
-            <motion.div variants={itemVariants} className="mb-8">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/90 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-                <Leaf className="w-3 h-3 text-antique-gold" />
-                Why Yatara
-              </span>
-              <h2 className="text-[2.5rem] md:text-[3.25rem] font-serif leading-[1.1] mb-6">
-                A private journey, <br />
-                <span className="text-antique-gold italic">executed quietly well.</span>
-              </h2>
-              <p className="text-sm md:text-base text-white/70 leading-[1.7] font-light max-w-sm">
-                We customize each itinerary to fit your exact preferences, ensuring a flawless and unique luxury journey across Sri Lanka.
-              </p>
-            </motion.div>
+          {/* ── Left: Huge Headline & List ── */}
+          <div className="w-full lg:w-[45%] flex flex-col mb-16 lg:mb-0">
+            <motion.h2 variants={itemVariants} className="text-[3rem] md:text-[3.5rem] lg:text-[4.5rem] font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-12">
+              Why Book with<br />Yatara Ceylon?
+            </motion.h2>
 
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col border-t border-neutral-200">
               {benefits.map((b, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-colors duration-300"
+                  className="flex items-center gap-6 py-5 border-b border-neutral-200"
                 >
-                  <div className="mt-0.5">
-                    <CheckCircle2 className="w-5 h-5 text-antique-gold" strokeWidth={1.5} />
+                  <div className="shrink-0 flex items-center justify-center">
+                    {b.icon}
                   </div>
                   <div>
-                    <h4 className="text-sm md:text-base font-semibold mb-1 group-hover:text-antique-gold transition-colors">{b.title}</h4>
-                    {b.detail && (
-                      <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">{b.detail}</p>
-                    )}
+                    <h4 className="text-[15px] text-neutral-700 font-normal">{b.title}</h4>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            <motion.div variants={itemVariants} className="mt-10">
-              <a
-                href="/inquire"
-                className="rounded-full bg-antique-gold px-8 py-3.5 text-xs font-bold tracking-[0.15em] text-neutral-900 hover:bg-white hover:text-deep-emerald transition-all duration-300 inline-block shadow-[0_0_20px_rgba(207,181,89,0.3)]"
-              >
-                START PLANNING
-              </a>
-            </motion.div>
           </div>
 
-          {/* ── Right: Liquid Glass Stat Grid ── */}
-          <div className="lg:col-span-7 lg:pl-10 relative">
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariants}
-                  className="relative overflow-hidden flex flex-col justify-center items-center text-center p-8 lg:p-12 min-h-[180px] lg:min-h-[220px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl group"
-                >
-                  {/* Subtle inner hover glow */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-antique-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          {/* ── Right: Intro Text & Massive Stats Container ── */}
+          <div className="w-full lg:w-[50%] flex flex-col pt-4">
+            <motion.p variants={itemVariants} className="text-xl md:text-[22px] text-neutral-600 leading-[1.6] font-light mb-12 md:mb-20 max-w-[90%]">
+              At Yatara Ceylon, we customize each itinerary to fit your preferences, ensuring a uniquely elite experience.
+            </motion.p>
 
-                  {/* Smooth Animated Numbers */}
-                  <div className="text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-serif leading-none tracking-tight mb-3 text-white drop-shadow-md">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-16 lg:gap-y-24">
+              {stats.map((s, i) => (
+                <motion.div key={i} variants={itemVariants} className="flex flex-col">
+                  {/* Huge Walker-Style numbers in deep emerald instead of blue */}
+                  <div className="text-[4rem] md:text-[5rem] lg:text-[5.5rem] font-bold leading-none text-[#1A365D] tracking-tighter mb-4">
                     <CountUp
                       value={s.value}
                       suffix={s.suffix ?? "+"}
                       play={isInView}
-                      durationMs={1600} // Smooth, elite counting
+                      durationMs={1800}
                     />
                   </div>
-
-                  <p className="text-[10px] md:text-xs tracking-[0.2em] font-medium text-white/50 uppercase">
+                  {/* Small tracking caps label */}
+                  <p className="text-[11px] md:text-sm tracking-[0.15em] font-medium text-neutral-500 uppercase max-w-[200px]">
                     {s.label}
                   </p>
                 </motion.div>
