@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import BuildTourHero from './_components/BuildTourHero';
 import BuildTourShell from './_components/BuildTourShell.client';
+import PopularTours from './_components/PopularTours';
 import ThemeCarousel from './_components/ThemeCarousel';
+import BuildTourParallax from './_components/BuildTourParallax';
 import Testimonials from './_components/Testimonials';
 import FooterOverlayCTA from './_components/FooterOverlayCTA';
 
@@ -14,8 +16,10 @@ export default function BuildTourPage() {
     return (
         <main className="bg-[#0a0f0d] min-h-screen">
             <BuildTourHero />
+            <PopularTours />
             <BuildTourShell />
             <ThemeCarousel />
+            <BuildTourParallax />
             <Testimonials />
             <FooterOverlayCTA />
         </main>
