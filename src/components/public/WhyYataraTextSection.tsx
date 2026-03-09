@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CopySlash, Users, ShieldCheck, MapPin, Sparkles } from "lucide-react";
+import { MoveRight, Star, ShieldCheck, MapPinned, SmilePlus } from "lucide-react";
 import { motion, useInView as useFramerInView, useAnimation } from "framer-motion";
 
 type Stat = { value: number; suffix?: string; label: string };
@@ -24,7 +24,7 @@ function usePrefersReducedMotion() {
 function CountUp({
   value,
   suffix = "+",
-  durationMs = 1500, // Smooth execution
+  durationMs = 2000, // Very slow and majestic
   start = 0,
   play,
 }: {
@@ -47,7 +47,7 @@ function CountUp({
     const t0 = performance.now();
     const tick = (t: number) => {
       const p = Math.min(1, (t - t0) / durationMs);
-      const eased = 1 - Math.pow(1 - p, 3);
+      const eased = 1 - Math.pow(1 - p, 4); // Quartic ease out for super smooth ending
       setCurrent(Math.round(start + (value - start) * eased));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
@@ -66,21 +66,21 @@ function CountUp({
 export default function WhyYataraTextSection() {
   const stats: Stat[] = useMemo(
     () => [
-      { value: 15, suffix: "+", label: "Years of Luxury Expertise" },
-      { value: 400, suffix: "+", label: "Boutique Stays Audited" },
-      { value: 24, suffix: "/7", label: "Concierge Availability" },
-      { value: 100, suffix: "%", label: "Bespoke Customization" },
+      { value: 15, suffix: "+", label: "Years of Luxury" },
+      { value: 400, suffix: "+", label: "Estates Audited" },
+      { value: 24, suffix: "/7", label: "Private Concierge" },
+      { value: 100, suffix: "%", label: "Bespoke Routes" },
     ],
     []
   );
 
   const benefits: Benefit[] = useMemo(
     () => [
-      { icon: <Users className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "A dedicated travel concierge planning your entire trip" },
-      { icon: <MapPin className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Private logistics with vetted, premium driver-guides" },
-      { icon: <ShieldCheck className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Secure, seamless booking and elite-level support" },
-      { icon: <Sparkles className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Curated escapes chosen for exclusivity, not volume" },
-      { icon: <CopySlash className="w-5 h-5 text-neutral-500" strokeWidth={1.5} />, title: "Free cancellation up to 24 hours on all transport services" },
+      { icon: <Star className="w-6 h-6 text-[#CFB53B]" strokeWidth={1.5} />, title: "A dedicated travel concierge orchestrating your journey" },
+      { icon: <MapPinned className="w-6 h-6 text-[#CFB53B]" strokeWidth={1.5} />, title: "Private VIP logistics with elite, seasoned driver-guides" },
+      { icon: <ShieldCheck className="w-6 h-6 text-[#CFB53B]" strokeWidth={1.5} />, title: "Bank-level secure booking and uncompromised privacy" },
+      { icon: <SmilePlus className="w-6 h-6 text-[#CFB53B]" strokeWidth={1.5} />, title: "Curated sanctuaries chosen for exclusivity, not volume" },
+      { icon: <MoveRight className="w-6 h-6 text-[#CFB53B]" strokeWidth={1.5} />, title: "Flexible cancellation up to 24 hours on all transfers" },
     ],
     []
   );
@@ -101,17 +101,17 @@ export default function WhyYataraTextSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Faster stagger
+        staggerChildren: 0.15, // Majestic slow stagger
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }
     }
   };
 
@@ -128,8 +128,13 @@ export default function WhyYataraTextSection() {
 
           {/* ── Left: Huge Headline & List ── */}
           <div className="w-full lg:w-[45%] flex flex-col mb-16 lg:mb-0">
-            <motion.h2 variants={itemVariants} className="text-[3rem] md:text-[3.5rem] lg:text-[4.5rem] font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-12">
-              Why Book with<br />Yatara Ceylon?
+            <motion.h2 variants={itemVariants} className="font-serif leading-[1.05] tracking-tight mb-14">
+              <span className="block text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] text-neutral-900 font-medium mb-1">
+                Why Journey With
+              </span>
+              <span className="block text-[3.25rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold text-[#CFB53B]">
+                Yatara Ceylon?
+              </span>
             </motion.h2>
 
             <div className="flex flex-col border-t border-neutral-200">
@@ -137,13 +142,13 @@ export default function WhyYataraTextSection() {
                 <motion.div
                   key={i}
                   variants={itemVariants}
-                  className="flex items-center gap-6 py-5 border-b border-neutral-200"
+                  className="flex items-center gap-6 py-7 border-b border-neutral-200 group"
                 >
-                  <div className="shrink-0 flex items-center justify-center">
+                  <div className="shrink-0 flex items-center justify-center p-3 rounded-full bg-neutral-50 group-hover:bg-[#113d33]/5 transition-colors duration-500">
                     {b.icon}
                   </div>
                   <div>
-                    <h4 className="text-[15px] text-neutral-700 font-normal">{b.title}</h4>
+                    <h4 className="text-[17px] md:text-[19px] text-neutral-800 font-medium group-hover:text-[#113d33] transition-colors duration-500">{b.title}</h4>
                   </div>
                 </motion.div>
               ))}
@@ -152,24 +157,24 @@ export default function WhyYataraTextSection() {
 
           {/* ── Right: Intro Text & Massive Stats Container ── */}
           <div className="w-full lg:w-[50%] flex flex-col pt-4">
-            <motion.p variants={itemVariants} className="text-xl md:text-[22px] text-neutral-600 leading-[1.6] font-light mb-12 md:mb-20 max-w-[90%]">
-              At Yatara Ceylon, we customize each itinerary to fit your preferences, ensuring a uniquely elite experience.
+            <motion.p variants={itemVariants} className="text-xl md:text-[22px] text-neutral-600 leading-[1.6] font-light mb-16 md:mb-24 max-w-[90%]">
+              At Yatara Ceylon, we customize each itinerary to fit your precise preferences, ensuring an absolutely flawless and elite luxury experience.
             </motion.p>
 
             <div className="grid grid-cols-2 gap-x-8 gap-y-16 lg:gap-y-24">
               {stats.map((s, i) => (
                 <motion.div key={i} variants={itemVariants} className="flex flex-col">
-                  {/* Huge Walker-Style numbers in deep emerald instead of blue */}
-                  <div className="text-[4rem] md:text-[5rem] lg:text-[5.5rem] font-bold leading-none text-[#1A365D] tracking-tighter mb-4">
+                  {/* Huge Walker-Style numbers in deep emerald */}
+                  <div className="text-[3.5rem] md:text-[5rem] lg:text-[6rem] font-bold leading-none text-[#113d33] tracking-tighter mb-4">
                     <CountUp
                       value={s.value}
                       suffix={s.suffix ?? "+"}
                       play={isInView}
-                      durationMs={1800}
+                      durationMs={2000}
                     />
                   </div>
                   {/* Small tracking caps label */}
-                  <p className="text-[11px] md:text-sm tracking-[0.15em] font-medium text-neutral-500 uppercase max-w-[200px]">
+                  <p className="text-[12px] md:text-[13px] tracking-[0.2em] font-bold text-neutral-500 uppercase max-w-[200px]">
                     {s.label}
                   </p>
                 </motion.div>
